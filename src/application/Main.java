@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 
 public class Main extends Application {
 	
+	//Comentario de prueba git
 	private static Stage loginStage;
 	private static Stage appStage;
 	
