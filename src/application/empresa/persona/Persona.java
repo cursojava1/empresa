@@ -8,6 +8,9 @@ import application.empresa.utils.Utils.VIVIENDA;
 
 public class Persona {
 
+	
+	//Izi pizi 100% real no fake
+	
 	protected String nombre;
 	protected String apellido;
 	protected short edad;
