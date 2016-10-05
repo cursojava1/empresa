@@ -12,7 +12,6 @@ public class Persona {
 	protected String apellido;
 	protected short edad;
 	protected Integer documento;
-	protected float altura;
 	protected SEXO sexo;
 	protected ESTADOCIVIL estadoCivil;
 	protected Domicilio domicilio;
