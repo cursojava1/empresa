@@ -97,6 +97,7 @@ public class App {
 		FileReader fr = null;
 		PrintWriter pw = null;
 		try {
+			//Comentario
 			fr = new FileReader(archivo);
 			BufferedReader br = new BufferedReader(fr);
 			pw = new PrintWriter(new FileWriter(archivoTemporal));
