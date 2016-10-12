@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.empresa.empleados.Empleado;
+import application.empresa.empleados.FactoryEmpleados;
 import application.empresa.empleados.Gerente;
 import application.empresa.empleados.Junior;
 import application.empresa.utils.Utils.ESTADOCIVIL;
@@ -115,12 +116,12 @@ public class AppControlador implements Initializable {
 		String valor = usuarios.getValue();
 		if (valor != null) {
 			if (valor.equals("Gerente")) {
-				Gerente nuevo = new Gerente();
+				Gerente nuevo = (Gerente) FactoryEmpleados.GetEmpleado("gerente");
 				nuevo.setRango(text1.getText());
 				CompletarEmpleado(nuevo);
 				app.GrabarEmpleado(nuevo);
 			} else {
-				Junior nuevo = new Junior();
+				Junior nuevo = (Junior) FactoryEmpleados.GetEmpleado("junior");
 				nuevo.SetLenguajeProgramacion(text1.getText());
 				CompletarEmpleado(nuevo);
 				app.GrabarEmpleado(nuevo);
