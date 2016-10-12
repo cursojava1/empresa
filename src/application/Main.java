@@ -7,7 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-//Mini prueba
+//Hola Magic!
 
 public class Main extends Application {
 	
