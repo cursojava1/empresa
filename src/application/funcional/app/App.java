@@ -19,7 +19,7 @@ public class App {
 	}
 	
 	public void GrabarEmpleado(Empleado nuevo) {
-		File archivo = new File("D:\\Workspace-Mars-2\\EmpresaFX\\src\\application\\basededatos\\empleados");
+		File archivo = new File("src\\application\\basededatos\\empleados");
 		File archivoTemporal = new File(archivo.getAbsolutePath() + ".tmp");
 		FileReader fr = null;
 		PrintWriter pw = null;
@@ -61,7 +61,7 @@ public class App {
 	}
 	
 	public List<String> ExtraerEmpleados() {
-		File archivo = new File("D:\\Workspace-Mars-2\\EmpresaFX\\src\\application\\basededatos\\empleados");
+		File archivo = new File("src\\application\\basededatos\\empleados");
 		FileReader fr = null;
 		List<String> empleados = new ArrayList<>();
 		try {
@@ -92,7 +92,7 @@ public class App {
 	}
 
 	public void EliminarEmpleado(int index) {
-		File archivo = new File("D:\\Workspace-Mars-2\\EmpresaFX\\src\\application\\basededatos\\empleados");
+		File archivo = new File("src\\application\\basededatos\\empleados");
 		File archivoTemporal = new File(archivo.getAbsolutePath() + ".tmp");
 		FileReader fr = null;
 		PrintWriter pw = null;

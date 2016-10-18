@@ -10,7 +10,7 @@ public class Login {
 
 	@SuppressWarnings("resource")
 	public boolean VerificarUsuario(String nombre, String password) {
-		File archivo = new File("D:\\Workspace-Mars-2\\EmpresaFX\\src\\application\\basededatos\\usuarios");
+		File archivo = new File("src\\application\\basededatos\\usuarios");
 		FileReader fr = null;
 		try {
 			fr = new FileReader(archivo);
