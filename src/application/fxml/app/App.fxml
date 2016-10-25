@@ -4,76 +4,140 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controladores.AppControlador">
-   <children>
-      <TabPane prefHeight="600.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab fx:id="tab1" text="Agregar Usuario">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Label layoutX="23.0" layoutY="28.0" text="NOMBRE" />
-                        <Label layoutX="23.0" layoutY="61.0" text="APELLIDO" />
-                        <Label layoutX="23.0" layoutY="93.0" text="DNI" />
-                        <Label layoutX="23.0" layoutY="123.0" text="SEXO" />
-                        <Label layoutX="23.0" layoutY="154.0" text="ESTADO CIVIL" />
-                        <Label layoutX="22.0" layoutY="186.0" text="EDAD" />
-                        <Label layoutX="23.0" layoutY="217.0" text="VIVIENDA" />
-                        <Label layoutX="30.0" layoutY="245.0" text="Calle" />
-                        <Label layoutX="30.0" layoutY="274.0" text="Numero" />
-                        <Label layoutX="30.0" layoutY="303.0" text="Piso" />
-                        <Label layoutX="30.0" layoutY="331.0" text="Departamento" />
-                        <TextField fx:id="nombre" layoutX="117.0" layoutY="24.0" prefHeight="25.0" prefWidth="113.0" />
-                        <TextField fx:id="apellido" layoutX="117.0" layoutY="57.0" prefHeight="25.0" prefWidth="113.0" />
-                        <TextField fx:id="dni" layoutX="117.0" layoutY="89.0" prefHeight="25.0" prefWidth="113.0" />
-                        <TextField fx:id="edad" layoutX="117.0" layoutY="182.0" prefHeight="25.0" prefWidth="113.0" />
-                        <TextField fx:id="calle" layoutX="117.0" layoutY="241.0" prefHeight="25.0" prefWidth="113.0" />
-                        <TextField fx:id="numero" layoutX="117.0" layoutY="270.0" prefHeight="25.0" prefWidth="113.0" />
-                        <TextField fx:id="piso" disable="true" layoutX="117.0" layoutY="299.0" prefHeight="25.0" prefWidth="113.0" />
-                        <TextField fx:id="dpt" disable="true" layoutX="117.0" layoutY="327.0" prefHeight="25.0" prefWidth="113.0" />
-                        <ChoiceBox fx:id="sexo" layoutX="117.0" layoutY="119.0" prefHeight="25.0" prefWidth="112.0" />
-                        <ChoiceBox fx:id="estado" layoutX="117.0" layoutY="150.0" prefHeight="25.0" prefWidth="111.0" />
-                        <RadioButton fx:id="rbcasa" layoutX="117.0" layoutY="217.0" mnemonicParsing="false" onAction="#ClickCasa" text="Casa">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="vivienda" />
-                           </toggleGroup>
-                        </RadioButton>
-                        <RadioButton fx:id="rbdpt" layoutX="174.0" layoutY="217.0" mnemonicParsing="false" onAction="#ClickDpt" text="Dpt" toggleGroup="$vivienda" />
-                        <Label layoutX="314.0" layoutY="28.0" text="USUARIOS" />
-                        <ChoiceBox fx:id="usuarios" layoutX="388.0" layoutY="24.0" prefWidth="150.0" />
-                        <Button fx:id="seleccionar" layoutX="388.0" layoutY="66.0" mnemonicParsing="false" onAction="#SeleccionarUsuario" prefHeight="25.0" prefWidth="151.0" text="Seleccionar Usuario" />
-                        <Button fx:id="agregar" layoutX="388.0" layoutY="327.0" mnemonicParsing="false" onAction="#AgregarUsuario" prefHeight="25.0" prefWidth="158.0" text="AGREGAR USUARIO" />
-                        <Label fx:id="label1" layoutX="314.0" layoutY="154.0" text="Label-1" visible="false" />
-                        <TextField fx:id="text1" layoutX="389.0" layoutY="150.0" visible="false" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab fx:id="tab2" text="Modificar Usuario">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
-            <Tab fx:id="tab3" text="Eliminar Usuario">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="243.0">
-                     <children>
-                        <TableView fx:id="tablaEmpleadosE" layoutX="29.0" layoutY="27.0" prefHeight="200.0" prefWidth="527.0">
-                          <columns>
-                              <TableColumn fx:id="nombreTablaE" prefWidth="75.0" text="Nombre" />
-                            <TableColumn fx:id="apellidoTablaE" prefWidth="75.0" text="Apellido" />
-                            <TableColumn fx:id="dniTablaE" prefWidth="75.0" text="Dni" />
-                              <TableColumn fx:id="edadTablaE" prefWidth="75.0" text="Edad" />
-                              <TableColumn fx:id="calleTablaE" prefWidth="75.0" text="Calle" />
-                              <TableColumn fx:id="numeroTablaE" prefWidth="75.0" text="Numero" />
-                              <TableColumn fx:id="lenguajeTablaE" prefWidth="75.0" text="Lenguaje" />
-                          </columns>
-                        </TableView>
-                        <Button fx:id="btnEliminarEmpleado" layoutX="446.0" layoutY="261.0" mnemonicParsing="false" onAction="#EliminarEmpleado" prefHeight="25.0" prefWidth="108.0" text="Eliminar" />
-                     </children></AnchorPane>
-              </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-   </children>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+	minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.controladores.AppControlador">
+	<children>
+		<TabPane prefHeight="600.0" prefWidth="600.0"
+			tabClosingPolicy="UNAVAILABLE">
+			<tabs>
+				<Tab fx:id="tab1" text="Agregar Usuario">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0"
+							prefWidth="200.0">
+							<children>
+								<Label layoutX="23.0" layoutY="28.0" text="NOMBRE" />
+								<Label layoutX="23.0" layoutY="61.0" text="APELLIDO" />
+								<Label layoutX="23.0" layoutY="93.0" text="DNI" />
+								<Label layoutX="23.0" layoutY="123.0" text="SEXO" />
+								<Label layoutX="23.0" layoutY="154.0" text="ESTADO CIVIL" />
+								<Label layoutX="22.0" layoutY="186.0" text="EDAD" />
+								<Label layoutX="23.0" layoutY="217.0" text="VIVIENDA" />
+								<Label layoutX="30.0" layoutY="245.0" text="Calle" />
+								<Label layoutX="30.0" layoutY="274.0" text="Numero" />
+								<Label layoutX="30.0" layoutY="303.0" text="Piso" />
+								<Label layoutX="30.0" layoutY="331.0" text="Departamento" />
+								<TextField fx:id="nombre" layoutX="117.0" layoutY="24.0"
+									prefHeight="25.0" prefWidth="113.0" />
+								<TextField fx:id="apellido" layoutX="117.0" layoutY="57.0"
+									prefHeight="25.0" prefWidth="113.0" />
+								<TextField fx:id="dni" layoutX="117.0" layoutY="89.0"
+									prefHeight="25.0" prefWidth="113.0" />
+								<TextField fx:id="edad" layoutX="117.0" layoutY="182.0"
+									prefHeight="25.0" prefWidth="113.0" />
+								<TextField fx:id="calle" layoutX="117.0" layoutY="241.0"
+									prefHeight="25.0" prefWidth="113.0" />
+								<TextField fx:id="numero" layoutX="117.0" layoutY="270.0"
+									prefHeight="25.0" prefWidth="113.0" />
+								<TextField fx:id="piso" disable="true" layoutX="117.0"
+									layoutY="299.0" prefHeight="25.0" prefWidth="113.0" />
+								<TextField fx:id="dpt" disable="true" layoutX="117.0"
+									layoutY="327.0" prefHeight="25.0" prefWidth="113.0" />
+								<ChoiceBox fx:id="sexo" layoutX="117.0" layoutY="119.0"
+									prefHeight="25.0" prefWidth="112.0" />
+								<ChoiceBox fx:id="estado" layoutX="117.0" layoutY="150.0"
+									prefHeight="25.0" prefWidth="111.0" />
+								<RadioButton fx:id="rbcasa" layoutX="117.0" layoutY="217.0"
+									mnemonicParsing="false" onAction="#ClickCasa" text="Casa">
+									<toggleGroup>
+										<ToggleGroup fx:id="vivienda" />
+									</toggleGroup>
+								</RadioButton>
+								<RadioButton fx:id="rbdpt" layoutX="174.0" layoutY="217.0"
+									mnemonicParsing="false" onAction="#ClickDpt" text="Dpt"
+									toggleGroup="$vivienda" />
+								<Label layoutX="314.0" layoutY="28.0" text="USUARIOS" />
+								<ChoiceBox fx:id="usuarios" layoutX="388.0" layoutY="24.0"
+									prefWidth="150.0" />
+								<Button fx:id="seleccionar" layoutX="388.0" layoutY="66.0"
+									mnemonicParsing="false" onAction="#SeleccionarUsuario"
+									prefHeight="25.0" prefWidth="151.0" text="Seleccionar Usuario" />
+								<Button fx:id="agregar" layoutX="388.0" layoutY="327.0"
+									mnemonicParsing="false" onAction="#AgregarUsuario" prefHeight="25.0"
+									prefWidth="158.0" text="AGREGAR USUARIO" />
+								<Label fx:id="label1" layoutX="314.0" layoutY="154.0"
+									text="Label-1" visible="false" />
+								<TextField fx:id="text1" layoutX="389.0" layoutY="150.0"
+									visible="false" />
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab fx:id="tab2" text="Modificar Usuario">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0"
+							prefWidth="200.0">
+							<children>
+								<Button fx:id="btnModificarEmpleado" layoutX="456.0"
+									layoutY="235.0" mnemonicParsing="false" prefHeight="25.0"
+									prefWidth="108.0" text="Modificar" />
+								<TableView fx:id="tablaEmpleadosM" layoutX="37.0"
+									layoutY="14.0" prefHeight="200.0" prefWidth="527.0">
+									<columns>
+										<TableColumn fx:id="nombreTablaM" prefWidth="75.0"
+											text="Nombre" />
+										<TableColumn fx:id="apellidoTablaM" prefWidth="75.0"
+											text="Apellido" />
+										<TableColumn fx:id="dniTablaM" prefWidth="75.0"
+											text="Dni" />
+										<TableColumn fx:id="edadTablaM" prefWidth="75.0"
+											text="Edad" />
+										<TableColumn fx:id="calleTablaM" prefWidth="75.0"
+											text="Calle" />
+										<TableColumn fx:id="numeroTablaM" prefWidth="75.0"
+											text="Numero" />
+										<TableColumn fx:id="lenguajeTablaM" prefWidth="75.0"
+											text="Lenguaje" />
+									</columns>
+								</TableView>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab fx:id="tab3" text="Eliminar Usuario">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0"
+							prefWidth="243.0">
+							<children>
+								<TableView fx:id="tablaEmpleadosE" layoutX="37.0"
+									layoutY="14.0" prefHeight="200.0" prefWidth="527.0">
+									<columns>
+										<TableColumn fx:id="nombreTablaE" prefWidth="75.0"
+											text="Nombre" />
+										<TableColumn fx:id="apellidoTablaE" prefWidth="75.0"
+											text="Apellido" />
+										<TableColumn fx:id="dniTablaE" prefWidth="75.0"
+											text="Dni" />
+										<TableColumn fx:id="edadTablaE" prefWidth="75.0"
+											text="Edad" />
+										<TableColumn fx:id="calleTablaE" prefWidth="75.0"
+											text="Calle" />
+										<TableColumn fx:id="numeroTablaE" prefWidth="75.0"
+											text="Numero" />
+										<TableColumn fx:id="lenguajeTablaE" prefWidth="75.0"
+											text="Lenguaje" />
+									</columns>
+								</TableView>
+								<Button fx:id="btnEliminarEmpleado" layoutX="456.0"
+									layoutY="235.0" mnemonicParsing="false" onAction="#EliminarEmpleado"
+									prefHeight="25.0" prefWidth="108.0" text="Eliminar" />
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+			</tabs>
+		</TabPane>
+	</children>
 </Pane>
