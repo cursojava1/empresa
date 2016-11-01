@@ -14,7 +14,7 @@
          </font>
       </Label>
       <TextField fx:id="nombreUsuario" layoutX="95.0" layoutY="115.0" promptText="Usuario..." />
-      <Button layoutX="118.0" layoutY="229.0" mnemonicParsing="false" onAction="#ClickBtnIngresar" style="-fx-background-color: orange; -fx-border-color: #ffa31a; -fx-font-weight: bold;" text="Ingresar" textFill="#fffcf4">
+      <Button fx:id="botonIngresar" layoutX="118.0" layoutY="203.0" mnemonicParsing="false" onAction="#ClickBtnIngresar" style="-fx-background-color: orange; -fx-border-color: #ffa31a; -fx-font-weight: bold;" text="Ingresar" textFill="#fffcf4">
          <font>
             <Font name="SansSerif Regular" size="12.0" />
          </font></Button>
@@ -34,5 +34,6 @@
          </image>
       </ImageView>
       <PasswordField fx:id="passwordUsuario" layoutX="95.0" layoutY="159.0" promptText="Contraseña..." />
+      <Text fx:id="usuarioError" fill="RED" layoutX="57.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Los datos ingresados son invalidos. Por favor vuelve a intentarlo." textAlignment="CENTER" visible="false" wrappingWidth="187.134765625" />
    </children>
 </AnchorPane>
