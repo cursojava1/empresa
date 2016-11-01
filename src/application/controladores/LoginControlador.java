@@ -2,6 +2,7 @@ package application.controladores;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import application.Main;
@@ -39,6 +40,9 @@ public class LoginControlador implements Initializable {
 	@FXML
 	private void ClickBtnIngresar(ActionEvent event) throws IOException {
 		boolean resultado = login.VerificarUsuario(nombreUsuario.getText(), passwordUsuario.getText());
+		HashMap<Integer, Boolean> estados = login.VerificarUsuarioDB(nombreUsuario.getText(), passwordUsuario.getText());
+		
+		
 		// System.out.println(resultado);
 		if (resultado) {
 			Main.ShowApp();

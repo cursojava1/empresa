@@ -5,9 +5,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+
+import application.basededatos.Database;
 
 public class Login {
 
+	Database database = Database.GetDatabase();
+	
 	@SuppressWarnings("resource")
 	public boolean VerificarUsuario(String nombre, String password) {
 		File archivo = new File("src\\application\\basededatos\\usuarios");
@@ -53,7 +58,18 @@ public class Login {
 		return false;
 	}
 	
-	
+	public HashMap<Integer, Boolean> VerificarUsuarioDB(String nombre, String password) {
+		HashMap<Integer, Boolean> estados = new HashMap<>();
+		HashMap<String, String> datos = new HashMap<>();
+		database.Conectar();
+		datos = database.GetNombreContraseña(nombre);
+		
+		
+		
+		
+		
+		return estados;
+	}
 	
 	
 	

@@ -2,7 +2,9 @@ package application.basededatos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 public class Database {
 
@@ -52,5 +54,23 @@ public class Database {
 			}
 		}
 	}
+
+	public HashMap<String, String> GetNombreContraseña(String nombre) {
+		HashMap<String, String> datos = new HashMap<>();
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+			ResultSet rs = ps.executeQuery("SELECT Nombre, Contraseña FROM Usuario where Nombre = " + nombre);
+			while (rs.next()) {
+				datos.put("Nombre", rs.getString("Nombre"));
+				datos.put("Contraseña", rs.getString("Contraseña"));
+				return datos;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	
 }
