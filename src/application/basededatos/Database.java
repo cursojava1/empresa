@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 
 public class Database {
 
@@ -55,15 +54,12 @@ public class Database {
 		}
 	}
 
-	public HashMap<String, String> GetNombreContraseña(String nombre) {
-		HashMap<String, String> datos = new HashMap<>();
+	public String GetContraseña(String nombre) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
-			ResultSet rs = ps.executeQuery("SELECT Nombre, Contraseña FROM Usuario where Nombre = " + nombre);
+			ResultSet rs = ps.executeQuery("SELECT Contraseña FROM Usuario where Nombre = '" + nombre + "'");
 			while (rs.next()) {
-				datos.put("Nombre", rs.getString("Nombre"));
-				datos.put("Contraseña", rs.getString("Contraseña"));
-				return datos;
+				return rs.getString("Contraseña");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
