@@ -1,11 +1,11 @@
-INSERT INTO Sexo VALUES ('Masculino')
-INSERT INTO Sexo VALUES ('Femenino')
+INSERT INTO Sexo VALUES ('MASCULINO')
+INSERT INTO Sexo VALUES ('FEMENINO')
 
-INSERT INTO EstadoCivil VALUES ('Casado')
-INSERT INTO EstadoCivil VALUES ('Soltero')
-INSERT INTO EstadoCivil VALUES ('Viudo')
-INSERT INTO EstadoCivil VALUES ('Divorciado')
-INSERT INTO EstadoCivil VALUES ('Concubino')
+INSERT INTO EstadoCivil VALUES ('CASADO')
+INSERT INTO EstadoCivil VALUES ('SOLTERO')
+INSERT INTO EstadoCivil VALUES ('VIUDO')
+INSERT INTO EstadoCivil VALUES ('DIVORCIADO')
+INSERT INTO EstadoCivil VALUES ('CONCUBINO')
 
 INSERT INTO Nivel VALUES ('Administrador')
 INSERT INTO Nivel VALUES ('Invitado')

@@ -83,6 +83,10 @@ public class Persona {
 		this.estadoCivil = nuevoEstado;
 	}
 	
+	public ESTADOCIVIL GetEstadoCivil() {
+		return estadoCivil;
+	}
+	
 	public String getCalle() {
 		return domicilio.Calle();
 	}

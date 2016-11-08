@@ -146,15 +146,14 @@ public class AppControlador implements Initializable {
 				Gerente nuevo = (Gerente) FactoryEmpleados.GetEmpleado("gerente");
 				nuevo.setRango(text1.getText());
 				CompletarEmpleado(nuevo);
-				app.GrabarEmpleado(nuevo);
+				app.GrabarEmpleadoDB(nuevo);
 			} else {
 				Junior nuevo = (Junior) FactoryEmpleados.GetEmpleado("junior");
 				nuevo.SetLenguajeProgramacion(text1.getText());
 				CompletarEmpleado(nuevo);
-				app.GrabarEmpleado(nuevo);
+				app.GrabarEmpleadoDB(nuevo);
 			}
 		}
-
 	}
 
 	private void CompletarEmpleado(Empleado nuevo) {

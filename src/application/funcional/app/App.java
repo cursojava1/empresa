@@ -10,12 +10,21 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.basededatos.Database;
 import application.empresa.empleados.Empleado;
 
 public class App {
 
+	Database database = Database.GetDatabase();
+	
 	public App() {
 		
+	}
+	
+	public void GrabarEmpleadoDB(Empleado nuevo) {
+		database.Conectar();
+		database.InsertEmpleado(nuevo);
+		database.Desconectar();
 	}
 	
 	public void GrabarEmpleado(Empleado nuevo) {
