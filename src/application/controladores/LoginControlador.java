@@ -44,15 +44,19 @@ public class LoginControlador implements Initializable {
 			Main.ShowApp();
 			break;
 		case 1:
-			System.out.println("Usuario Incorrecto");
+			usuarioError.setText("El usuario no existe.");
+			botonIngresar.setLayoutX(118.00);
+			botonIngresar.setLayoutY(224.00);
+			usuarioError.setVisible(true);
 			break;
 		case 2:
-			System.out.println("Contraseña Incorrecta");
+			usuarioError.setText("La contraseña es incorrecta.");
+			botonIngresar.setLayoutX(118.00);
+			botonIngresar.setLayoutY(224.00);
+			usuarioError.setVisible(true);
+			break;
 		}
 		
-			//botonIngresar.setLayoutX(118.00);
-			//botonIngresar.setLayoutY(239.00);
-			//usuarioError.setVisible(true);
 	}
 
 }
