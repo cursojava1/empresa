@@ -62,7 +62,6 @@ public class Database {
 				return rs.getString("Contraseña");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
