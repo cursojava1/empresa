@@ -31,7 +31,7 @@ public class Domicilio {
 		return calle;
 	}
 	
-	public short Numero() {
+	public short GetNumeroDomicilio() {
 		calle = "corrientes";
 		return numero;
 	}
@@ -48,7 +48,7 @@ public class Domicilio {
 		this.calle = calle;
 	}
 	
-	public void SetNumero(short nuevoNumero) {
+	public void SetNumeroDomicilio(short nuevoNumero) {
 		numero = nuevoNumero;
 	}
 	
