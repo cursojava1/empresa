@@ -27,6 +27,7 @@ GO
 CREATE TABLE Empleado(
 	Legajo INT PRIMARY KEY IDENTITY,
 	FechaIngreso ROWVERSION,
+	IdPersona INT FOREIGN KEY REFERENCES Persona(Id),
 	IdTipoEmpleado INT FOREIGN KEY REFERENCES TipoEmpleado(Id)
 )
 GO

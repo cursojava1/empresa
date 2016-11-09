@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import application.empresa.empleados.Empleado;
+import application.empresa.empleados.Gerente;
+import application.empresa.utils.Utils.VIVIENDA;
 
 public class Database {
 
@@ -81,15 +83,72 @@ public class Database {
 			rs.next();
 			int idEstadoCivil = rs.getInt("Id");
 			
-			StringBuilder consulta = new StringBuilder("INSERT INTO Persona VALUES ('")
+			StringBuilder consultaInsertarPersona = new StringBuilder("INSERT INTO Persona VALUES ('")
 					.append(nuevo.Nombre()).append("', '")
 					.append(nuevo.Apellido()).append("', ")
 					.append(nuevo.getDocumento()).append(", ")
 					.append(nuevo.Edad()).append(", ")
 					.append(idSexo).append(", ")
 					.append(idEstadoCivil).append(")");
-			int cantidadAfectadas = ps.executeUpdate(consulta.toString());
 			
+			int cantidadAfectadas = ps.executeUpdate(consultaInsertarPersona.toString());
+			
+			// Obtener Id Vivienda.
+			rs = ps.executeQuery("SELECT Id FROM TipoVivienda WHERE Vivienda = '" + nuevo.getVivienda() + "'");
+			int idVivienda = rs.getInt("Id");
+			
+			StringBuilder consultaInsertarDomicilio = new StringBuilder("INSERT INTO Domicilio VALUES (")
+					.append(idVivienda).append(", '")
+					.append(nuevo.getCalle()).append("', ")
+					.append(nuevo.getNumero());
+			
+			if (nuevo.getVivienda().equals(VIVIENDA.DEPARTAMENTO)) {
+				consultaInsertarDomicilio.append(", ").append(nuevo.GetPiso())
+				.append(", '").append(nuevo.GetDepartamento()).append("'");
+			}
+			
+			consultaInsertarDomicilio.append(")");
+			
+			cantidadAfectadas = ps.executeUpdate(consultaInsertarDomicilio.toString());
+			
+			//Obtener Id Persona.
+			rs = ps.executeQuery("SELECT Id FROM Persona WHERE Dni = " + nuevo.getDocumento());
+			int idPersona = rs.getInt("Id");
+			
+			//Obtener Id Domicilio.
+			rs = ps.executeQuery("SELECT Max(Id) FROM Domicilio");
+			int idDomicilio = rs.getInt("Id");
+			
+			StringBuilder consultaInsertarMultiDomicilio = new StringBuilder("INSERT INTO MultiDomicilio Values (")
+					.append(idPersona).append(", ").append(idDomicilio).append(")");
+			
+			cantidadAfectadas = ps.executeUpdate(consultaInsertarMultiDomicilio.toString());
+			
+			//Obtener Id Tipo de empleado.
+			rs = ps.executeQuery("SELECT Id FROM TipoEmpleado WHERE Tipo = " + nuevo.getClass());
+			int idTipoEmpleado = rs.getInt("Id");
+			
+			StringBuilder consultaInsertarEmpleado = new StringBuilder("INSERT INTO Empleado Values(")
+					.append(nuevo.getFechaDeIngreso()).append(", ")
+					.append(idTipoEmpleado).append(", ")
+					.append(idPersona).append(")");
+			
+			cantidadAfectadas = ps.executeUpdate(consultaInsertarEmpleado.toString());
+			
+			//Obtener legajo.
+			rs = ps.executeQuery("SELECT Max(Legajo) FROM Empleado");
+			int legajoEmpleado = rs.getInt("Legajo");
+			
+			//Obtener tipo de empleado.
+			rs = ps.executeQuery("SELECT Tipo FROM TipoEmpleado WHERE Id = " + idTipoEmpleado);
+			String tipo  = rs.getString("Tipo");
+			
+			if (tipo.equals("Gerente")) {
+				Gerente gerente = (Gerente)nuevo;
+				StringBuilder consultaInsertarGerente = new StringBuilder("INSERT INTO Gerente Values('")
+						.append(gerente.getRango()).append("', ").append(legajoEmpleado).append(")");
+				cantidadAfectadas = ps.executeUpdate(consultaInsertarGerente.toString());
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();

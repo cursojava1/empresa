@@ -153,9 +153,13 @@ public class Persona {
 		}
 	}
 	
+	public short GetPiso() {
+		return domicilio.Piso();
+	}
 	
-	
-	
+	public String GetDepartamento() {
+		return domicilio.getDepartamento();
+	}
 	
 	
 	
