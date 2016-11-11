@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import application.empresa.empleados.Empleado;
 import application.empresa.empleados.Gerente;
+import application.empresa.empleados.Junior;
 import application.empresa.utils.Utils.VIVIENDA;
 
 public class Database {
@@ -148,6 +149,11 @@ public class Database {
 				StringBuilder consultaInsertarGerente = new StringBuilder("INSERT INTO Gerente Values('")
 						.append(gerente.getRango()).append("', ").append(legajoEmpleado).append(")");
 				cantidadAfectadas = ps.executeUpdate(consultaInsertarGerente.toString());
+			} else if (tipo.equals("Junior")) {
+				Junior junior = (Junior)nuevo;
+				StringBuilder consultaInsertarJunior = new StringBuilder("INSERT INTO Junior Values('")
+						.append(junior.GetLenguajes()).append("', ").append(legajoEmpleado).append(")");
+				cantidadAfectadas = ps.executeUpdate(consultaInsertarJunior.toString());
 			}
 			
 		} catch (Exception e) {
