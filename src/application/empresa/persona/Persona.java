@@ -60,7 +60,7 @@ public class Persona {
 	public void SetDomicilio(String calle, short numero) {
 		try {
 			domicilio.SetCalle(calle);
-			domicilio.SetNumero(numero);
+			domicilio.SetNumeroDomicilio(numero);
 		} catch (Exception e) {
 			System.out.println("Error en la clase: " + this.getClass() + " el metodo SetDomicilio con el mensaje: " + e.getMessage());
 			e.printStackTrace();
@@ -70,7 +70,7 @@ public class Persona {
 	public void SetDomicilio(String calle, short numero, short piso, String departamento) {
 		try {
 			domicilio.SetCalle(calle);
-			domicilio.SetNumero(numero);
+			domicilio.SetNumeroDomicilio(numero);
 			domicilio.setDepartamento(departamento);
 			domicilio.SetPiso(piso);
 		} catch (Exception e) {
@@ -92,7 +92,7 @@ public class Persona {
 	}
 	
 	public short getNumero() {
-		return domicilio.Numero();
+		return domicilio.GetNumeroDomicilio();
 	}
 	
 	public void setEdad(short nuevaEdad) {
