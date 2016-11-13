@@ -56,7 +56,7 @@ public class AppControlador implements Initializable {
 		ObservableList<String> opcionesSexo = FXCollections.observableArrayList("Masculino", "Femenino");
 		sexo.setItems(opcionesSexo);
 		ObservableList<String> opcionesEstado = FXCollections.observableArrayList("Casado", "Soltero", "Viudo",
-				"Divorciado", "Concuvino");
+				"Divorciado", "Concubino");
 		estado.setItems(opcionesEstado);
 		rbcasa.setSelected(true);
 		
