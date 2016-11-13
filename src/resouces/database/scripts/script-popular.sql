@@ -1,3 +1,4 @@
+USE Empresa
 INSERT INTO Sexo VALUES ('Masculino')
 INSERT INTO Sexo VALUES ('Femenino')
 

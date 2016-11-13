@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 
 import application.empresa.empleados.Empleado;
 import application.empresa.empleados.Gerente;
@@ -76,11 +77,13 @@ public class Database {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
 			// Obtener Id Sexo.
-			ResultSet rs = ps.executeQuery("SELECT Id FROM Sexo WHERE Sexo = '" + nuevo.getSexo() + "'");
+			String consulta = "SELECT Id FROM Sexo WHERE Sexo = '" + nuevo.getSexo() + "'";
+			ResultSet rs = ps.executeQuery(consulta);
 			rs.next();
 			int idSexo = rs.getInt("Id");
 			// Obtener id estado civil.
-			rs = ps.executeQuery("SELECT Id FROM EstadoCivil WHERE Estado = '" + nuevo.GetEstadoCivil() + "'");
+			consulta = "SELECT Id FROM EstadoCivil WHERE Estado = '" + nuevo.GetEstadoCivil() + "'";
+			rs = ps.executeQuery(consulta);
 			rs.next();
 			int idEstadoCivil = rs.getInt("Id");
 			
@@ -95,10 +98,12 @@ public class Database {
 			int cantidadAfectadas = ps.executeUpdate(consultaInsertarPersona.toString());
 			
 			// Obtener Id Vivienda.
-			rs = ps.executeQuery("SELECT Id FROM TipoVivienda WHERE Vivienda = '" + nuevo.getVivienda() + "'");
+			consulta = "SELECT Id FROM TipoVivienda WHERE Vivienda = '" + nuevo.getVivienda() + "'";
+			rs = ps.executeQuery(consulta);
+			rs.next();
 			int idVivienda = rs.getInt("Id");
 			
-			StringBuilder consultaInsertarDomicilio = new StringBuilder("INSERT INTO Domicilio VALUES (")
+			StringBuilder consultaInsertarDomicilio = new StringBuilder("INSERT INTO Domicilio ([IdTipoVivienda],[Calle],[Numero]) VALUES (")
 					.append(idVivienda).append(", '")
 					.append(nuevo.getCalle()).append("', ")
 					.append(nuevo.getNumero());
@@ -114,10 +119,12 @@ public class Database {
 			
 			//Obtener Id Persona.
 			rs = ps.executeQuery("SELECT Id FROM Persona WHERE Dni = " + nuevo.getDocumento());
+			rs.next();
 			int idPersona = rs.getInt("Id");
 			
 			//Obtener Id Domicilio.
-			rs = ps.executeQuery("SELECT Max(Id) FROM Domicilio");
+			rs = ps.executeQuery("SELECT Max(Id) AS Id FROM Domicilio");
+			rs.next();
 			int idDomicilio = rs.getInt("Id");
 			
 			StringBuilder consultaInsertarMultiDomicilio = new StringBuilder("INSERT INTO MultiDomicilio Values (")
@@ -126,22 +133,25 @@ public class Database {
 			cantidadAfectadas = ps.executeUpdate(consultaInsertarMultiDomicilio.toString());
 			
 			//Obtener Id Tipo de empleado.
-			rs = ps.executeQuery("SELECT Id FROM TipoEmpleado WHERE Tipo = " + nuevo.getClass());
+			rs = ps.executeQuery("SELECT Id FROM TipoEmpleado WHERE Tipo = '" + nuevo.getClass().getSimpleName() + "'");
+			rs.next();
 			int idTipoEmpleado = rs.getInt("Id");
 			
-			StringBuilder consultaInsertarEmpleado = new StringBuilder("INSERT INTO Empleado Values(")
-					.append(nuevo.getFechaDeIngreso()).append(", ")
-					.append(idTipoEmpleado).append(", ")
-					.append(idPersona).append(")");
+			StringBuilder consultaInsertarEmpleado = new StringBuilder("INSERT INTO Empleado Values('")
+					.append(new SimpleDateFormat("yyyy-MM-dd").format(nuevo.getFechaDeIngreso())).append("', ")
+					.append(idPersona).append(", ")
+					.append(idTipoEmpleado).append(")");
 			
 			cantidadAfectadas = ps.executeUpdate(consultaInsertarEmpleado.toString());
 			
 			//Obtener legajo.
-			rs = ps.executeQuery("SELECT Max(Legajo) FROM Empleado");
+			rs = ps.executeQuery("SELECT Max(Legajo) AS Legajo FROM Empleado");
+			rs.next();
 			int legajoEmpleado = rs.getInt("Legajo");
 			
 			//Obtener tipo de empleado.
 			rs = ps.executeQuery("SELECT Tipo FROM TipoEmpleado WHERE Id = " + idTipoEmpleado);
+			rs.next();
 			String tipo  = rs.getString("Tipo");
 			
 			if (tipo.equals("Gerente")) {

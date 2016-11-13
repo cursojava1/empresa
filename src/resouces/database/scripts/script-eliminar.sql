@@ -1,0 +1,29 @@
+USE Empresa
+DELETE FROM Junior
+DROP TABLE Junior
+DELETE FROM Gerente
+DROP TABLE Gerente
+DELETE FROM MultiDomicilio
+DROP TABLE MultiDomicilio
+DELETE FROM Domicilio
+DROP TABLE Domicilio
+DELETE FROM TipoVivienda
+DROP TABLE TipoVivienda
+DELETE FROM Empleado
+DROP TABLE Empleado
+DELETE FROM Persona
+DROP TABLE Persona
+DELETE FROM EstadoCivil
+DROP TABLE EstadoCivil
+DELETE FROM Sexo
+DROP TABLE Sexo
+DELETE FROM TipoEmpleado
+DROP TABLE TipoEmpleado
+DELETE FROM Usuario
+DROP TABLE Usuario
+DELETE FROM Nivel
+DROP TABLE Nivel
+GO
+USE master
+DROP DATABASE Empresa
+GO
