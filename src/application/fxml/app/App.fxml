@@ -50,42 +50,23 @@
 						</AnchorPane>
 					</content>
 				</Tab>
-				<Tab fx:id="tab2" text="Modificar Empleado">
+				<Tab fx:id="tab2" text="Administrar Empleado">
 					<content>
 						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 							<children>
-								<Button fx:id="btnModificarEmpleado" layoutX="456.0" layoutY="235.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Modificar" />
-								<TableView fx:id="tablaEmpleadosM" layoutX="37.0" layoutY="14.0" prefHeight="200.0" prefWidth="527.0">
+								<Button fx:id="btnModificarEmpleado" layoutX="341.0" layoutY="238.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Modificar" />
+								<TableView fx:id="tablaEmpleados" layoutX="37.0" layoutY="14.0" prefHeight="200.0" prefWidth="527.0">
 									<columns>
-										<TableColumn fx:id="nombreTablaM" prefWidth="75.0" text="Nombre" />
-										<TableColumn fx:id="apellidoTablaM" prefWidth="75.0" text="Apellido" />
-										<TableColumn fx:id="dniTablaM" prefWidth="75.0" text="Dni" />
-										<TableColumn fx:id="edadTablaM" prefWidth="75.0" text="Edad" />
-										<TableColumn fx:id="calleTablaM" prefWidth="75.0" text="Calle" />
-										<TableColumn fx:id="numeroTablaM" prefWidth="75.0" text="Numero" />
-										<TableColumn fx:id="lenguajeTablaM" prefWidth="75.0" text="Lenguaje" />
+										<TableColumn fx:id="nombreTabla" prefWidth="75.0" text="Nombre" />
+										<TableColumn fx:id="apellidoTabla" prefWidth="75.0" text="Apellido" />
+										<TableColumn fx:id="dniTabla" prefWidth="75.0" text="Dni" />
+										<TableColumn fx:id="edadTabla" prefWidth="75.0" text="Edad" />
+										<TableColumn fx:id="calleTabla" prefWidth="75.0" text="Calle" />
+										<TableColumn fx:id="numeroTabla" prefWidth="75.0" text="Numero" />
+										<TableColumn fx:id="lenguajeTabla" prefWidth="75.0" text="Lenguaje" />
 									</columns>
 								</TableView>
-							</children>
-						</AnchorPane>
-					</content>
-				</Tab>
-				<Tab fx:id="tab3" text="Eliminar Empleado">
-					<content>
-						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="243.0">
-							<children>
-								<TableView fx:id="tablaEmpleadosE" layoutX="37.0" layoutY="14.0" prefHeight="200.0" prefWidth="527.0">
-									<columns>
-										<TableColumn fx:id="nombreTablaE" prefWidth="75.0" text="Nombre" />
-										<TableColumn fx:id="apellidoTablaE" prefWidth="75.0" text="Apellido" />
-										<TableColumn fx:id="dniTablaE" prefWidth="75.0" text="Dni" />
-										<TableColumn fx:id="edadTablaE" prefWidth="75.0" text="Edad" />
-										<TableColumn fx:id="calleTablaE" prefWidth="75.0" text="Calle" />
-										<TableColumn fx:id="numeroTablaE" prefWidth="75.0" text="Numero" />
-										<TableColumn fx:id="lenguajeTablaE" prefWidth="75.0" text="Lenguaje" />
-									</columns>
-								</TableView>
-								<Button fx:id="btnEliminarEmpleado" layoutX="456.0" layoutY="235.0" mnemonicParsing="false" onAction="#EliminarEmpleado" prefHeight="25.0" prefWidth="108.0" text="Eliminar" />
+                        <Button fx:id="btnEliminarEmpleado" layoutX="456.0" layoutY="238.0" mnemonicParsing="false" onAction="#EliminarEmpleado" prefHeight="25.0" prefWidth="108.0" text="Eliminar" />
 							</children>
 						</AnchorPane>
 					</content>

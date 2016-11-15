@@ -13,8 +13,7 @@ import application.empresa.utils.Utils.ESTADOCIVIL;
 import application.empresa.utils.Utils.SEXO;
 import application.empresa.utils.Utils.VIVIENDA;
 import application.funcional.app.App;
-import application.fxml.app.ModeloEmpleadoTE;
-import application.fxml.app.ModeloEmpleadoTM;
+import application.fxml.app.ModeloEmpleado;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,7 +25,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-///comentario
+
 public class AppControlador implements Initializable {
 
 	App app;
@@ -38,20 +37,15 @@ public class AppControlador implements Initializable {
 	ChoiceBox<String> sexo, estado, usuarios;
 	@FXML
 	Label label1;
-	@FXML private TableView<ModeloEmpleadoTM> tablaEmpleadosM;
 	@FXML
-	private TableColumn<ModeloEmpleadoTM, String> nombreTablaM, apellidoTablaM, dniTablaM, edadTablaM, calleTablaM,
-			numeroTablaM, lenguajeTablaM;
-	
-	@FXML private TableView<ModeloEmpleadoTE> tablaEmpleadosE;
-	@FXML private TableColumn<ModeloEmpleadoTE, String> nombreTablaE, apellidoTablaE, dniTablaE, edadTablaE, calleTablaE, numeroTablaE, lenguajeTablaE;
-	
-	ObservableList<ModeloEmpleadoTM> empleadosTM = FXCollections.observableArrayList();
-	List<String> empleadosArchivoTM;
-	
-	ObservableList<ModeloEmpleadoTE> empleadosTE = FXCollections.observableArrayList();
-	List<String> empleadosArchivoTE;
-	
+	private TableView<ModeloEmpleado> tablaEmpleados;
+	@FXML
+	private TableColumn<ModeloEmpleado, String> nombreTabla, apellidoTabla, dniTabla, edadTabla, calleTabla,
+			numeroTabla, lenguajeTabla;
+
+	ObservableList<ModeloEmpleado> empleados = FXCollections.observableArrayList();
+	List<String> empleadosArchivo;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		app = new App();
@@ -61,57 +55,28 @@ public class AppControlador implements Initializable {
 				"Divorciado", "Concubino");
 		estado.setItems(opcionesEstado);
 		rbcasa.setSelected(true);
-		
-		nombreTablaM.setCellValueFactory(new PropertyValueFactory<ModeloEmpleadoTM, String>("NombreTablaM"));
-		apellidoTablaM.setCellValueFactory(new PropertyValueFactory<ModeloEmpleadoTM, String>("ApellidoTablaM"));
-		dniTablaM.setCellValueFactory(new PropertyValueFactory<ModeloEmpleadoTM, String>("DniTablaM"));
-		edadTablaM.setCellValueFactory(new PropertyValueFactory<ModeloEmpleadoTM, String>("EdadTablaM"));
-		calleTablaM.setCellValueFactory(new PropertyValueFactory<ModeloEmpleadoTM, String>("CalleTablaM"));
-		numeroTablaM.setCellValueFactory(new PropertyValueFactory<ModeloEmpleadoTM, String>("NumeroTablaM"));
-		lenguajeTablaM.setCellValueFactory(new PropertyValueFactory<ModeloEmpleadoTM, String>("LenguajeTablaM"));
-		
-		nombreTablaE.setCellValueFactory(new PropertyValueFactory<ModeloEmpleadoTE, String>("NombreTablaE"));
-		apellidoTablaE.setCellValueFactory(new PropertyValueFactory<ModeloEmpleadoTE, String>("ApellidoTablaE"));
-		dniTablaE.setCellValueFactory(new PropertyValueFactory<ModeloEmpleadoTE, String>("DniTablaE"));
-		edadTablaE.setCellValueFactory(new PropertyValueFactory<ModeloEmpleadoTE, String>("EdadTablaE"));
-		calleTablaE.setCellValueFactory(new PropertyValueFactory<ModeloEmpleadoTE, String>("CalleTablaE"));
-		numeroTablaE.setCellValueFactory(new PropertyValueFactory<ModeloEmpleadoTE, String>("NumeroTablaE"));
-		lenguajeTablaE.setCellValueFactory(new PropertyValueFactory<ModeloEmpleadoTE, String>("LenguajeTablaE"));
-		
-		
+
+		nombreTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("NombreTabla"));
+		apellidoTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("ApellidoTabla"));
+		dniTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("DniTabla"));
+		edadTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("EdadTabla"));
+		calleTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("CalleTabla"));
+		numeroTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("NumeroTabla"));
+		lenguajeTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("LenguajeTabla"));
+
 		ObservableList<String> opcionesUsuarios = FXCollections.observableArrayList("Gerente", "Desarrollador");
 		usuarios.setItems(opcionesUsuarios);
-		
-		empleadosArchivoTM = app.ExtraerEmpleados();
-		ModeloEmpleadoTM modeloEmpleadoTM;
-		String[] datosM = new String[7];
-		for (String empleado : empleadosArchivoTM) {
-			datosM = empleado.split(" ");
-			modeloEmpleadoTM = new ModeloEmpleadoTM(datosM[0], datosM[1], datosM[2], datosM[3], datosM[4], datosM[5], datosM[6]);
-			empleadosTM.add(modeloEmpleadoTM);
-		}
-		tablaEmpleadosM.setItems(empleadosTM);
-		
-		empleadosArchivoTE = app.ExtraerEmpleados();
-		ModeloEmpleadoTE modeloEmpleadoTE;
+
+		empleadosArchivo = app.ExtraerEmpleados();
+		ModeloEmpleado modeloEmpleado;
 		String[] datos = new String[7];
-		for (String empleado : empleadosArchivoTE) {
+		for (String empleado : empleadosArchivo) {
 			datos = empleado.split(" ");
-			modeloEmpleadoTE = new ModeloEmpleadoTE(datos[0], datos[1], datos[2], datos[3], datos[4], datos[5], datos[6]);
-			empleadosTE.add(modeloEmpleadoTE);
+			modeloEmpleado = new ModeloEmpleado(datos[0], datos[1], datos[2], datos[3], datos[4], datos[5], datos[6]);
+			empleados.add(modeloEmpleado);
 		}
-		tablaEmpleadosE.setItems(empleadosTE);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		tablaEmpleados.setItems(empleados);
+
 	}
 
 	@FXML
@@ -202,20 +167,8 @@ public class AppControlador implements Initializable {
 
 	@FXML
 	private void EliminarEmpleado() {
-		int index = tablaEmpleadosE.getSelectionModel().getSelectedIndex();
-		empleadosTE.remove(index);
+		int index = tablaEmpleados.getSelectionModel().getSelectedIndex();
+		empleados.remove(index);
 		app.EliminarEmpleado(index);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
