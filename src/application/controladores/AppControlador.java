@@ -23,6 +23,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -39,7 +40,7 @@ public class AppControlador implements Initializable {
 
 	App app;
 	@FXML
-	TextField nombre, apellido, dni, edad, calle, piso, numero, dpt, text1, Unick, Uemail, Upass, Upassconfirmar;
+	TextField nombre, apellido, dni, edad, calle, piso, numero, dpt, text1, Unick, Uemail, Upass, Upassconfirmar,driver,nombreDB,direccion,puerto;
 	@FXML
 	RadioButton rbcasa, rbdpt, Ucheckadmin, Ucheckinvitado;
 	@FXML
@@ -235,6 +236,14 @@ public class AppControlador implements Initializable {
 		int index = tablaEmpleados.getSelectionModel().getSelectedIndex();
 		empleados.remove(index);
 		app.EliminarEmpleado(index);
+	}
+	
+	private void ConfigurarDB (Database configuracion){
+		configuracion.SetDriver(driver.getText());
+		configuracion.SetNombreDB(nombreDB.getText());
+		configuracion.SetDireccion(direccion.getText());
+		configuracion.SetPuerto(puerto.getText());
+		 
 	}
 
 	private void LimpiarDatos(String[] datos) {

@@ -23,6 +23,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -39,7 +40,11 @@ public class AppControlador implements Initializable {
 
 	App app;
 	@FXML
+<<<<<<< HEAD
 	TextField nombre, apellido, dni, edad, calle, piso, numero, dpt, text1, Unick, Uemail, Upass, Upassconfirmar;
+=======
+	TextField nombre, apellido, dni, edad, calle, piso, numero, dpt, text1,driver,nombreDB,direccion,puerto;
+>>>>>>> funcionalidad configuracion base de datos
 	@FXML
 	RadioButton rbcasa, rbdpt, Ucheckadmin, Ucheckinvitado;
 	@FXML
@@ -60,12 +65,17 @@ public class AppControlador implements Initializable {
 	List<String> empleadosArchivo;
 
 	@FXML
+<<<<<<< HEAD
 	private TableView<ModeloUsuario> Tusuarios;
 	@FXML
 	private TableColumn<ModeloUsuario, String> TUnick, TUemail, TUcontrase�a, TUnivel;
 	ObservableList<ModeloUsuario> observableUsuarios = FXCollections.observableArrayList();
 	List<String> usuariosLista;
 
+=======
+	CheckBox seguridad;
+	
+>>>>>>> funcionalidad configuracion base de datos
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		app = new App();
@@ -236,6 +246,14 @@ public class AppControlador implements Initializable {
 		empleados.remove(index);
 		app.EliminarEmpleado(index);
 	}
+	
+	private void ConfigurarDB (Database configuracion){
+		configuracion.SetDriver(driver.getText());
+		configuracion.SetNombreDB(nombreDB.getText());
+		configuracion.SetDireccion(direccion.getText());
+		configuracion.SetPuerto(puerto.getText());
+		 
+	}
 
 	private void LimpiarDatos(String[] datos) {
 		for (int i = 0; i < datos.length; i++) {
@@ -283,7 +301,21 @@ public class AppControlador implements Initializable {
 		OcultarTodosAnchorPane();
 		AnchorAdministrarUsuario.setVisible(true);
 	}
-<<<<<<< HEAD
+	
+	private void ListarEmpleados(){
+		empleadosArchivo = app.ExtraerEmpleadosDB();
+		ModeloEmpleado modeloEmpleado;
+		String[] datos = new String[11];
+		for (String empleado : empleadosArchivo) {
+			datos = empleado.split(" ");
+			LimpiarDatos(datos);
+			modeloEmpleado = new ModeloEmpleado(datos[0], datos[1], datos[2], datos[3], datos[4], datos[5], datos[6],
+					datos[7], datos[8], datos[9], datos[10]);
+			empleados.add(modeloEmpleado);
+		}
+		
+		tablaEmpleados.setItems(empleados);
+	}
 
 	@FXML
 	private void AgregarUsuarioNuevo() {
@@ -318,22 +350,4 @@ public class AppControlador implements Initializable {
 
 	}
 
-=======
-	
-	private void ListarEmpleados(){
-		empleadosArchivo = app.ExtraerEmpleadosDB();
-		ModeloEmpleado modeloEmpleado;
-		String[] datos = new String[11];
-		for (String empleado : empleadosArchivo) {
-			datos = empleado.split(" ");
-			LimpiarDatos(datos);
-			modeloEmpleado = new ModeloEmpleado(datos[0], datos[1], datos[2], datos[3], datos[4], datos[5], datos[6],
-					datos[7], datos[8], datos[9], datos[10]);
-			empleados.add(modeloEmpleado);
-		}
-		
-		tablaEmpleados.setItems(empleados);
-	}
-	
->>>>>>> Correción SELECT Empleados.  Metodo para limpiar los campos de Empleado. Optimizacion de conectar y desconectar de base de datos (1 sola llamada de cada uno en la aplicación). Al agregar un empleado, automaticamente lo lista en la sección Administrar Empleados.
 }
