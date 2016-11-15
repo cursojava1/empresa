@@ -99,10 +99,11 @@
                         <Label layoutX="63.0" layoutY="186.0" text="Direccion" />
                         <Label layoutX="315.0" layoutY="186.0" text="Puerto" />
                         <Label layoutX="63.0" layoutY="122.0" text="Nombre de Base de datos" />
-                        <TextField fx:id="driver" layoutX="106.0" layoutY="55.0" prefHeight="25.0" prefWidth="327.0" />
+                        <TextField fx:id="driver" layoutX="106.0" layoutY="55.0" prefHeight="25.0" prefWidth="220.0" />
                         <TextField fx:id="nombreDB" layoutX="213.0" layoutY="118.0" prefHeight="25.0" prefWidth="113.0" />
                         <TextField fx:id="direccion" layoutX="120.0" layoutY="182.0" />
                         <TextField fx:id="puerto" layoutX="356.0" layoutY="182.0" prefHeight="25.0" prefWidth="77.0" />
+                        <CheckBox fx:id="seguridad" layoutX="369.0" layoutY="59.0" mnemonicParsing="false" text="Seguridad Integrada" />
                      </children>
                   </AnchorPane>
               </content>
