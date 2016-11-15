@@ -40,8 +40,8 @@ public class AppControlador implements Initializable {
 	@FXML
 	private TableView<ModeloEmpleado> tablaEmpleados;
 	@FXML
-	private TableColumn<ModeloEmpleado, String> nombreTabla, apellidoTabla, dniTabla, edadTabla, calleTabla,
-			numeroTabla, lenguajeTabla;
+	private TableColumn<ModeloEmpleado, String> legajoTabla, nombreTabla, apellidoTabla, dniTabla, edadTabla, calleTabla,
+			numeroTabla, lenguajeTabla, rangoTabla;
 
 	ObservableList<ModeloEmpleado> empleados = FXCollections.observableArrayList();
 	List<String> empleadosArchivo;
@@ -56,6 +56,7 @@ public class AppControlador implements Initializable {
 		estado.setItems(opcionesEstado);
 		rbcasa.setSelected(true);
 
+		legajoTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("LegajoTabla"));
 		nombreTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("NombreTabla"));
 		apellidoTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("ApellidoTabla"));
 		dniTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("DniTabla"));
@@ -63,16 +64,17 @@ public class AppControlador implements Initializable {
 		calleTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("CalleTabla"));
 		numeroTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("NumeroTabla"));
 		lenguajeTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("LenguajeTabla"));
+		rangoTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("RangoTabla"));
 
 		ObservableList<String> opcionesUsuarios = FXCollections.observableArrayList("Gerente", "Desarrollador");
 		usuarios.setItems(opcionesUsuarios);
 
 		empleadosArchivo = app.ExtraerEmpleados();
 		ModeloEmpleado modeloEmpleado;
-		String[] datos = new String[7];
+		String[] datos = new String[9];
 		for (String empleado : empleadosArchivo) {
 			datos = empleado.split(" ");
-			modeloEmpleado = new ModeloEmpleado(datos[0], datos[1], datos[2], datos[3], datos[4], datos[5], datos[6]);
+			modeloEmpleado = new ModeloEmpleado(datos[0], datos[1], datos[2], datos[3], datos[4], datos[5], datos[6], datos[7], datos[8]);
 			empleados.add(modeloEmpleado);
 		}
 		tablaEmpleados.setItems(empleados);
