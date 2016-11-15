@@ -31,10 +31,11 @@ public class Database {
 		if (conexion == null) {
 			try {
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-				String url = String.format("jdbc:sqlserver://%s:%s;databaseName=%s;integratedSecurity=true;", "localhost", "1433", "Empresa");
+				String url = String.format("jdbc:sqlserver://%s:%s;databaseName=%s;integratedSecurity=true;",
+						"localhost", "1433", "Empresa");
 				try {
 					conexion = DriverManager.getConnection(url);
-					
+
 					if (conexion != null) {
 						System.out.println("Conexion Exitosa");
 					}
@@ -51,8 +52,8 @@ public class Database {
 		if (conexion != null) {
 			try {
 				conexion.close();
-				if(conexion.isClosed()) {
-	                System.out.println("Desconexion Exitosa");
+				if (conexion.isClosed()) {
+					System.out.println("Desconexion Exitosa");
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -76,7 +77,7 @@ public class Database {
 	public void InsertPersona(Empleado nuevo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
-			
+
 			// Obtener Id Sexo.
 			String consulta = "SELECT Id FROM Sexo WHERE Sexo = '" + nuevo.getSexo() + "'";
 			ResultSet rs = ps.executeQuery(consulta);
@@ -87,100 +88,147 @@ public class Database {
 			rs = ps.executeQuery(consulta);
 			rs.next();
 			int idEstadoCivil = rs.getInt("Id");
-			
+
 			StringBuilder consultaInsertarPersona = new StringBuilder("INSERT INTO Persona VALUES ('")
-					.append(nuevo.Nombre()).append("', '")
-					.append(nuevo.Apellido()).append("', ")
-					.append(nuevo.getDocumento()).append(", ")
-					.append(nuevo.Edad()).append(", ")
-					.append(idSexo).append(", ")
-					.append(idEstadoCivil).append(")");
-			
+					.append(nuevo.Nombre()).append("', '").append(nuevo.Apellido()).append("', ")
+					.append(nuevo.getDocumento()).append(", ").append(nuevo.Edad()).append(", ").append(idSexo)
+					.append(", ").append(idEstadoCivil).append(")");
+
 			int cantidadAfectadas = ps.executeUpdate(consultaInsertarPersona.toString());
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void InsertEmpleado(Empleado nuevo) {
+
+	public void InsertDomicilio(Empleado nuevo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
-	
+
 			// Obtener Id Vivienda.
 			String consulta = "SELECT Id FROM TipoVivienda WHERE Vivienda = '" + nuevo.getVivienda() + "'";
 			ResultSet rs = ps.executeQuery(consulta);
 			rs.next();
 			int idVivienda = rs.getInt("Id");
-			
-			StringBuilder consultaInsertarDomicilio = new StringBuilder("INSERT INTO Domicilio ([IdTipoVivienda],[Calle],[Numero]) VALUES (")
-					.append(idVivienda).append(", '")
-					.append(nuevo.getCalle()).append("', ")
-					.append(nuevo.getNumero());
-			
+
+			StringBuilder consultaInsertarDomicilio = new StringBuilder(
+					"INSERT INTO Domicilio ([IdTipoVivienda],[Calle],[Numero]) VALUES (").append(idVivienda)
+							.append(", '").append(nuevo.getCalle()).append("', ").append(nuevo.getNumero());
+
 			if (nuevo.getVivienda().equals(VIVIENDA.DEPARTAMENTO)) {
-				consultaInsertarDomicilio.append(", ").append(nuevo.GetPiso())
-				.append(", '").append(nuevo.GetDepartamento()).append("'");
+				consultaInsertarDomicilio.append(", ").append(nuevo.GetPiso()).append(", '")
+						.append(nuevo.GetDepartamento()).append("'");
 			}
-			
+
 			consultaInsertarDomicilio.append(")");
-			
+
 			int cantidadAfectadas = ps.executeUpdate(consultaInsertarDomicilio.toString());
-			
-			//Obtener Id Persona.
-			rs = ps.executeQuery("SELECT Id FROM Persona WHERE Dni = " + nuevo.getDocumento());
-			rs.next();
-			int idPersona = rs.getInt("Id");
-			
-			//Obtener Id Domicilio.
-			rs = ps.executeQuery("SELECT Max(Id) AS Id FROM Domicilio");
-			rs.next();
-			int idDomicilio = rs.getInt("Id");
-			
-			StringBuilder consultaInsertarMultiDomicilio = new StringBuilder("INSERT INTO MultiDomicilio Values (")
-					.append(idPersona).append(", ").append(idDomicilio).append(")");
-			
-			cantidadAfectadas = ps.executeUpdate(consultaInsertarMultiDomicilio.toString());
-			
-			//Obtener Id Tipo de empleado.
-			rs = ps.executeQuery("SELECT Id FROM TipoEmpleado WHERE Tipo = '" + nuevo.getClass().getSimpleName() + "'");
-			rs.next();
-			int idTipoEmpleado = rs.getInt("Id");
-			
-			StringBuilder consultaInsertarEmpleado = new StringBuilder("INSERT INTO Empleado Values('")
-					.append(new SimpleDateFormat("yyyy-MM-dd").format(nuevo.getFechaDeIngreso())).append("', ")
-					.append(idPersona).append(", ")
-					.append(idTipoEmpleado).append(")");
-			
-			cantidadAfectadas = ps.executeUpdate(consultaInsertarEmpleado.toString());
-			
-			//Obtener legajo.
-			rs = ps.executeQuery("SELECT Max(Legajo) AS Legajo FROM Empleado");
-			rs.next();
-			int legajoEmpleado = rs.getInt("Legajo");
-			
-			//Obtener tipo de empleado.
-			rs = ps.executeQuery("SELECT Tipo FROM TipoEmpleado WHERE Id = " + idTipoEmpleado);
-			rs.next();
-			String tipo  = rs.getString("Tipo");
-			
-			if (tipo.equals("Gerente")) {
-				Gerente gerente = (Gerente)nuevo;
-				StringBuilder consultaInsertarGerente = new StringBuilder("INSERT INTO Gerente Values('")
-						.append(gerente.getRango()).append("', ").append(legajoEmpleado).append(")");
-				cantidadAfectadas = ps.executeUpdate(consultaInsertarGerente.toString());
-			} else if (tipo.equals("Junior")) {
-				Junior junior = (Junior)nuevo;
-				StringBuilder consultaInsertarJunior = new StringBuilder("INSERT INTO Junior Values('")
-						.append(junior.GetLenguajes()).append("', ").append(legajoEmpleado).append(")");
-				cantidadAfectadas = ps.executeUpdate(consultaInsertarJunior.toString());
-			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
+
+	public void InsertMultiDomicilio(Empleado nuevo) {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+			// Obtener Id Persona.
+			ResultSet rs = ps.executeQuery("SELECT Id FROM Persona WHERE Dni = " + nuevo.getDocumento());
+			rs.next();
+			int idPersona = rs.getInt("Id");
+
+			// Obtener Id Domicilio.
+			rs = ps.executeQuery("SELECT Max(Id) AS Id FROM Domicilio");
+			rs.next();
+			int idDomicilio = rs.getInt("Id");
+
+			StringBuilder consultaInsertarMultiDomicilio = new StringBuilder("INSERT INTO MultiDomicilio Values (")
+					.append(idPersona).append(", ").append(idDomicilio).append(")");
+
+			int cantidadAfectadas = ps.executeUpdate(consultaInsertarMultiDomicilio.toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void InsertEmpleado(Empleado nuevo) {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+			// Obtener Id Persona.
+			ResultSet rs = ps.executeQuery("SELECT Id FROM Persona WHERE Dni = " + nuevo.getDocumento());
+			rs.next();
+			int idPersona = rs.getInt("Id");
+
+			// Obtener Id Tipo de empleado.
+			rs = ps.executeQuery("SELECT Id FROM TipoEmpleado WHERE Tipo = '" + nuevo.getClass().getSimpleName() + "'");
+			rs.next();
+			int idTipoEmpleado = rs.getInt("Id");
+
+			StringBuilder consultaInsertarEmpleado = new StringBuilder("INSERT INTO Empleado Values('")
+					.append(new SimpleDateFormat("yyyy-MM-dd").format(nuevo.getFechaDeIngreso())).append("', ")
+					.append(idPersona).append(", ").append(idTipoEmpleado).append(")");
+
+			int cantidadAfectadas = ps.executeUpdate(consultaInsertarEmpleado.toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void InsertGerente(Empleado nuevo) {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+			// Obtener legajo.
+			ResultSet rs = ps.executeQuery("SELECT Max(Legajo) AS Legajo FROM Empleado");
+			rs.next();
+			int legajoEmpleado = rs.getInt("Legajo");
+
+			// Obtener Id Tipo de empleado.
+			rs = ps.executeQuery("SELECT Id FROM TipoEmpleado WHERE Tipo = '" + nuevo.getClass().getSimpleName() + "'");
+			rs.next();
+			int idTipoEmpleado = rs.getInt("Id");
+
+			// Obtener tipo de empleado.
+			rs = ps.executeQuery("SELECT Tipo FROM TipoEmpleado WHERE Id = " + idTipoEmpleado);
+			rs.next();
+			String tipo = rs.getString("Tipo");
+
+			Gerente gerente = (Gerente) nuevo;
+			StringBuilder consultaInsertarGerente = new StringBuilder("INSERT INTO Gerente Values('")
+					.append(gerente.getRango()).append("', ").append(legajoEmpleado).append(")");
+			int cantidadAfectadas = ps.executeUpdate(consultaInsertarGerente.toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void InsertJunior(Empleado nuevo) {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+			// Obtener legajo.
+			ResultSet rs = ps.executeQuery("SELECT Max(Legajo) AS Legajo FROM Empleado");
+			rs.next();
+			int legajoEmpleado = rs.getInt("Legajo");
+
+			// Obtener Id Tipo de empleado.
+			rs = ps.executeQuery("SELECT Id FROM TipoEmpleado WHERE Tipo = '" + nuevo.getClass().getSimpleName() + "'");
+			rs.next();
+			int idTipoEmpleado = rs.getInt("Id");
+
+			// Obtener tipo de empleado.
+			rs = ps.executeQuery("SELECT Tipo FROM TipoEmpleado WHERE Id = " + idTipoEmpleado);
+			rs.next();
+			String tipo = rs.getString("Tipo");
+
+			Junior junior = (Junior) nuevo;
+			StringBuilder consultaInsertarJunior = new StringBuilder("INSERT INTO Junior Values('")
+					.append(junior.GetLenguajes()).append("', ").append(legajoEmpleado).append(")");
+			int cantidadAfectadas = ps.executeUpdate(consultaInsertarJunior.toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

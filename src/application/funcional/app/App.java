@@ -24,7 +24,11 @@ public class App {
 	public void GrabarEmpleadoDB(Empleado nuevo) {
 		database.Conectar();
 		database.InsertPersona(nuevo);
+		database.InsertDomicilio(nuevo);
+		database.InsertMultiDomicilio(nuevo);
 		database.InsertEmpleado(nuevo);
+		database.InsertGerente(nuevo);
+		database.InsertJunior(nuevo);
 		database.Desconectar();
 	}
 	
