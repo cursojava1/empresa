@@ -23,6 +23,7 @@ public class App {
 	
 	public void GrabarEmpleadoDB(Empleado nuevo) {
 		database.Conectar();
+		database.InsertPersona(nuevo);
 		database.InsertEmpleado(nuevo);
 		database.Desconectar();
 	}

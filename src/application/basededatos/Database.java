@@ -73,9 +73,10 @@ public class Database {
 		return null;
 	}
 
-	public void InsertEmpleado(Empleado nuevo) {
+	public void InsertPersona(Empleado nuevo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
+			
 			// Obtener Id Sexo.
 			String consulta = "SELECT Id FROM Sexo WHERE Sexo = '" + nuevo.getSexo() + "'";
 			ResultSet rs = ps.executeQuery(consulta);
@@ -97,9 +98,18 @@ public class Database {
 			
 			int cantidadAfectadas = ps.executeUpdate(consultaInsertarPersona.toString());
 			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void InsertEmpleado(Empleado nuevo) {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+	
 			// Obtener Id Vivienda.
-			consulta = "SELECT Id FROM TipoVivienda WHERE Vivienda = '" + nuevo.getVivienda() + "'";
-			rs = ps.executeQuery(consulta);
+			String consulta = "SELECT Id FROM TipoVivienda WHERE Vivienda = '" + nuevo.getVivienda() + "'";
+			ResultSet rs = ps.executeQuery(consulta);
 			rs.next();
 			int idVivienda = rs.getInt("Id");
 			
@@ -115,7 +125,7 @@ public class Database {
 			
 			consultaInsertarDomicilio.append(")");
 			
-			cantidadAfectadas = ps.executeUpdate(consultaInsertarDomicilio.toString());
+			int cantidadAfectadas = ps.executeUpdate(consultaInsertarDomicilio.toString());
 			
 			//Obtener Id Persona.
 			rs = ps.executeQuery("SELECT Id FROM Persona WHERE Dni = " + nuevo.getDocumento());
@@ -170,5 +180,7 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
+	
+	
 	
 }
