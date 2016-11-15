@@ -1,78 +1,78 @@
 package application.fxml.app;
 
-public class ModeloEmpleadoTM {
+public class ModeloEmpleado {
 
-	String nombreTablaM, apellidoTablaM, dniTablaM, edadTablaM, calleTablaM, numeroTablaM, lenguajeTablaM;
+	String nombreTabla, apellidoTabla, dniTabla, edadTabla, calleTabla, numeroTabla, lenguajeTabla;
 
-	public ModeloEmpleadoTM() {
+	public ModeloEmpleado() {
 
 	}
 
-	public ModeloEmpleadoTM(String nombreTablaM, String apellidoTablaM, String dniTablaM, String edadTablaM,
-			String calleTablaM, String numeroTablaM, String lenguajeTablaM) {
+	public ModeloEmpleado(String nombreTabla, String apellidoTabla, String dniTabla, String edadTabla,
+			String calleTabla, String numeroTabla, String lenguajeTabla) {
 		super();
-		this.nombreTablaM = nombreTablaM;
-		this.apellidoTablaM = apellidoTablaM;
-		this.dniTablaM = dniTablaM;
-		this.edadTablaM = edadTablaM;
-		this.calleTablaM = calleTablaM;
-		this.numeroTablaM = numeroTablaM;
-		this.lenguajeTablaM = lenguajeTablaM;
+		this.nombreTabla = nombreTabla;
+		this.apellidoTabla = apellidoTabla;
+		this.dniTabla = dniTabla;
+		this.edadTabla = edadTabla;
+		this.calleTabla = calleTabla;
+		this.numeroTabla = numeroTabla;
+		this.lenguajeTabla = lenguajeTabla;
 	}
 
-	public String getNombreTablaM() {
-		return nombreTablaM;
+	public String getNombreTabla() {
+		return nombreTabla;
 	}
 
-	public void setNombreTablaM(String nombreTablaM) {
-		this.nombreTablaM = nombreTablaM;
+	public void setNombreTabla(String nombreTablaM) {
+		this.nombreTabla = nombreTablaM;
 	}
 
-	public String getApellidoTablaM() {
-		return apellidoTablaM;
+	public String getApellidoTabla() {
+		return apellidoTabla;
 	}
 
-	public void setApellidoTablaM(String apellidoTablaM) {
-		this.apellidoTablaM = apellidoTablaM;
+	public void setApellidoTabla(String apellidoTabla) {
+		this.apellidoTabla = apellidoTabla;
 	}
 
-	public String getDniTablaM() {
-		return dniTablaM;
+	public String getDniTabla() {
+		return dniTabla;
 	}
 
-	public void setDniTablaM(String dniTablaM) {
-		this.dniTablaM = dniTablaM;
+	public void setDniTabla(String dniTabla) {
+		this.dniTabla = dniTabla;
 	}
 
-	public String getEdadTablaM() {
-		return edadTablaM;
+	public String getEdadTabla() {
+		return edadTabla;
 	}
 
-	public void setEdadTablaM(String edadTablaM) {
-		this.edadTablaM = edadTablaM;
+	public void setEdadTabla(String edadTabla) {
+		this.edadTabla = edadTabla;
 	}
 
-	public String getCalleTablaM() {
-		return calleTablaM;
+	public String getCalleTabla() {
+		return calleTabla;
 	}
 
-	public void setCalleTablaM(String calleTablaM) {
-		this.calleTablaM = calleTablaM;
+	public void setCalleTablaM(String calleTabla) {
+		this.calleTabla = calleTabla;
 	}
 
-	public String getNumeroTablaM() {
-		return numeroTablaM;
+	public String getNumeroTabla() {
+		return numeroTabla;
 	}
 
-	public void setNumeroTablaM(String numeroTablaM) {
-		this.numeroTablaM = numeroTablaM;
+	public void setNumeroTabla(String numeroTabla) {
+		this.numeroTabla = numeroTabla;
 	}
 
-	public String getLenguajeTablaM() {
-		return lenguajeTablaM;
+	public String getLenguajeTabla() {
+		return lenguajeTabla;
 	}
 
-	public void setLenguajeTablaM(String lenguajeTablaM) {
-		this.lenguajeTablaM = lenguajeTablaM;
+	public void setLenguajeTabla(String lenguajeTabla) {
+		this.lenguajeTabla = lenguajeTabla;
 	}
 }
