@@ -40,8 +40,8 @@ public class AppControlador implements Initializable {
 	@FXML
 	private TableView<ModeloEmpleado> tablaEmpleados;
 	@FXML
-	private TableColumn<ModeloEmpleado, String> legajoTabla, nombreTabla, apellidoTabla, dniTabla, edadTabla, calleTabla,
-			numeroTabla, lenguajeTabla, rangoTabla;
+	private TableColumn<ModeloEmpleado, String> legajoTabla, nombreTabla, apellidoTabla, dniTabla, edadTabla,
+			calleTabla, numeroTabla, lenguajeTabla, rangoTabla;
 
 	ObservableList<ModeloEmpleado> empleados = FXCollections.observableArrayList();
 	List<String> empleadosArchivo;
@@ -69,12 +69,14 @@ public class AppControlador implements Initializable {
 		ObservableList<String> opcionesUsuarios = FXCollections.observableArrayList("Gerente", "Desarrollador");
 		usuarios.setItems(opcionesUsuarios);
 
-		empleadosArchivo = app.ExtraerEmpleados();
+		empleadosArchivo = app.ExtraerEmpleadosDB();
 		ModeloEmpleado modeloEmpleado;
-		String[] datos = new String[9];
+		String[] datos = new String[11];
 		for (String empleado : empleadosArchivo) {
 			datos = empleado.split(" ");
-			modeloEmpleado = new ModeloEmpleado(datos[0], datos[1], datos[2], datos[3], datos[4], datos[5], datos[6], datos[7], datos[8]);
+			LimpiarDatos(datos);
+			modeloEmpleado = new ModeloEmpleado(datos[0], datos[1], datos[2], datos[3], datos[4], datos[5], datos[6],
+					datos[7], datos[8],datos[9],datos[10]);
 			empleados.add(modeloEmpleado);
 		}
 		tablaEmpleados.setItems(empleados);
@@ -172,5 +174,15 @@ public class AppControlador implements Initializable {
 		int index = tablaEmpleados.getSelectionModel().getSelectedIndex();
 		empleados.remove(index);
 		app.EliminarEmpleado(index);
+	}
+
+	private void LimpiarDatos(String[] datos) {
+
+		for (int i = 0; i < datos.length; i++) {
+			if (datos[i].equals("null")) {
+				datos[i] = "-";
+			}
+		}
+
 	}
 }

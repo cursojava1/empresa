@@ -2,14 +2,14 @@ package application.fxml.app;
 
 public class ModeloEmpleado {
 
-	String legajoTabla, nombreTabla, apellidoTabla, dniTabla, edadTabla, calleTabla, numeroTabla, lenguajeTabla, rangoTabla;
+	String legajoTabla, nombreTabla, apellidoTabla, dniTabla, edadTabla, calleTabla, numeroTabla, pisoTabla, departamentoTabla, lenguajeTabla, rangoTabla;
 
 	public ModeloEmpleado() {
 
 	}
 
 	public ModeloEmpleado(String legajoTabla, String nombreTabla, String apellidoTabla, String dniTabla, String edadTabla,
-			String calleTabla, String numeroTabla, String lenguajeTabla,String rangoTabla) {
+			String calleTabla, String numeroTabla, String pisoTabla, String departamentoTabla,String lenguajeTabla,String rangoTabla) {
 		super();
 		this.legajoTabla = legajoTabla;
 		this.nombreTabla = nombreTabla;
@@ -18,6 +18,8 @@ public class ModeloEmpleado {
 		this.edadTabla = edadTabla;
 		this.calleTabla = calleTabla;
 		this.numeroTabla = numeroTabla;
+		this.pisoTabla = pisoTabla;
+		this.departamentoTabla = departamentoTabla;
 		this.lenguajeTabla = lenguajeTabla;
 		this.rangoTabla = rangoTabla;
 	}
@@ -72,6 +74,22 @@ public class ModeloEmpleado {
 
 	public void setNumeroTabla(String numeroTabla) {
 		this.numeroTabla = numeroTabla;
+	}
+	
+	public String getPisoTabla() {
+		return pisoTabla;
+	}
+
+	public void setPisoTabla(String pisoTabla) {
+		this.pisoTabla = pisoTabla;
+	}
+	
+	public String getDepartamentoTabla() {
+		return departamentoTabla;
+	}
+
+	public void setDepartamentoTabla(String departamentoTabla) {
+		this.departamentoTabla = departamentoTabla;
 	}
 
 	public String getLenguajeTabla() {

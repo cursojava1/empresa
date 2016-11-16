@@ -55,7 +55,7 @@
 						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 							<children>
 								<Button fx:id="btnModificarEmpleado" layoutX="341.0" layoutY="238.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Modificar" />
-								<TableView fx:id="tablaEmpleados" layoutX="63.0" layoutY="14.0" prefHeight="198.0" prefWidth="674.0">
+								<TableView fx:id="tablaEmpleados" layoutX="63.0" layoutY="14.0" prefHeight="198.0" prefWidth="664.0">
 									<columns>
 										<TableColumn fx:id="legajoTabla" prefWidth="56.0" text="Legajo" />
 										<TableColumn fx:id="nombreTabla" prefWidth="81.0" text="Nombre" />
@@ -64,8 +64,10 @@
 										<TableColumn fx:id="edadTabla" prefWidth="46.0" text="Edad" />
 										<TableColumn fx:id="calleTabla" text="Calle" />
 										<TableColumn fx:id="numeroTabla" minWidth="0.0" prefWidth="69.0" text="Numero" />
+										<TableColumn fx:id="pisoTabla" minWidth="0.0" prefWidth="69.0" text="Piso" />
+										<TableColumn fx:id="departamentoTabla" minWidth="0.0" prefWidth="69.0" text="Departamento" />
 										<TableColumn fx:id="lenguajeTabla" prefWidth="92.0" text="Lenguaje" />
-										<TableColumn fx:id="rangoTabla" prefWidth="109.0" text="Rango" />
+										<TableColumn fx:id="rangoTabla" prefWidth="107.0" text="Rango" />
 									</columns>
 								</TableView>
                         <Button fx:id="btnEliminarEmpleado" layoutX="456.0" layoutY="238.0" mnemonicParsing="false" onAction="#EliminarEmpleado" prefHeight="25.0" prefWidth="108.0" text="Eliminar" />
