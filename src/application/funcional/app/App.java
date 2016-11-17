@@ -79,8 +79,7 @@ public class App {
 
 		database.Conectar();
 		result = database.SelectEmpleados();
-		database.Desconectar();
-
+		//database.Desconectar();
 		return result;
 
 	}

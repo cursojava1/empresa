@@ -32,7 +32,7 @@ public class Main extends Application {
 	public static void ShowApp() throws IOException {
 		Parent root = FXMLLoader.load(Main.class.getResource("/application/fxml/app/App.fxml"));
 		appStage = new Stage();
-		Scene scene = new Scene(root,800,400);
+		Scene scene = new Scene(root,850,400);
 		scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
 		appStage.setScene(scene);
 		appStage.setTitle("ABM de Usuarios");
