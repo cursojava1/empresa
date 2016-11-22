@@ -11,6 +11,7 @@ import java.util.List;
 import application.empresa.empleados.Empleado;
 import application.empresa.empleados.Gerente;
 import application.empresa.empleados.Junior;
+import application.empresa.usuario.Usuario;
 import application.empresa.utils.Utils.VIVIENDA;
 
 public class Database {
@@ -261,4 +262,79 @@ public class Database {
 		return null;
 	}
 
+	
+	public void InsertUsuario(Usuario nuevo) {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+
+			// Obtener Id Nivel.
+			String consulta = "SELECT Id FROM Nivel WHERE Nivel = '" + nuevo.getNivel() + "'";
+			ResultSet rs = ps.executeQuery(consulta);
+			rs.next();
+			int idNivel = rs.getInt("Id");
+
+			StringBuilder consultaInsertarUsuario = new StringBuilder("INSERT INTO Usuario VALUES ('")
+					.append(nuevo.getNombre()).append("', '").append(nuevo.getContraseña()).append("', ")
+					.append(nuevo.getEmail()).append(", ").append(idNivel).append(")");
+
+			int cantidadAfectadas = ps.executeUpdate(consultaInsertarUsuario.toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void UpdateUsuario(Usuario nuevo) {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+
+
+			StringBuilder consultaUpdateUsuario = new StringBuilder("UPDATE Usuario SET('")
+					.append(nuevo.getNombre()).append("', '").append(nuevo.getContraseña()).append("', ")
+					.append(nuevo.getEmail()).append(", ").append(nuevo.getNivel()).append(")")
+					.append(" WHERE id = " + nuevo.getEmail());
+
+			int cantidadAfectadas = ps.executeUpdate(consultaUpdateUsuario.toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void DeleteUsuario(Usuario nuevo) {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+
+			String consultaDeleteUsuario = "DELETE FROM Usuario WHERE Id = '" + nuevo.getEmail() + "'";			
+			int cantidadAfectadas = ps.executeUpdate(consultaDeleteUsuario.toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public List<String> SelectUsuarios() {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+			String consulta = "SELECT U.Id, U.Nombre, U.Contraseña, U.Email, N.Tipo FROM Usuario U LEFT JOIN Nivel N ON U.IdNivel=N.Id";
+			ResultSet rs = ps.executeQuery(consulta);
+
+			List<String> usuarios = new ArrayList<>();
+			String datosUsuario;
+			while (rs.next()) {
+				datosUsuario = new StringBuilder("").append(String.valueOf(rs.getInt("Id"))).append(" ")
+						.append(rs.getString("Nombre")).append(" ").append(rs.getString("Contraseña")).append(" ")
+						.append(rs.getString("Email")).append(" ").append(rs.getString("Tipo")).toString();
+
+				usuarios.add(datosUsuario);
+			}
+
+			return usuarios;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
