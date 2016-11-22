@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controladores.AppControlador">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controladores.AppControlador">
 	<children>
 		<TabPane prefHeight="400.0" prefWidth="850.0" tabClosingPolicy="UNAVAILABLE">
 			<tabs>
@@ -91,7 +100,46 @@
                         <TextField fx:id="nombreDB" layoutX="213.0" layoutY="118.0" prefHeight="25.0" prefWidth="113.0" />
                         <TextField fx:id="direccion" layoutX="120.0" layoutY="182.0" />
                         <TextField fx:id="puerto" layoutX="356.0" layoutY="182.0" prefHeight="25.0" prefWidth="77.0" />
-                        <CheckBox fx:id="seguridad" layoutX="369.0" layoutY="59.0" mnemonicParsing="false" text="Seguridad Integrada" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+				<Tab text="Agregar Usuarios">
+               <content>
+                  <AnchorPane prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="104.0" layoutY="46.0" text="NICK" />
+                        <Label layoutX="103.0" layoutY="76.0" text="EMAIL" />
+                        <Label layoutX="82.0" layoutY="107.0" text="CONTRASEÑA" />
+                        <Label layoutX="51.0" layoutY="142.0" text="CONFIRMAR CONTRASEÑA" />
+                        <Label layoutX="65.0" layoutY="176.0" text="SELECCIONAR NIVEL:" />
+                        <TextField fx:id="Unick" layoutX="196.0" layoutY="42.0" />
+                        <TextField fx:id="Uemail" layoutX="187.0" layoutY="72.0" prefHeight="22.0" prefWidth="152.0" />
+                        <PasswordField fx:id="Upass" layoutX="196.0" layoutY="103.0" />
+                        <PasswordField fx:id="Upassconfirmar" layoutX="196.0" layoutY="138.0" />
+                        <RadioButton fx:id="Ucheckadmin" layoutX="206.0" layoutY="176.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="114.0" text="ADMINISTRADOR">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="nivel" />
+                           </toggleGroup></RadioButton>
+                        <RadioButton fx:id="Ucheckinvitado" layoutX="219.0" layoutY="207.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="88.0" text="INVITADO" toggleGroup="$nivel" />
+                        <Button layoutX="206.0" layoutY="275.0" mnemonicParsing="false" text="AGREGAR USUARIO" />
+                     </children>
+                  </AnchorPane>
+               </content></Tab>
+            <Tab text="Administrar Usuario">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="Tusuarios" layoutX="222.0" layoutY="57.0" prefHeight="200.0" prefWidth="407.0">
+                          <columns>
+                            <TableColumn fx:id="TUnick" prefWidth="88.0" text="Nick" />
+                            <TableColumn fx:id="TUemail" prefWidth="120.0" text="Email" />
+                              <TableColumn fx:id="TUcontraseña" prefWidth="104.0" text="Contraseña" />
+                              <TableColumn fx:id="TUnivel" prefWidth="94.0" text="Nivel" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="661.0" layoutY="297.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Eliminar" />
+                        <Button layoutX="514.0" layoutY="297.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Modificar" />
                      </children>
                   </AnchorPane>
               </content>
