@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import application.basededatos.ConfiguracionDB;
 import application.basededatos.Database;
 import application.empresa.empleados.Empleado;
 import application.empresa.empleados.FactoryEmpleados;
@@ -201,11 +202,11 @@ public class AppControlador implements Initializable {
 		app.EliminarEmpleado(index);
 	}
 	
-	private void ConfigurarDB (Database configuracion){
+	private void ConfigurarDB (ConfiguracionDB configuracion){
 		configuracion.SetDriver(driver.getText());
 		configuracion.SetNombreDB(nombreDB.getText());
 		configuracion.SetDireccion(direccion.getText());
-		configuracion.SetPuerto(puerto.getText());
+		configuracion.SetPuerto(Integer.parseInt(puerto.getText()));
 		 
 	}
 
