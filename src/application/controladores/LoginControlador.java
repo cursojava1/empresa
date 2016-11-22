@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.text.Text;
 
 public class LoginControlador implements Initializable {
@@ -31,6 +32,9 @@ public class LoginControlador implements Initializable {
 
 	@FXML
 	Button botonIngresar;
+	
+	@FXML
+	TitledPane desplegableDB;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
