@@ -16,11 +16,11 @@ import application.empresa.empleados.Empleado;
 public class App {
 
 	Database database = Database.GetDatabase();
-	
+
 	public App() {
-		
+
 	}
-	
+
 	public void GrabarEmpleadoDB(Empleado nuevo) {
 		database.Conectar();
 		database.InsertPersona(nuevo);
@@ -28,10 +28,10 @@ public class App {
 		database.InsertMultiDomicilio(nuevo);
 		database.InsertEmpleado(nuevo);
 		database.InsertGerente(nuevo);
-		database.InsertJunior(nuevo);
+		// database.InsertJunior(nuevo);
 		database.Desconectar();
 	}
-	
+
 	public void GrabarEmpleado(Empleado nuevo) {
 		File archivo = new File("src\\application\\basededatos\\empleados");
 		File archivoTemporal = new File(archivo.getAbsolutePath() + ".tmp");
@@ -73,7 +73,17 @@ public class App {
 			}
 		}
 	}
-	
+
+	public List<String> ExtraerEmpleadosDB() {
+		List<String> result = new ArrayList<>();
+
+		database.Conectar();
+		result = database.SelectEmpleados();
+		//database.Desconectar();
+		return result;
+
+	}
+
 	public List<String> ExtraerEmpleados() {
 		File archivo = new File("src\\application\\basededatos\\empleados");
 		FileReader fr = null;
@@ -111,7 +121,7 @@ public class App {
 		FileReader fr = null;
 		PrintWriter pw = null;
 		try {
-			//Comentario
+			// Comentario
 			fr = new FileReader(archivo);
 			BufferedReader br = new BufferedReader(fr);
 			pw = new PrintWriter(new FileWriter(archivoTemporal));
@@ -120,12 +130,12 @@ public class App {
 			try {
 				int i = 0;
 				while ((linea = br.readLine()) != null) {
-			        if (i != index) {
-			          pw.println(linea);
-			          pw.flush();
-			        }
-			        i++;
-		        }
+					if (i != index) {
+						pw.println(linea);
+						pw.flush();
+					}
+					i++;
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -149,30 +159,5 @@ public class App {
 			}
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controladores.AppControlador">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controladores.AppControlador">
 	<children>
-		<TabPane prefHeight="600.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+		<TabPane prefHeight="400.0" prefWidth="850.0" tabClosingPolicy="UNAVAILABLE">
 			<tabs>
 				<Tab fx:id="tab1" text="Agregar Empleado">
 					<content>
@@ -52,28 +52,35 @@
 				</Tab>
 				<Tab fx:id="tab2" text="Administrar Empleado">
 					<content>
-						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="850.0">
 							<children>
-								<Button fx:id="btnModificarEmpleado" layoutX="341.0" layoutY="238.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Modificar" />
-								<TableView fx:id="tablaEmpleados" layoutX="37.0" layoutY="14.0" prefHeight="200.0" prefWidth="527.0">
+								<Button fx:id="btnModificarEmpleado" layoutX="606.0" layoutY="238.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Modificar" />
+								<TableView fx:id="tablaEmpleados" layoutX="7.0" layoutY="14.0" prefHeight="198.0" prefWidth="836.0">
 									<columns>
-										<TableColumn fx:id="nombreTabla" prefWidth="75.0" text="Nombre" />
-										<TableColumn fx:id="apellidoTabla" prefWidth="75.0" text="Apellido" />
-										<TableColumn fx:id="dniTabla" prefWidth="75.0" text="Dni" />
-										<TableColumn fx:id="edadTabla" prefWidth="75.0" text="Edad" />
-										<TableColumn fx:id="calleTabla" prefWidth="75.0" text="Calle" />
-										<TableColumn fx:id="numeroTabla" prefWidth="75.0" text="Numero" />
-										<TableColumn fx:id="lenguajeTabla" prefWidth="75.0" text="Lenguaje" />
+										<TableColumn fx:id="legajoTabla" prefWidth="45.0" resizable="false" text="Legajo" />
+										<TableColumn fx:id="nombreTabla" prefWidth="78.0" resizable="false" text="Nombre" />
+										<TableColumn fx:id="apellidoTabla" prefWidth="75.0" resizable="false" text="Apellido" />
+										<TableColumn fx:id="dniTabla" prefWidth="78.0" resizable="false" text="Dni" />
+										<TableColumn fx:id="edadTabla" prefWidth="34.0" resizable="false" text="Edad" />
+										<TableColumn fx:id="calleTabla" prefWidth="87.0" resizable="false" text="Calle" />
+										<TableColumn fx:id="numeroTabla" minWidth="0.0" prefWidth="72.0" resizable="false" text="Numero" />
+										<TableColumn fx:id="pisoTabla" minWidth="0.0" prefWidth="30.0" resizable="false" text="Piso" />
+										<TableColumn fx:id="departamentoTabla" minWidth="0.0" prefWidth="95.0" resizable="false" text="Departamento" />
+										<TableColumn fx:id="lenguajeTabla" minWidth="0.0" prefWidth="83.0" resizable="false" text="Lenguaje" />
+										<TableColumn fx:id="rangoTabla" minWidth="0.0" prefWidth="104.0" resizable="false" text="Rango" />
 									</columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
 								</TableView>
-                        <Button fx:id="btnEliminarEmpleado" layoutX="456.0" layoutY="238.0" mnemonicParsing="false" onAction="#EliminarEmpleado" prefHeight="25.0" prefWidth="108.0" text="Eliminar" />
+                        <Button fx:id="btnEliminarEmpleado" layoutX="728.0" layoutY="238.0" mnemonicParsing="false" onAction="#EliminarEmpleado" prefHeight="25.0" prefWidth="108.0" text="Eliminar" />
 							</children>
 						</AnchorPane>
 					</content>
 				</Tab>
             <Tab fx:id="tab4" text="Configuracion">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="850.0">
                      <children>
                         <Label layoutX="218.0" layoutY="21.0" text="Acceso Base de datos" />
                         <Label layoutX="63.0" layoutY="59.0" text="Driver" />

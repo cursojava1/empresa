@@ -40,8 +40,8 @@ public class AppControlador implements Initializable {
 	@FXML
 	private TableView<ModeloEmpleado> tablaEmpleados;
 	@FXML
-	private TableColumn<ModeloEmpleado, String> nombreTabla, apellidoTabla, dniTabla, edadTabla, calleTabla,
-			numeroTabla, lenguajeTabla;
+	private TableColumn<ModeloEmpleado, String> legajoTabla, nombreTabla, apellidoTabla, dniTabla, edadTabla,
+			calleTabla, numeroTabla, pisoTabla, departamentoTabla, lenguajeTabla, rangoTabla;
 
 	ObservableList<ModeloEmpleado> empleados = FXCollections.observableArrayList();
 	List<String> empleadosArchivo;
@@ -56,23 +56,47 @@ public class AppControlador implements Initializable {
 		estado.setItems(opcionesEstado);
 		rbcasa.setSelected(true);
 
+		
+		
+		tablaEmpleados.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		
+		legajoTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("LegajoTabla"));
 		nombreTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("NombreTabla"));
 		apellidoTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("ApellidoTabla"));
 		dniTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("DniTabla"));
 		edadTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("EdadTabla"));
 		calleTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("CalleTabla"));
 		numeroTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("NumeroTabla"));
+		pisoTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("PisoTabla"));
+		departamentoTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("DepartamentoTabla"));
 		lenguajeTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("LenguajeTabla"));
+		rangoTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("RangoTabla"));
 
+		
+		legajoTabla.prefWidthProperty().bind(tablaEmpleados.widthProperty().divide(11));
+		nombreTabla.prefWidthProperty().bind(tablaEmpleados.widthProperty().divide(11));
+		apellidoTabla.prefWidthProperty().bind(tablaEmpleados.widthProperty().divide(11));
+		dniTabla.prefWidthProperty().bind(tablaEmpleados.widthProperty().divide(11));
+		edadTabla.prefWidthProperty().bind(tablaEmpleados.widthProperty().divide(11));
+		calleTabla.prefWidthProperty().bind(tablaEmpleados.widthProperty().divide(11));
+		numeroTabla.prefWidthProperty().bind(tablaEmpleados.widthProperty().divide(11));
+		pisoTabla.prefWidthProperty().bind(tablaEmpleados.widthProperty().divide(11));
+		departamentoTabla.prefWidthProperty().bind(tablaEmpleados.widthProperty().divide(11));
+		lenguajeTabla.prefWidthProperty().bind(tablaEmpleados.widthProperty().divide(11));
+		rangoTabla.prefWidthProperty().bind(tablaEmpleados.widthProperty().divide(11));
+		
+		
 		ObservableList<String> opcionesUsuarios = FXCollections.observableArrayList("Gerente", "Desarrollador");
 		usuarios.setItems(opcionesUsuarios);
 
-		empleadosArchivo = app.ExtraerEmpleados();
+		empleadosArchivo = app.ExtraerEmpleadosDB();
 		ModeloEmpleado modeloEmpleado;
-		String[] datos = new String[7];
+		String[] datos = new String[11];
 		for (String empleado : empleadosArchivo) {
 			datos = empleado.split(" ");
-			modeloEmpleado = new ModeloEmpleado(datos[0], datos[1], datos[2], datos[3], datos[4], datos[5], datos[6]);
+			LimpiarDatos(datos);
+			modeloEmpleado = new ModeloEmpleado(datos[0], datos[1], datos[2], datos[3], datos[4], datos[5], datos[6],
+					datos[7], datos[8], datos[9], datos[10]);
 			empleados.add(modeloEmpleado);
 		}
 		tablaEmpleados.setItems(empleados);
@@ -170,5 +194,15 @@ public class AppControlador implements Initializable {
 		int index = tablaEmpleados.getSelectionModel().getSelectedIndex();
 		empleados.remove(index);
 		app.EliminarEmpleado(index);
+	}
+
+	private void LimpiarDatos(String[] datos) {
+
+		for (int i = 0; i < datos.length; i++) {
+			if (datos[i].equals("null")) {
+				datos[i] = "-";
+			}
+		}
+
 	}
 }

@@ -2,24 +2,32 @@ package application.fxml.app;
 
 public class ModeloEmpleado {
 
-	String nombreTabla, apellidoTabla, dniTabla, edadTabla, calleTabla, numeroTabla, lenguajeTabla;
+	String legajoTabla, nombreTabla, apellidoTabla, dniTabla, edadTabla, calleTabla, numeroTabla, pisoTabla, departamentoTabla, lenguajeTabla, rangoTabla;
 
 	public ModeloEmpleado() {
 
 	}
 
-	public ModeloEmpleado(String nombreTabla, String apellidoTabla, String dniTabla, String edadTabla,
-			String calleTabla, String numeroTabla, String lenguajeTabla) {
+	public ModeloEmpleado(String legajoTabla, String nombreTabla, String apellidoTabla, String dniTabla, String edadTabla,
+			String calleTabla, String numeroTabla, String pisoTabla, String departamentoTabla,String lenguajeTabla,String rangoTabla) {
 		super();
+		this.legajoTabla = legajoTabla;
 		this.nombreTabla = nombreTabla;
 		this.apellidoTabla = apellidoTabla;
 		this.dniTabla = dniTabla;
 		this.edadTabla = edadTabla;
 		this.calleTabla = calleTabla;
 		this.numeroTabla = numeroTabla;
+		this.pisoTabla = pisoTabla;
+		this.departamentoTabla = departamentoTabla;
 		this.lenguajeTabla = lenguajeTabla;
+		this.rangoTabla = rangoTabla;
 	}
 
+	public String getLegajoTabla() {
+		return legajoTabla;
+	}
+	
 	public String getNombreTabla() {
 		return nombreTabla;
 	}
@@ -67,6 +75,22 @@ public class ModeloEmpleado {
 	public void setNumeroTabla(String numeroTabla) {
 		this.numeroTabla = numeroTabla;
 	}
+	
+	public String getPisoTabla() {
+		return pisoTabla;
+	}
+
+	public void setPisoTabla(String pisoTabla) {
+		this.pisoTabla = pisoTabla;
+	}
+	
+	public String getDepartamentoTabla() {
+		return departamentoTabla;
+	}
+
+	public void setDepartamentoTabla(String departamentoTabla) {
+		this.departamentoTabla = departamentoTabla;
+	}
 
 	public String getLenguajeTabla() {
 		return lenguajeTabla;
@@ -74,5 +98,13 @@ public class ModeloEmpleado {
 
 	public void setLenguajeTabla(String lenguajeTabla) {
 		this.lenguajeTabla = lenguajeTabla;
+	}
+	
+	public String getRangoTabla() {
+		return rangoTabla;
+	}
+
+	public void setRangoTabla(String rangoTabla) {
+		this.rangoTabla = rangoTabla;
 	}
 }

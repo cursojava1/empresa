@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import application.empresa.empleados.Empleado;
 import application.empresa.empleados.Gerente;
@@ -231,4 +233,32 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
+
+	public List<String> SelectEmpleados() {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+			String consulta = "SELECT E.Legajo, P.Nombre, P.Apellido, P.Dni, P.Edad, D.Calle, D.Numero, D.Piso, D.Departamento, J.Lenguaje, G.Rango  FROM Persona P LEFT JOIN Empleado E ON P.Id=E.IdPersona LEFT JOIN MultiDomicilio M ON P.Id=M.IdPersona  LEFT JOIN Domicilio D ON M.IdDomicilio=D.Id LEFT JOIN Gerente G ON E.IdTipoEmpleado = G.Id LEFT JOIN Junior J ON E.IdTipoEmpleado=J.Id";
+			ResultSet rs = ps.executeQuery(consulta);
+
+			List<String> empleados = new ArrayList<>();
+			String datosEmpleado;
+			while (rs.next()) {
+				datosEmpleado = new StringBuilder("").append(String.valueOf(rs.getInt("Legajo"))).append(" ")
+						.append(rs.getString("Nombre")).append(" ").append(rs.getString("Apellido")).append(" ")
+						.append(rs.getString("Dni")).append(" ").append(rs.getString("Edad")).append(" ")
+						.append(rs.getString("Calle")).append(" ").append(rs.getString("Numero")).append(" ")
+						.append(rs.getString("Piso")).append(" ").append(rs.getString("Departamento")).append(" ")
+						.append(rs.getString("Lenguaje")).append(" ").append(rs.getString("Rango")).toString();
+
+				empleados.add(datosEmpleado);
+			}
+
+			return empleados;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }
