@@ -212,8 +212,7 @@ public class AppControlador implements Initializable {
 	}
 	
 	@FXML
-	private void CerrarApp(){	
-		
+	private void CerrarApp(){			
 		app.CerrarApp();
 		
 	}

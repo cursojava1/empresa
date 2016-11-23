@@ -151,21 +151,32 @@
 		</TabPane>
       <MenuBar layoutX="-1.0" layoutY="2.0" prefHeight="25.0" prefWidth="853.0">
         <menus>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Inicio">
             <items>
               <MenuItem fx:id="CerrarApp" mnemonicParsing="false" onAction="#CerrarApp" text="Close" />
             </items>
           </Menu>
+          <Menu mnemonicParsing="false" text="Empleados">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Agregar" />
+              <MenuItem mnemonicParsing="false" text="Administrar" />
+            </items>
+          </Menu>
+          
+          <Menu mnemonicParsing="false" text="Autores">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Agregar" />
+              <MenuItem mnemonicParsing="false" text="Administrar" />
+            </items>
+          </Menu>
+          
+          <Menu mnemonicParsing="false" text="Usuarios">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Agregar" />
+              <MenuItem mnemonicParsing="false" text="Administrar" />
+            </items>
+          </Menu>
+          
         </menus>
       </MenuBar>
 	</children>
