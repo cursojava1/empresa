@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Main;
-import application.basededatos.ConfiguracionDB;
-import application.basededatos.Database;
 import application.empresa.empleados.Empleado;
 import application.empresa.empleados.FactoryEmpleados;
 import application.empresa.empleados.Gerente;
@@ -237,14 +235,6 @@ public class AppControlador implements Initializable {
 		int index = tablaEmpleados.getSelectionModel().getSelectedIndex();
 		empleados.remove(index);
 		app.EliminarEmpleado(index);
-	}
-	
-	private void ConfigurarDB (ConfiguracionDB configuracion){
-		configuracion.SetDriver(driver.getText());
-		configuracion.SetNombreDB(nombreDB.getText());
-		configuracion.SetDireccion(direccion.getText());
-		configuracion.SetPuerto(Integer.parseInt(puerto.getText()));
-		 
 	}
 
 	private void LimpiarDatos(String[] datos) {

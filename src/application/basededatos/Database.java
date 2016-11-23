@@ -24,8 +24,10 @@ import application.empresa.usuario.Usuario;
 import application.empresa.persona.Persona;
 import application.empresa.utils.Utils.VIVIENDA;
 
+
 public class Database {
 
+	
 	private static Database database = null;
 	private Connection conexion = null;
 
@@ -40,10 +42,11 @@ public class Database {
 		return database;
 	}
 
-	public void Conectar() {
+	public void Conectar(ConfiguracionDB config) {
 		if (conexion == null) {
 			try {
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				String a = config.GetDireccionDB();
 				String url = String.format("jdbc:sqlserver://%s:%s;databaseName=%s;integratedSecurity=true;",
 				Configuracion.getAppSetting("dataBaseServer"),
 				Configuracion.getAppSetting("dataBasePassword"),

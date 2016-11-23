@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Main;
-import application.basededatos.Database;
 import application.empresa.empleados.Empleado;
 import application.empresa.empleados.FactoryEmpleados;
 import application.empresa.empleados.Gerente;
@@ -41,10 +40,10 @@ public class AppControlador implements Initializable {
 	App app;
 	@FXML
 <<<<<<< HEAD
-	TextField nombre, apellido, dni, edad, calle, piso, numero, dpt, text1, Unick, Uemail, Upass, Upassconfirmar;
+	TextField nombre, apellido, dni, edad, calle, piso, numero, dpt, text1, Unick, Uemail, Upass, Upassconfirmar,driver,nombreDB,direccion,puerto;
 =======
-	TextField nombre, apellido, dni, edad, calle, piso, numero, dpt, text1,driver,nombreDB,direccion,puerto;
->>>>>>> funcionalidad configuracion base de datos
+	TextField nombre, apellido, dni, edad, calle, piso, numero, dpt, text1;
+>>>>>>> funcionalidad de base de datos
 	@FXML
 	RadioButton rbcasa, rbdpt, Ucheckadmin, Ucheckinvitado;
 	@FXML
@@ -65,17 +64,12 @@ public class AppControlador implements Initializable {
 	List<String> empleadosArchivo;
 
 	@FXML
-<<<<<<< HEAD
 	private TableView<ModeloUsuario> Tusuarios;
 	@FXML
 	private TableColumn<ModeloUsuario, String> TUnick, TUemail, TUcontraseña, TUnivel;
 	ObservableList<ModeloUsuario> observableUsuarios = FXCollections.observableArrayList();
 	List<String> usuariosLista;
 
-=======
-	CheckBox seguridad;
-	
->>>>>>> funcionalidad configuracion base de datos
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		app = new App();
@@ -245,14 +239,6 @@ public class AppControlador implements Initializable {
 		int index = tablaEmpleados.getSelectionModel().getSelectedIndex();
 		empleados.remove(index);
 		app.EliminarEmpleado(index);
-	}
-	
-	private void ConfigurarDB (Database configuracion){
-		configuracion.SetDriver(driver.getText());
-		configuracion.SetNombreDB(nombreDB.getText());
-		configuracion.SetDireccion(direccion.getText());
-		configuracion.SetPuerto(puerto.getText());
-		 
 	}
 
 	private void LimpiarDatos(String[] datos) {

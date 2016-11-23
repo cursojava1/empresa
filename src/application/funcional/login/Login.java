@@ -6,11 +6,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import application.basededatos.ConfiguracionDB;
 import application.basededatos.Database;
 
 public class Login {
-
+	
 	Database database = Database.GetDatabase();
+
+	ConfiguracionDB config = new ConfiguracionDB();
 	
 	@SuppressWarnings("resource")
 	public boolean VerificarUsuario(String nombre, String password) {
@@ -70,7 +73,7 @@ public class Login {
 	 * 		   Estado 2: Contraseña incorrecta
 	 */
 	public int VerificarUsuarioDB(String nombre, String password) {
-		database.Conectar();
+		database.Conectar(config);
 		String contraseña = database.GetContraseña(nombre);
 		if (contraseña == null) {
 			return 1;

@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 
 import application.Main;
+import application.basededatos.ConfiguracionDB;
 import application.funcional.login.Login;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,11 +19,13 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.text.Text;
 
 public class LoginControlador implements Initializable {
+	
+	ConfiguracionDB config = new ConfiguracionDB();
 
 	Login login;
 
 	@FXML
-	TextField nombreUsuario;
+	TextField nombreUsuario,nombreDB,direccionDB,puerto;
 
 	@FXML
 	PasswordField passwordUsuario;
@@ -42,7 +45,17 @@ public class LoginControlador implements Initializable {
 	}
 
 	@FXML
+	private void ConfigurarDB (ConfiguracionDB configuracion){
+		configuracion.SetNombreDB(nombreDB.getText());
+		System.out.println(nombreDB.getText());
+		configuracion.SetDireccionDB(direccionDB.getText());
+		configuracion.SetPuerto(Integer.parseInt(puerto.getText()));
+		 
+	}
+	
+	@FXML
 	private void ClickBtnIngresar(ActionEvent event) throws IOException {
+		ConfigurarDB(config);
 		//boolean resultado = login.VerificarUsuario(nombreUsuario.getText(), passwordUsuario.getText());
 		int estado = login.VerificarUsuarioDB(nombreUsuario.getText(), passwordUsuario.getText());
 		switch (estado) {
@@ -67,5 +80,6 @@ public class LoginControlador implements Initializable {
 		}
 		
 	}
+
 
 }
