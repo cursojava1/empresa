@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.Main;
 import application.basededatos.Database;
 import application.empresa.empleados.Empleado;
 
@@ -30,6 +31,12 @@ public class App {
 		database.InsertGerente(nuevo);
 		// database.InsertJunior(nuevo);
 		database.Desconectar();
+	}
+	
+	public void CerrarApp(){
+		Main.CerrarApp();
+		database.Desconectar();
+
 	}
 
 	public void GrabarEmpleado(Empleado nuevo) {
@@ -159,5 +166,7 @@ public class App {
 			}
 		}
 	}
+	
+	
 
 }

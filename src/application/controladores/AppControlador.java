@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import application.Main;
+import application.basededatos.Database;
 import application.empresa.empleados.Empleado;
 import application.empresa.empleados.FactoryEmpleados;
 import application.empresa.empleados.Gerente;
@@ -20,14 +22,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class AppControlador implements Initializable {
-
+	
 	App app;
 	@FXML
 	TextField nombre, apellido, dni, edad, calle, piso, numero, dpt, text1;
@@ -35,6 +41,10 @@ public class AppControlador implements Initializable {
 	RadioButton rbcasa, rbdpt;
 	@FXML
 	ChoiceBox<String> sexo, estado, usuarios;
+	@FXML
+	MenuItem CerrarApp;
+	@FXML
+	AnchorPane AnchorAgregarEmpleado,AnchorAdministrarEmpleado,AnchorAgregarUsuario,AnchorAdministrarUsuario;
 	@FXML
 	Label label1;
 	@FXML
@@ -197,12 +207,48 @@ public class AppControlador implements Initializable {
 	}
 
 	private void LimpiarDatos(String[] datos) {
-
 		for (int i = 0; i < datos.length; i++) {
 			if (datos[i].equals("null")) {
 				datos[i] = "-";
 			}
 		}
-
 	}
+	
+	@FXML
+	private void CerrarApp(){			
+		app.CerrarApp();
+		
+	}
+	
+	private void OcultarTodosAnchorPane(){			
+		AnchorAgregarEmpleado.setVisible(false);
+		AnchorAdministrarEmpleado.setVisible(false);
+		AnchorAgregarUsuario.setVisible(false);
+		AnchorAdministrarUsuario.setVisible(false);
+	}
+	
+	@FXML
+	private void MostrarAgregarEmpleado(){			
+		OcultarTodosAnchorPane();
+		AnchorAgregarEmpleado.setVisible(true);
+	}
+	
+	@FXML
+	private void MostrarAdministrarEmpleado(){			
+		OcultarTodosAnchorPane();
+		AnchorAdministrarEmpleado.setVisible(true);
+	}
+
+	@FXML
+	private void MostrarAgregarUsuario(){			
+		OcultarTodosAnchorPane();
+		AnchorAgregarUsuario.setVisible(true);
+	}
+	
+	@FXML
+	private void MostrarAdministrarUsuario(){			
+		OcultarTodosAnchorPane();
+		AnchorAdministrarUsuario.setVisible(true);
+	}
+	
 }
