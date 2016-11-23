@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controladores.LoginControlador">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="300.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controladores.LoginControlador">
    <children>
       <Label layoutX="128.0" layoutY="38.0" text="LOGIN" textFill="#5b5b5b">
          <font>
@@ -40,15 +40,20 @@
       </ImageView>
       <PasswordField fx:id="passwordUsuario" layoutX="95.0" layoutY="159.0" promptText="Contraseña..." />
       <Text fx:id="usuarioError" fill="RED" layoutX="57.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" visible="false" wrappingWidth="187.134765625" />
-      <Button fx:id="botonIngresar" layoutX="118.0" layoutY="213.0" mnemonicParsing="false" onAction="#ClickBtnIngresar" style="-fx-background-color: orange; -fx-border-color: #ffa31a; -fx-font-weight: bold;" text="Ingresar" textFill="#fffcf4">
+      <Button fx:id="botonIngresar" layoutX="137.0" layoutY="214.0" mnemonicParsing="false" onAction="#ClickBtnIngresar" style="-fx-background-color: orange; -fx-border-color: #ffa31a; -fx-font-weight: bold;" text="Ingresar" textFill="#fffcf4">
          <font>
             <Font name="SansSerif Regular" size="12.0" />
          </font>
       </Button>
       <Accordion layoutX="42.0" layoutY="261.0" />
-    <TitledPane fx:id="desplegableDB" animated="false" layoutX="50.0" layoutY="249.0" prefHeight="103.0" prefWidth="202.0" text="Base de Datos">
+    <TitledPane fx:id="desplegableDB" animated="false" layoutX="57.0" layoutY="247.0" prefHeight="143.0" prefWidth="187.0" text="Base de Datos">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="117.0" prefWidth="187.0" style="-fx-background-color: #FFFFFF;">
+               <children>
+                  <TextField fx:id="nombreDB" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="160.0" promptText="Nombre de Base de Datos" />
+                  <TextField fx:id="direccionDB" layoutX="14.0" layoutY="45.0" prefHeight="27.0" prefWidth="160.0" promptText="Direccion" />
+                  <TextField fx:id="puerto" layoutX="14.0" layoutY="76.0" prefHeight="27.0" prefWidth="160.0" promptText="Puerto" />
+               </children></AnchorPane>
       </content>
     </TitledPane>
    </children>

@@ -10,19 +10,20 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.basededatos.ConfiguracionDB;
 import application.basededatos.Database;
 import application.empresa.empleados.Empleado;
 
 public class App {
 
 	Database database = Database.GetDatabase();
-
+	ConfiguracionDB config;
 	public App() {
 
 	}
 
 	public void GrabarEmpleadoDB(Empleado nuevo) {
-		database.Conectar();
+		database.Conectar(config);
 		database.InsertPersona(nuevo);
 		database.InsertDomicilio(nuevo);
 		database.InsertMultiDomicilio(nuevo);
@@ -76,8 +77,7 @@ public class App {
 
 	public List<String> ExtraerEmpleadosDB() {
 		List<String> result = new ArrayList<>();
-
-		database.Conectar();
+		database.Conectar(config);
 		result = database.SelectEmpleados();
 		//database.Desconectar();
 		return result;

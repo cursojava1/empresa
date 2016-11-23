@@ -5,8 +5,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import application.basededatos.ConfiguracionDB;
-import application.basededatos.Database;
 import application.empresa.empleados.Empleado;
 import application.empresa.empleados.FactoryEmpleados;
 import application.empresa.empleados.Gerente;
@@ -33,7 +31,7 @@ public class AppControlador implements Initializable {
 
 	App app;
 	@FXML
-	TextField nombre, apellido, dni, edad, calle, piso, numero, dpt, text1,driver,nombreDB,direccion,puerto;
+	TextField nombre, apellido, dni, edad, calle, piso, numero, dpt, text1;
 	@FXML
 	RadioButton rbcasa, rbdpt;
 	@FXML
@@ -200,14 +198,6 @@ public class AppControlador implements Initializable {
 		int index = tablaEmpleados.getSelectionModel().getSelectedIndex();
 		empleados.remove(index);
 		app.EliminarEmpleado(index);
-	}
-	
-	private void ConfigurarDB (ConfiguracionDB configuracion){
-		configuracion.SetDriver(driver.getText());
-		configuracion.SetNombreDB(nombreDB.getText());
-		configuracion.SetDireccion(direccion.getText());
-		configuracion.SetPuerto(Integer.parseInt(puerto.getText()));
-		 
 	}
 
 	private void LimpiarDatos(String[] datos) {
