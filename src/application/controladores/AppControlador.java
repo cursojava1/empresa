@@ -29,6 +29,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class AppControlador implements Initializable {
@@ -42,6 +43,8 @@ public class AppControlador implements Initializable {
 	ChoiceBox<String> sexo, estado, usuarios;
 	@FXML
 	MenuItem CerrarApp;
+	@FXML
+	AnchorPane AnchorAgregarEmpleado,AnchorAdministrarEmpleado,AnchorAgregarUsuario,AnchorAdministrarUsuario;
 	@FXML
 	Label label1;
 	@FXML
@@ -215,6 +218,37 @@ public class AppControlador implements Initializable {
 	private void CerrarApp(){			
 		app.CerrarApp();
 		
+	}
+	
+	private void OcultarTodosAnchorPane(){			
+		AnchorAgregarEmpleado.setVisible(false);
+		AnchorAdministrarEmpleado.setVisible(false);
+		AnchorAgregarUsuario.setVisible(false);
+		AnchorAdministrarUsuario.setVisible(false);
+	}
+	
+	@FXML
+	private void MostrarAgregarEmpleado(){			
+		OcultarTodosAnchorPane();
+		AnchorAgregarEmpleado.setVisible(true);
+	}
+	
+	@FXML
+	private void MostrarAdministrarEmpleado(){			
+		OcultarTodosAnchorPane();
+		AnchorAdministrarEmpleado.setVisible(true);
+	}
+
+	@FXML
+	private void MostrarAgregarUsuario(){			
+		OcultarTodosAnchorPane();
+		AnchorAgregarUsuario.setVisible(true);
+	}
+	
+	@FXML
+	private void MostrarAdministrarUsuario(){			
+		OcultarTodosAnchorPane();
+		AnchorAdministrarUsuario.setVisible(true);
 	}
 	
 }
