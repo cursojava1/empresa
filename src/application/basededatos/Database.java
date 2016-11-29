@@ -76,43 +76,39 @@ public class Database {
 		}
 		return null;
 	}
-	
-	public Integer ObtenerIdSexo (Empleado nuevo){
+
+	public Integer ObtenerIdSexo(Empleado nuevo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
 			String consulta = "SELECT Id FROM Sexo WHERE Sexo = '" + nuevo.getSexo() + "'";
 			ResultSet rs = ps.executeQuery(consulta);
 			rs.next();
-			return  rs.getInt("Id");
-		}catch (SQLException e) {
-				e.printStackTrace();
-			}
-			return null;
-		}
-
-	
-	public Integer ObtenerIdEstadoCivil (Empleado nuevo){
-		try {
-			java.sql.Statement ps = conexion.createStatement();
-			String consulta = "SELECT Id FROM EstadoCivil WHERE Estado = '" + nuevo.GetEstadoCivil() + "'";
-				ResultSet rs = ps.executeQuery(consulta);
-				rs.next();
-				return rs.getInt("Id");
+			return rs.getInt("Id");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-				
-	
+
+	public Integer ObtenerIdEstadoCivil(Empleado nuevo) {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+			String consulta = "SELECT Id FROM EstadoCivil WHERE Estado = '" + nuevo.GetEstadoCivil() + "'";
+			ResultSet rs = ps.executeQuery(consulta);
+			rs.next();
+			return rs.getInt("Id");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public void InsertPersona(Empleado nuevo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
 
-
-			int idSexo 			= ObtenerIdSexo(nuevo);
-			int idEstadoCivil  	= ObtenerIdEstadoCivil(nuevo);
-			
+			int idSexo = ObtenerIdSexo(nuevo);
+			int idEstadoCivil = ObtenerIdEstadoCivil(nuevo);
 
 			StringBuilder consultaInsertarPersona = new StringBuilder("INSERT INTO Persona VALUES ('")
 					.append(nuevo.Nombre()).append("', '").append(nuevo.Apellido()).append("', ")
@@ -126,26 +122,24 @@ public class Database {
 		}
 	}
 
-	public Integer ObtenerIdVivienda (Empleado nuevo){
+	public Integer ObtenerIdVivienda(Empleado nuevo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
 			String consulta = "SELECT Id FROM TipoVivienda WHERE Vivienda = '" + nuevo.getVivienda() + "'";
 			ResultSet rs = ps.executeQuery(consulta);
 			rs.next();
 			return rs.getInt("Id");
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			return null;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		
-		
+		return null;
+	}
+
 	public void InsertDomicilio(Empleado nuevo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
 
-			
-			int idVivienda			= ObtenerIdVivienda(nuevo);
+			int idVivienda = ObtenerIdVivienda(nuevo);
 
 			StringBuilder consultaInsertarDomicilio = new StringBuilder(
 					"INSERT INTO Domicilio ([IdTipoVivienda],[Calle],[Numero]) VALUES (").append(idVivienda)
@@ -165,15 +159,12 @@ public class Database {
 		}
 	}
 
-	
-		
 	public void InsertMultiDomicilio(Empleado nuevo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
-			
-			int idPersona 		= ObtenerIdPersona(nuevo);
-			int idDomicilio 	= ObtenerIdDomicilio(nuevo);
-			
+
+			int idPersona = ObtenerIdPersona(nuevo);
+			int idDomicilio = ObtenerIdDomicilio(nuevo);
 
 			StringBuilder consultaInsertarMultiDomicilio = new StringBuilder("INSERT INTO MultiDomicilio Values (")
 					.append(idPersona).append(", ").append(idDomicilio).append(")");
@@ -197,7 +188,6 @@ public class Database {
 		return null;
 	}
 
-	
 	public Integer ObtenerIdDomicilio(Empleado nuevo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
@@ -209,27 +199,27 @@ public class Database {
 		}
 		return null;
 	}
-	
-	public Integer ObtenerIdTipoEmpleado (Empleado nuevo){
-		try{
+
+	public Integer ObtenerIdTipoEmpleado(Empleado nuevo) {
+		try {
 			java.sql.Statement ps = conexion.createStatement();
-			ResultSet rs = ps.executeQuery("SELECT Id FROM TipoEmpleado WHERE Tipo = '" + nuevo.getClass().getSimpleName() + "'");
+			ResultSet rs = ps.executeQuery(
+					"SELECT Id FROM TipoEmpleado WHERE Tipo = '" + nuevo.getClass().getSimpleName() + "'");
 			rs.next();
 			return rs.getInt("Id");
-		} catch (SQLException e){
-					e.printStackTrace();
-				}
-				return null;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		
+		return null;
+	}
+
 	public void InsertEmpleado(Empleado nuevo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
 
-			
-			int idPersona 		= ObtenerIdPersona(nuevo);
-			int idTipoEmpleado  = ObtenerIdTipoEmpleado(nuevo);
-	
+			int idPersona = ObtenerIdPersona(nuevo);
+			int idTipoEmpleado = ObtenerIdTipoEmpleado(nuevo);
+
 			StringBuilder consultaInsertarEmpleado = new StringBuilder("INSERT INTO Empleado Values('")
 					.append(new SimpleDateFormat("yyyy-MM-dd").format(nuevo.getFechaDeIngreso())).append("', ")
 					.append(idPersona).append(", ").append(idTipoEmpleado).append(")");
@@ -241,66 +231,58 @@ public class Database {
 		}
 	}
 
-	public Integer ObtenerLegajo (Empleado nuevo){
-		try{
+	public Integer ObtenerLegajo(Empleado nuevo) {
+		try {
 			java.sql.Statement ps = conexion.createStatement();
 			ResultSet rs = ps.executeQuery("SELECT Max(Legajo) AS Legajo FROM Empleado");
 			rs.next();
-			return rs.getInt("Id"); 
-		} catch (SQLException e){
+			return rs.getInt("Id");
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	public String ObtenerTipoEmpleado (Empleado nuevo){
-		try{
+
+	public String ObtenerTipoEmpleado(Empleado nuevo) {
+		try {
 			java.sql.Statement ps = conexion.createStatement();
 			ResultSet rs = ps.executeQuery("SELECT Tipo FROM TipoEmpleado WHERE Id = " + ObtenerIdTipoEmpleado(nuevo));
 			rs.next();
-			return rs.getString("Tipo"); 
-		} catch (SQLException e){
+			return rs.getString("Tipo");
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-
 	public void InsertGerente(Empleado nuevo) {
-		
+
 		try {
 			java.sql.Statement ps = conexion.createStatement();
 
-					int legajoEmpleado 		= ObtenerLegajo(nuevo);
-					int idTipoEmpleado  	= ObtenerIdTipoEmpleado(nuevo);
-					String TipoEmpleado  	= ObtenerTipoEmpleado(nuevo);
-					
-			
+			int legajoEmpleado = ObtenerLegajo(nuevo);
+
 			Gerente gerente = (Gerente) nuevo;
 			StringBuilder consultaInsertarGerente = new StringBuilder("INSERT INTO Gerente Values('")
 					.append(gerente.getRango()).append("', ").append(legajoEmpleado).append(")");
-			
+
 			int cantidadAfectadas = ps.executeUpdate(consultaInsertarGerente.toString());
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
 
 	public void InsertJunior(Empleado nuevo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
 
-			int legajoEmpleado 		= ObtenerLegajo(nuevo);
-			int idTipoEmpleado  	= ObtenerIdTipoEmpleado(nuevo);
-			String TipoEmpleado  	= ObtenerTipoEmpleado(nuevo);
-			
-			
+			int legajoEmpleado = ObtenerLegajo(nuevo);
+
 			Junior junior = (Junior) nuevo;
 			StringBuilder consultaInsertarJunior = new StringBuilder("INSERT INTO Junior Values('")
 					.append(junior.GetLenguajes()).append("', ").append(legajoEmpleado).append(")");
-			
+
 			int cantidadAfectadas = ps.executeUpdate(consultaInsertarJunior.toString());
 
 		} catch (Exception e) {
