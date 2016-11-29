@@ -2,8 +2,10 @@ package application.basededatos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,7 @@ import application.empresa.empleados.Empleado;
 import application.empresa.empleados.Gerente;
 import application.empresa.empleados.Junior;
 import application.empresa.usuario.Usuario;
+import application.empresa.persona.Persona;
 import application.empresa.utils.Utils.VIVIENDA;
 
 public class Database {
@@ -35,7 +38,10 @@ public class Database {
 			try {
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 				String url = String.format("jdbc:sqlserver://%s:%s;databaseName=%s;integratedSecurity=true;",
-						"localhost", "1433", "Empresa");
+				Configuracion.getAppSetting("dataBaseServer"),
+				Configuracion.getAppSetting("dataBasePassword"),
+				Configuracion.getAppSetting("dataBaseCatalog"));
+			
 				try {
 					conexion = DriverManager.getConnection(url);
 
@@ -387,4 +393,144 @@ public class Database {
 		}
 		return null;
 	}
+
+	public void UpdatePersona(Empleado empleado) {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+			
+			int idPersona = ObtenerIdPersona(empleado);
+			
+			StringBuilder consultaModificarPersona = new StringBuilder();
+			consultaModificarPersona.append("UPDATE Persona SET('");
+			consultaModificarPersona.append(empleado.Nombre()).append("', '");
+			consultaModificarPersona.append(empleado.Apellido()).append("', ");
+			consultaModificarPersona.append(empleado.getDocumento()).append(", ");
+			consultaModificarPersona.append(empleado.Edad()).append(", ");
+			consultaModificarPersona.append(empleado.getSexo()).append(", ");
+			consultaModificarPersona.append(empleado.GetEstadoCivil()).append(", ");
+			consultaModificarPersona.append(" WHERE id = " + idPersona);
+
+			int cantidadAfectadas = ps.executeUpdate(consultaModificarPersona.toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void UpdateDomicilio(Empleado empleado) {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+
+			int idVivienda = ObtenerIdVivienda(empleado);
+
+			StringBuilder consultaModificarDomicilio = new StringBuilder();
+			consultaModificarDomicilio.append("UPDATE Domicilio SET('");
+			consultaModificarDomicilio.append(empleado.getVivienda()).append("', '");
+			consultaModificarDomicilio.append(empleado.getCalle()).append("', ");
+			consultaModificarDomicilio.append(empleado.getNumero()).append(", ");
+
+			if (empleado.getVivienda().equals(VIVIENDA.DEPARTAMENTO)) {
+				consultaModificarDomicilio.append(", ");
+				consultaModificarDomicilio.append(empleado.GetPiso());
+				consultaModificarDomicilio.append(", '");
+				consultaModificarDomicilio.append(empleado.GetDepartamento()).append("'");
+
+			}
+			consultaModificarDomicilio.append(" WHERE id = " + idVivienda);
+			int cantidadAfectadas = ps.executeUpdate(consultaModificarDomicilio.toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void UpdateMultiDomicilio(Empleado empleado) {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+
+			int idPersona = ObtenerIdPersona(empleado);
+
+			int idDomicilio = ObtenerIdDomicilio(empleado);
+
+			StringBuilder consultaModificarMultiDomicilio = new StringBuilder();
+			consultaModificarMultiDomicilio.append("UPDATE MultiDomicilio SET ('");
+			consultaModificarMultiDomicilio.append(idPersona).append(", ");
+			consultaModificarMultiDomicilio.append(idDomicilio).append(")");
+			consultaModificarMultiDomicilio.append(" WHERE id = " + idDomicilio);
+			int cantidadAfectadas = ps.executeUpdate(consultaModificarMultiDomicilio.toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void UpdateEmpleado(Empleado empleado) {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+
+			int idPersona = ObtenerIdPersona(empleado);
+
+			int idTipoEmpleado = ObtenerIdTipoEmpleado(empleado);
+
+			StringBuilder consultaModificarEmpleado = new StringBuilder();
+			consultaModificarEmpleado.append("UPDATE Empleado SET('");
+			consultaModificarEmpleado.append(new SimpleDateFormat("yyyy-MM-dd").format(empleado.getFechaDeIngreso()))
+					.append("', ");
+			consultaModificarEmpleado.append(idPersona).append(", ");
+			consultaModificarEmpleado.append(idTipoEmpleado).append(")");
+			consultaModificarEmpleado.append(" WHERE id = " + idTipoEmpleado);
+			int cantidadAfectadas = ps.executeUpdate(consultaModificarEmpleado.toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void UpdateGerente(Empleado empleado) {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+			
+			int legajoEmpleado = ObtenerLegajo(empleado);
+			
+			int idTipoEmpleado = ObtenerIdTipoEmpleado(empleado);
+
+			String tipo = ObtenerTipoEmpleado(empleado);
+
+			Gerente gerente = (Gerente) empleado;
+			StringBuilder consultaModificarGerente = new StringBuilder();
+			consultaModificarGerente.append("UPDATE Gerente SET('");
+			consultaModificarGerente.append(gerente.getRango()).append("', ");
+			consultaModificarGerente.append(legajoEmpleado).append(")");
+			consultaModificarGerente.append(" WHERE id = " + tipo);
+			int cantidadAfectadas = ps.executeUpdate(consultaModificarGerente.toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void UpdateJunior(Empleado empleado) {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+			
+			int legajoEmpleado = ObtenerLegajo(empleado);
+			
+			int idTipoEmpleado = ObtenerIdTipoEmpleado(empleado);
+
+			String tipo = ObtenerTipoEmpleado(empleado);
+
+			Junior junior = (Junior) empleado;
+			StringBuilder consultaModificarJunior = new StringBuilder();
+			consultaModificarJunior.append("UPDATE Junior SET('");
+			consultaModificarJunior.append(junior.GetLenguajes()).append("', ");
+			consultaModificarJunior.append(legajoEmpleado).append(")");
+			consultaModificarJunior.append(" WHERE id = " + tipo);
+			int cantidadAfectadas = ps.executeUpdate(consultaModificarJunior.toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
+	
