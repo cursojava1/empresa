@@ -1,23 +1,23 @@
 package application.basededatos;
 
 public class ConfiguracionDB {
-	private String nombreDB;
-	private String direccionDB;
-	private int puerto;
+	protected String nombreDB;
+	protected String direccionDB;
+	protected int puerto;
 	
 	public ConfiguracionDB ()
 	{
-		
 	}
-	/*public void SetDriver(String driver) {
-		this.driver = driver;
-		
-	}*/
 
 	public void SetNombreDB(String nombreDB) {
 		this.nombreDB = nombreDB;
 		
 	}
+	
+	public String GetNombreDB(){
+		return nombreDB;
+	}
+	
 
 	public void SetDireccionDB(String direccionDB) {
 		this.direccionDB = direccionDB;
@@ -29,9 +29,6 @@ public class ConfiguracionDB {
 		
 	}
 	
-	public String GetNombreDB(){
-		return nombreDB;
-	}
 	
 	public String GetDireccionDB(){
 		return direccionDB;
@@ -39,6 +36,5 @@ public class ConfiguracionDB {
 	public int GetPuerto(){
 		return puerto;
 	}
-	//public abstract String ImprimirArchivoDB();
 
 }

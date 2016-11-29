@@ -17,13 +17,11 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.text.Text;
 
 public class LoginControlador implements Initializable {
-	
-	ConfiguracionDB config = new ConfiguracionDB();
 
 	Login login;
 
 	@FXML
-	TextField nombreUsuario,nombreDB,direccionDB,puerto;
+	TextField nombreUsuario, nombreDB, direccionDB, puerto;
 
 	@FXML
 	PasswordField passwordUsuario;
@@ -33,7 +31,7 @@ public class LoginControlador implements Initializable {
 
 	@FXML
 	Button botonIngresar;
-	
+
 	@FXML
 	TitledPane desplegableDB;
 
@@ -43,18 +41,10 @@ public class LoginControlador implements Initializable {
 	}
 
 	@FXML
-	private void ConfigurarDB (ConfiguracionDB configuracion){
-		configuracion.SetNombreDB(nombreDB.getText());
-		System.out.println(nombreDB.getText());
-		configuracion.SetDireccionDB(direccionDB.getText());
-		configuracion.SetPuerto(Integer.parseInt(puerto.getText()));
-		 
-	}
-	
-	@FXML
 	private void ClickBtnIngresar(ActionEvent event) throws IOException {
-		ConfigurarDB(config);
-		//boolean resultado = login.VerificarUsuario(nombreUsuario.getText(), passwordUsuario.getText());
+		login.SetearConectar(nombreDB.getText(), direccionDB.getText(), Integer.parseInt(puerto.getText()));
+		// boolean resultado = login.VerificarUsuario(nombreUsuario.getText(),
+		// passwordUsuario.getText());
 		int estado = login.VerificarUsuarioDB(nombreUsuario.getText(), passwordUsuario.getText());
 		switch (estado) {
 		case 0:
@@ -73,8 +63,7 @@ public class LoginControlador implements Initializable {
 			usuarioError.setVisible(true);
 			break;
 		}
-		
-	}
 
+	}
 
 }
