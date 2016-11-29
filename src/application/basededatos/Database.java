@@ -17,7 +17,7 @@ import application.empresa.usuario.Usuario;
 import application.empresa.persona.Persona;
 import application.empresa.utils.Utils.VIVIENDA;
 
-public class Database<Int> {
+public class Database {
 
 	private static Database database = null;
 	private Connection conexion = null;
@@ -38,7 +38,10 @@ public class Database<Int> {
 			try {
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 				String url = String.format("jdbc:sqlserver://%s:%s;databaseName=%s;integratedSecurity=true;",
-						"localhost", "1433", "Empresa");
+				Configuracion.getAppSetting("dataBaseServer"),
+				Configuracion.getAppSetting("dataBasePassword"),
+				Configuracion.getAppSetting("dataBaseCatalog"));
+			
 				try {
 					conexion = DriverManager.getConnection(url);
 
@@ -391,21 +394,21 @@ public class Database<Int> {
 		return null;
 	}
 
-	public void UpdatePersona(Empleado IdPersona) {
+	public void UpdatePersona(Empleado empleado) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
-			ResultSet rs = ps.executeQuery("SELECT Id FROM Persona WHERE Dni = " + IdPersona.getDocumento());
+			ResultSet rs = ps.executeQuery("SELECT Id FROM Persona WHERE Dni = " + empleado.getDocumento());
 			rs.next();
 			int idPersona = rs.getInt("Id");
 
 			StringBuilder consultaModificarPersona = new StringBuilder();
 			consultaModificarPersona.append("UPDATE Persona SET('");
-			consultaModificarPersona.append(IdPersona.Nombre()).append("', '");
-			consultaModificarPersona.append(IdPersona.Apellido()).append("', ");
-			consultaModificarPersona.append(IdPersona.getDocumento()).append(", ");
-			consultaModificarPersona.append(IdPersona.Edad()).append(", ");
-			consultaModificarPersona.append(IdPersona.getSexo()).append(", ");
-			consultaModificarPersona.append(IdPersona.GetEstadoCivil()).append(", ");
+			consultaModificarPersona.append(empleado.Nombre()).append("', '");
+			consultaModificarPersona.append(empleado.Apellido()).append("', ");
+			consultaModificarPersona.append(empleado.getDocumento()).append(", ");
+			consultaModificarPersona.append(empleado.Edad()).append(", ");
+			consultaModificarPersona.append(empleado.getSexo()).append(", ");
+			consultaModificarPersona.append(empleado.GetEstadoCivil()).append(", ");
 			consultaModificarPersona.append(" WHERE id = " + idPersona);
 
 			int cantidadAfectadas = ps.executeUpdate(consultaModificarPersona.toString());
