@@ -12,7 +12,6 @@ import application.basededatos.Database;
 public class Login {
 	
 	Database database = Database.GetDatabase();
-
 	ConfiguracionDB config = new ConfiguracionDB();
 	
 	@SuppressWarnings("resource")
@@ -81,6 +80,13 @@ public class Login {
 			return 0;
 		}
 		return 2;
+	}
+	
+	public void SetearConectar(String nombreDB, String direccionDB, Integer puerto){
+		config.SetNombreDB(nombreDB);
+		config.SetDireccionDB(direccionDB);
+		config.SetPuerto(puerto);
+		database.Conectar(config);
 	}
 	
 }

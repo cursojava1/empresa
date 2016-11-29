@@ -30,6 +30,7 @@ public class Database {
 	
 	private static Database database = null;
 	private Connection conexion = null;
+	ConfiguracionDB config = new ConfiguracionDB();
 
 	private Database() {
 
@@ -46,7 +47,6 @@ public class Database {
 		if (conexion == null) {
 			try {
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-				String a = config.GetDireccionDB();
 				String url = String.format("jdbc:sqlserver://%s:%s;databaseName=%s;integratedSecurity=true;",
 				Configuracion.getAppSetting("dataBaseServer"),
 				Configuracion.getAppSetting("dataBasePassword"),
