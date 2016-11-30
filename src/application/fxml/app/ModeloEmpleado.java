@@ -2,14 +2,16 @@ package application.fxml.app;
 
 public class ModeloEmpleado {
 
-	String legajoTabla, nombreTabla, apellidoTabla, dniTabla, edadTabla, calleTabla, numeroTabla, pisoTabla, departamentoTabla, lenguajeTabla, rangoTabla;
+	String legajoTabla, nombreTabla, apellidoTabla, dniTabla, edadTabla, calleTabla, numeroTabla, pisoTabla,
+			departamentoTabla, lenguajeTabla, rangoTabla;
 
 	public ModeloEmpleado() {
 
 	}
 
-	public ModeloEmpleado(String legajoTabla, String nombreTabla, String apellidoTabla, String dniTabla, String edadTabla,
-			String calleTabla, String numeroTabla, String pisoTabla, String departamentoTabla,String lenguajeTabla,String rangoTabla) {
+	public ModeloEmpleado(String legajoTabla, String nombreTabla, String apellidoTabla, String dniTabla,
+			String edadTabla, String calleTabla, String numeroTabla, String pisoTabla, String departamentoTabla,
+			String lenguajeTabla, String rangoTabla) {
 		super();
 		this.legajoTabla = legajoTabla;
 		this.nombreTabla = nombreTabla;
@@ -27,7 +29,7 @@ public class ModeloEmpleado {
 	public String getLegajoTabla() {
 		return legajoTabla;
 	}
-	
+
 	public String getNombreTabla() {
 		return nombreTabla;
 	}
@@ -75,7 +77,7 @@ public class ModeloEmpleado {
 	public void setNumeroTabla(String numeroTabla) {
 		this.numeroTabla = numeroTabla;
 	}
-	
+
 	public String getPisoTabla() {
 		return pisoTabla;
 	}
@@ -83,7 +85,7 @@ public class ModeloEmpleado {
 	public void setPisoTabla(String pisoTabla) {
 		this.pisoTabla = pisoTabla;
 	}
-	
+
 	public String getDepartamentoTabla() {
 		return departamentoTabla;
 	}
@@ -99,7 +101,7 @@ public class ModeloEmpleado {
 	public void setLenguajeTabla(String lenguajeTabla) {
 		this.lenguajeTabla = lenguajeTabla;
 	}
-	
+
 	public String getRangoTabla() {
 		return rangoTabla;
 	}

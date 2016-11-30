@@ -327,14 +327,14 @@ public class Database {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
 
-			String consulta = "SELECT Id FROM Nivel WHERE Nivel = '" + nuevo.getNivel() + "'";
+			String consulta = "SELECT Id FROM Nivel WHERE Tipo = '" + nuevo.getNivel() + "'";
 			ResultSet rs = ps.executeQuery(consulta);
 			rs.next();
 			int idNivel = rs.getInt("Id");
 
 			StringBuilder consultaInsertarUsuario = new StringBuilder("INSERT INTO Usuario VALUES ('")
-					.append(nuevo.getNombre()).append("', '").append(nuevo.getContraseña()).append("', ")
-					.append(nuevo.getEmail()).append(", ").append(idNivel).append(")");
+					.append(nuevo.getNombre()).append("', '").append(nuevo.getContraseña()).append("', '")
+					.append(nuevo.getEmail()).append("', ").append(idNivel).append(")");
 
 			int cantidadAfectadas = ps.executeUpdate(consultaInsertarUsuario.toString());
 

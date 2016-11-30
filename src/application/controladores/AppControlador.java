@@ -11,11 +11,14 @@ import application.empresa.empleados.Empleado;
 import application.empresa.empleados.FactoryEmpleados;
 import application.empresa.empleados.Gerente;
 import application.empresa.empleados.Junior;
+import application.empresa.usuario.Usuario;
 import application.empresa.utils.Utils.ESTADOCIVIL;
+import application.empresa.utils.Utils.NIVEL;
 import application.empresa.utils.Utils.SEXO;
 import application.empresa.utils.Utils.VIVIENDA;
 import application.funcional.app.App;
 import application.fxml.app.ModeloEmpleado;
+import application.fxml.app.ModeloUsuario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,20 +36,20 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class AppControlador implements Initializable {
-	
+
 	App app;
 	@FXML
-	TextField nombre, apellido, dni, edad, calle, piso, numero, dpt, text1;
+	TextField nombre, apellido, dni, edad, calle, piso, numero, dpt, text1, Unick, Uemail, Upass, Upassconfirmar;
 	@FXML
-	RadioButton rbcasa, rbdpt;
+	RadioButton rbcasa, rbdpt, Ucheckadmin, Ucheckinvitado;
 	@FXML
 	ChoiceBox<String> sexo, estado, usuarios;
 	@FXML
 	MenuItem CerrarApp;
 	@FXML
-	AnchorPane AnchorAgregarEmpleado,AnchorAdministrarEmpleado,AnchorAgregarUsuario,AnchorAdministrarUsuario;
+	AnchorPane AnchorAgregarEmpleado, AnchorAdministrarEmpleado, AnchorAgregarUsuario, AnchorAdministrarUsuario;
 	@FXML
-	Label label1;
+	Label label1, labelPassMal;
 	@FXML
 	private TableView<ModeloEmpleado> tablaEmpleados;
 	@FXML
@@ -55,6 +58,13 @@ public class AppControlador implements Initializable {
 
 	ObservableList<ModeloEmpleado> empleados = FXCollections.observableArrayList();
 	List<String> empleadosArchivo;
+
+	@FXML
+	private TableView<ModeloUsuario> Tusuarios;
+	@FXML
+	private TableColumn<ModeloUsuario, String> TUnick, TUemail, TUcontraseña, TUnivel;
+	ObservableList<ModeloUsuario> observableUsuarios = FXCollections.observableArrayList();
+	List<String> usuariosLista;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -66,10 +76,8 @@ public class AppControlador implements Initializable {
 		estado.setItems(opcionesEstado);
 		rbcasa.setSelected(true);
 
-		
-		
 		tablaEmpleados.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-		
+
 		legajoTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("LegajoTabla"));
 		nombreTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("NombreTabla"));
 		apellidoTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("ApellidoTabla"));
@@ -82,7 +90,6 @@ public class AppControlador implements Initializable {
 		lenguajeTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("LenguajeTabla"));
 		rangoTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("RangoTabla"));
 
-		
 		legajoTabla.prefWidthProperty().bind(tablaEmpleados.widthProperty().divide(11));
 		nombreTabla.prefWidthProperty().bind(tablaEmpleados.widthProperty().divide(11));
 		apellidoTabla.prefWidthProperty().bind(tablaEmpleados.widthProperty().divide(11));
@@ -94,8 +101,7 @@ public class AppControlador implements Initializable {
 		departamentoTabla.prefWidthProperty().bind(tablaEmpleados.widthProperty().divide(11));
 		lenguajeTabla.prefWidthProperty().bind(tablaEmpleados.widthProperty().divide(11));
 		rangoTabla.prefWidthProperty().bind(tablaEmpleados.widthProperty().divide(11));
-		
-		
+
 		ObservableList<String> opcionesUsuarios = FXCollections.observableArrayList("Gerente", "Desarrollador");
 		usuarios.setItems(opcionesUsuarios);
 
@@ -111,6 +117,22 @@ public class AppControlador implements Initializable {
 		}
 		tablaEmpleados.setItems(empleados);
 
+		TUnick.setCellValueFactory(new PropertyValueFactory<ModeloUsuario, String>("NombreTabla"));
+		TUemail.setCellValueFactory(new PropertyValueFactory<ModeloUsuario, String>("EmailTable"));
+		TUcontraseña.setCellValueFactory(new PropertyValueFactory<ModeloUsuario, String>("PassTabla"));
+		TUnivel.setCellValueFactory(new PropertyValueFactory<ModeloUsuario, String>("NivelTabla"));
+
+		usuariosLista = app.ExtraerUsuariosDB();
+		ModeloUsuario modeloUsuario;
+		String[] datosUsuario = new String[5];
+		for (String usuario : usuariosLista) {
+			datosUsuario = usuario.split(" ");
+			LimpiarDatos(datosUsuario); // 1 = nick / 3 = contraseña / 2 = email
+										// / 4 = Nivel
+			modeloUsuario = new ModeloUsuario(datosUsuario[1], datosUsuario[3], datosUsuario[2], datosUsuario[4]);
+			observableUsuarios.add(modeloUsuario);
+		}
+		Tusuarios.setItems(observableUsuarios);
 	}
 
 	@FXML
@@ -213,42 +235,75 @@ public class AppControlador implements Initializable {
 			}
 		}
 	}
-	
+
 	@FXML
-	private void CerrarApp(){			
+	private void CerrarApp() {
 		app.CerrarApp();
-		
+
 	}
-	
-	private void OcultarTodosAnchorPane(){			
+
+	private void OcultarTodosAnchorPane() {
 		AnchorAgregarEmpleado.setVisible(false);
 		AnchorAdministrarEmpleado.setVisible(false);
 		AnchorAgregarUsuario.setVisible(false);
 		AnchorAdministrarUsuario.setVisible(false);
 	}
-	
+
 	@FXML
-	private void MostrarAgregarEmpleado(){			
+	private void MostrarAgregarEmpleado() {
 		OcultarTodosAnchorPane();
 		AnchorAgregarEmpleado.setVisible(true);
 	}
-	
+
 	@FXML
-	private void MostrarAdministrarEmpleado(){			
+	private void MostrarAdministrarEmpleado() {
 		OcultarTodosAnchorPane();
 		AnchorAdministrarEmpleado.setVisible(true);
 	}
 
 	@FXML
-	private void MostrarAgregarUsuario(){			
+	private void MostrarAgregarUsuario() {
 		OcultarTodosAnchorPane();
 		AnchorAgregarUsuario.setVisible(true);
 	}
-	
+
 	@FXML
-	private void MostrarAdministrarUsuario(){			
+	private void MostrarAdministrarUsuario() {
 		OcultarTodosAnchorPane();
 		AnchorAdministrarUsuario.setVisible(true);
 	}
-	
+
+	@FXML
+	private void AgregarUsuarioNuevo() {
+		Usuario nuevo = new Usuario();
+		if (CompletarUsuarioNuevo(nuevo)) {
+			app.GrabarUsuarioDB(nuevo);
+		}
+	}
+
+	private boolean CompletarUsuarioNuevo(Usuario nuevo) {
+		nuevo.setNombre(Unick.getText());
+		nuevo.setEmail(Uemail.getText());
+		if (ComprobarContraseñas()) {
+			nuevo.setContraseña(Upass.getText());
+			if (Ucheckadmin.isSelected()) {
+				nuevo.setNivel(NIVEL.ADMINISTRADOR);
+			} else {
+				nuevo.setNivel(NIVEL.INVITADO);
+			}
+			return true;
+		}
+		labelPassMal.setText("La contraseña es incorrecta");
+		return false;
+
+	}
+
+	private boolean ComprobarContraseñas() {
+		if (Upass.getText().equals(Upassconfirmar.getText())) {
+			return true;
+		}
+		return false;
+
+	}
+
 }

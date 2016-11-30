@@ -4,46 +4,45 @@ import application.empresa.utils.Utils.NIVEL;
 
 public class Usuario {
 
-		protected String nombre;
-		protected String contraseña;
-		protected String email;
-		protected NIVEL nivel;
-		
-		public Usuario() {
-		
-		}			
+	protected String nombre;
+	protected String contraseña;
+	protected String email;
+	protected NIVEL nivel;
 
-		public String getNombre() {
-			return nombre;
-		}
+	public Usuario() {
 
-		public void setNombre(String nombre) {
-			this.nombre = nombre;
-		}
+	}
 
-		public String getContraseña() {
-			return contraseña;
-		}
+	public String getNombre() {
+		return nombre;
+	}
 
-		public void setContraseña(String contraseña) {
-			this.contraseña = contraseña;
-		}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-		public String getEmail() {
-			return email;
-		}
+	public String getContraseña() {
+		return contraseña;
+	}
 
-		public void setEmail(String email) {
-			this.email = email;
-		}
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
+	}
 
-		public NIVEL getNivel() {
-			return nivel;
-		}
+	public String getEmail() {
+		return email;
+	}
 
-		public void setNivel(NIVEL nivel) {
-			this.nivel = nivel;
-		}	
-			
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public NIVEL getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(NIVEL nivel) {
+		this.nivel = nivel;
+	}
 
 }
