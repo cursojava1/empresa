@@ -44,7 +44,7 @@ public class LoginControlador implements Initializable {
 
 	@FXML
 	private void ClickBtnIngresar(ActionEvent event) throws IOException {
-		login.SetearConectar(nombreDB.getText(), direccionDB.getText(), Integer.parseInt(puerto.getText()));
+		login.SetearConectar(nombreDB.getText(), direccionDB.getText(),puerto.getText());
 		// boolean resultado = login.VerificarUsuario(nombreUsuario.getText(),
 		// passwordUsuario.getText());
 		int estado = login.VerificarUsuarioDB(nombreUsuario.getText(), passwordUsuario.getText());

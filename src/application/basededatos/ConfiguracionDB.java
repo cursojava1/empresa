@@ -3,7 +3,7 @@ package application.basededatos;
 public class ConfiguracionDB {
 	protected String nombreDB;
 	protected String direccionDB;
-	protected int puerto;
+	protected String puerto;
 	
 	public ConfiguracionDB ()
 	{
@@ -24,7 +24,7 @@ public class ConfiguracionDB {
 		
 	}
 
-	public void SetPuerto(int puerto) {
+	public void SetPuerto(String puerto) {
 		this.puerto = puerto;
 		
 	}
@@ -33,8 +33,19 @@ public class ConfiguracionDB {
 	public String GetDireccionDB(){
 		return direccionDB;
 	}
-	public int GetPuerto(){
+	public String GetPuerto(){
 		return puerto;
 	}
 
+	public void SetNombreDBDefault(String nombreDB) {
+		this.nombreDB = Configuracion.getAppSetting("dataBaseCatalog");
+	}
+
+	public void SetDireccionDefault(String direccionDB) {
+		this.direccionDB = Configuracion.getAppSetting("dataBaseServer");
+	}
+
+	public void SetPuertoDefault(String puerto) {
+		this.puerto = Configuracion.getAppSetting("dataBasePassword");
+	}
 }

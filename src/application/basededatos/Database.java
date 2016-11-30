@@ -29,6 +29,7 @@ public class Database {
 
 	
 	private static Database database = null;
+	private String url;
 	private Connection conexion = null;
 	ConfiguracionDB config = new ConfiguracionDB();
 
@@ -47,11 +48,8 @@ public class Database {
 		if (conexion == null) {
 			try {
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-				String url = String.format("jdbc:sqlserver://%s:%s;databaseName=%s;integratedSecurity=true;",
-				Configuracion.getAppSetting("dataBaseServer"),
-				Configuracion.getAppSetting("dataBasePassword"),
-				Configuracion.getAppSetting("dataBaseCatalog"));
-			
+				url = String.format("jdbc:sqlserver://%s:%s;databaseName=%s;integratedSecurity=true;",
+				config.GetDireccionDB(),config.GetPuerto(),config.GetNombreDB());
 				try {
 					conexion = DriverManager.getConnection(url);
 
