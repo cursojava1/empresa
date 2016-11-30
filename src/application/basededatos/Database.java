@@ -242,7 +242,7 @@ public class Database {
 			java.sql.Statement ps = conexion.createStatement();
 			ResultSet rs = ps.executeQuery("SELECT Max(Legajo) AS Legajo FROM Empleado");
 			rs.next();
-			return rs.getInt("Id");
+			return rs.getInt("Legajo");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
