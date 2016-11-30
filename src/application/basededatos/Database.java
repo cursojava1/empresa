@@ -299,7 +299,7 @@ public class Database {
 	public List<String> SelectEmpleados() {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
-			String consulta = "SELECT E.Legajo, P.Nombre, P.Apellido, P.Dni, P.Edad, D.Calle, D.Numero, D.Piso, D.Departamento, J.Lenguaje, G.Rango  FROM Persona P LEFT JOIN Empleado E ON P.Id=E.IdPersona LEFT JOIN MultiDomicilio M ON P.Id=M.IdPersona  LEFT JOIN Domicilio D ON M.IdDomicilio=D.Id LEFT JOIN Gerente G ON E.IdTipoEmpleado = G.Id LEFT JOIN Junior J ON E.IdTipoEmpleado=J.Id";
+			String consulta = "SELECT E.Legajo, P.Nombre, P.Apellido, P.Dni, P.Edad, D.Calle, D.Numero, D.Piso, D.Departamento, J.Lenguaje, G.Rango FROM Persona P LEFT JOIN Empleado E ON P.Id=E.IdPersona LEFT JOIN MultiDomicilio M ON P.Id=M.IdPersona LEFT JOIN Domicilio D ON M.IdDomicilio=D.Id LEFT JOIN TipoEmpleado T ON E.IdTipoEmpleado = T.Id LEFT JOIN Junior J ON E.Legajo = J.LegajoEmpleado LEFT JOIN Gerente G ON E.Legajo = G.LegajoEmpleado";
 			ResultSet rs = ps.executeQuery(consulta);
 
 			List<String> empleados = new ArrayList<>();

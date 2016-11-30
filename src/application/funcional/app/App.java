@@ -24,14 +24,17 @@ public class App {
 	}
 
 	public void GrabarEmpleadoDB(Empleado nuevo) {
-		database.Conectar();
+
 		database.InsertPersona(nuevo);
 		database.InsertDomicilio(nuevo);
 		database.InsertMultiDomicilio(nuevo);
 		database.InsertEmpleado(nuevo);
-		database.InsertGerente(nuevo);
-		// database.InsertJunior(nuevo);
-		database.Desconectar();
+		if (nuevo.getClass().getSimpleName().equals("Gerente")){
+			database.InsertGerente(nuevo);
+		} else { 
+			database.InsertJunior(nuevo);	
+		}				
+
 	}
 	
 	public void GrabarUsuarioDB(Usuario nuevo){
@@ -98,9 +101,7 @@ public class App {
 	public List<String> ExtraerEmpleadosDB() {
 		List<String> result = new ArrayList<>();
 
-		database.Conectar();
 		result = database.SelectEmpleados();
-		//database.Desconectar();
 		return result;
 
 	}
