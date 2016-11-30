@@ -397,10 +397,9 @@ public class Database {
 	public void UpdatePersona(Empleado empleado) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
-			ResultSet rs = ps.executeQuery("SELECT Id FROM Persona WHERE Dni = " + empleado.getDocumento());
-			rs.next();
-			int idPersona = rs.getInt("Id");
-
+			
+			int idPersona = ObtenerIdPersona(empleado);
+			
 			StringBuilder consultaModificarPersona = new StringBuilder();
 			consultaModificarPersona.append("UPDATE Persona SET('");
 			consultaModificarPersona.append(empleado.Nombre()).append("', '");
@@ -422,11 +421,7 @@ public class Database {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
 
-			// Obtener Id Vivienda.
-			String consulta = "SELECT Id FROM TipoVivienda WHERE Vivienda = '" + empleado.getVivienda() + "'";
-			ResultSet rs = ps.executeQuery(consulta);
-			rs.next();
-			int idVivienda = rs.getInt("Id");
+			int idVivienda = ObtenerIdVivienda(empleado);
 
 			StringBuilder consultaModificarDomicilio = new StringBuilder();
 			consultaModificarDomicilio.append("UPDATE Domicilio SET('");
@@ -453,13 +448,9 @@ public class Database {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
 
-			ResultSet rs = ps.executeQuery("SELECT Id FROM Persona WHERE Dni = " + empleado.getDocumento());
-			rs.next();
-			int idPersona = rs.getInt("Id");
+			int idPersona = ObtenerIdPersona(empleado);
 
-			rs = ps.executeQuery("SELECT Max(Id) AS Id FROM Domicilio");
-			rs.next();
-			int idDomicilio = rs.getInt("Id");
+			int idDomicilio = ObtenerIdDomicilio(empleado);
 
 			StringBuilder consultaModificarMultiDomicilio = new StringBuilder();
 			consultaModificarMultiDomicilio.append("UPDATE MultiDomicilio SET ('");
@@ -477,14 +468,9 @@ public class Database {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
 
-			ResultSet rs = ps.executeQuery("SELECT Id FROM Persona WHERE Dni = " + empleado.getDocumento());
-			rs.next();
-			int idPersona = rs.getInt("Id");
+			int idPersona = ObtenerIdPersona(empleado);
 
-			rs = ps.executeQuery(
-					"SELECT Id FROM TipoEmpleado WHERE Tipo = '" + empleado.getClass().getSimpleName() + "'");
-			rs.next();
-			int idTipoEmpleado = rs.getInt("Id");
+			int idTipoEmpleado = ObtenerIdTipoEmpleado(empleado);
 
 			StringBuilder consultaModificarEmpleado = new StringBuilder();
 			consultaModificarEmpleado.append("UPDATE Empleado SET('");
@@ -503,18 +489,12 @@ public class Database {
 	public void UpdateGerente(Empleado empleado) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
-			ResultSet rs = ps.executeQuery("SELECT Max(Legajo) AS Legajo FROM Empleado");
-			rs.next();
-			int legajoEmpleado = rs.getInt("Legajo");
+			
+			int legajoEmpleado = ObtenerLegajo(empleado);
+			
+			int idTipoEmpleado = ObtenerIdTipoEmpleado(empleado);
 
-			rs = ps.executeQuery(
-					"SELECT Id FROM TipoEmpleado WHERE Tipo = '" + empleado.getClass().getSimpleName() + "'");
-			rs.next();
-			int idTipoEmpleado = rs.getInt("Id");
-
-			rs = ps.executeQuery("SELECT Tipo FROM TipoEmpleado WHERE Id = " + idTipoEmpleado);
-			rs.next();
-			String tipo = rs.getString("Tipo");
+			String tipo = ObtenerTipoEmpleado(empleado);
 
 			Gerente gerente = (Gerente) empleado;
 			StringBuilder consultaModificarGerente = new StringBuilder();
@@ -532,18 +512,12 @@ public class Database {
 	public void UpdateJunior(Empleado empleado) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
-			ResultSet rs = ps.executeQuery("SELECT Max(Legajo) AS Legajo FROM Empleado");
-			rs.next();
-			int legajoEmpleado = rs.getInt("Legajo");
+			
+			int legajoEmpleado = ObtenerLegajo(empleado);
+			
+			int idTipoEmpleado = ObtenerIdTipoEmpleado(empleado);
 
-			rs = ps.executeQuery(
-					"SELECT Id FROM TipoEmpleado WHERE Tipo = '" + empleado.getClass().getSimpleName() + "'");
-			rs.next();
-			int idTipoEmpleado = rs.getInt("Id");
-
-			rs = ps.executeQuery("SELECT Tipo FROM TipoEmpleado WHERE Id = " + idTipoEmpleado);
-			rs.next();
-			String tipo = rs.getString("Tipo");
+			String tipo = ObtenerTipoEmpleado(empleado);
 
 			Junior junior = (Junior) empleado;
 			StringBuilder consultaModificarJunior = new StringBuilder();
