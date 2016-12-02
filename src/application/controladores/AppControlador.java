@@ -200,6 +200,7 @@ public class AppControlador implements Initializable {
 		case "Femenino":
 			nuevo.setSexo(SEXO.FEMENINO);
 			break;
+		
 		}
 		switch (estado.getValue()) {
 		case "Casado":

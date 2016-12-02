@@ -25,26 +25,38 @@ public class App {
 	}
 
 	public void GrabarEmpleadoDB(Empleado nuevo) {
+		
+		if (database.InsertPersona(nuevo)) {
+			System.out.println("Insert Persona");
+		};
+		if (database.InsertDomicilio(nuevo)) {
+			System.out.println("Insert Domicilio");
+		}
+		if (database.InsertEmpleado(nuevo)) {
+			System.out.println("Insert Empleado");
+		}
 
-		database.InsertPersona(nuevo);
-		database.InsertDomicilio(nuevo);
-		database.InsertMultiDomicilio(nuevo);
-		database.InsertEmpleado(nuevo);
-		if (nuevo.getClass().getSimpleName().equals("Gerente")){
+		//database.InsertMultiDomicilio(nuevo);
+
+		if (nuevo.getClass().getSimpleName().equals("Gerente")) {
 			database.InsertGerente(nuevo);
-		} else { 
-			database.InsertJunior(nuevo);	
-		}				
+			System.out.println("Insert Gerente");
+			
+		} else {
+			database.InsertJunior(nuevo);
+			System.out.println("Insert Junior");
+
+		}
 
 	}
-	
-	public void GrabarUsuarioDB(Usuario nuevo){
+
+	public void GrabarUsuarioDB(Usuario nuevo) {
 
 		database.InsertUsuario(nuevo);
 		database.Desconectar();
 	}
-	
-	public void CerrarApp(){
+
+	public void CerrarApp() {
 		Main.CerrarApp();
 		database.Desconectar();
 
@@ -91,9 +103,9 @@ public class App {
 			}
 		}
 	}
-	
-	public List<String> ExtraerUsuariosDB(){
-		List<String> result =new ArrayList<>();
+
+	public List<String> ExtraerUsuariosDB() {
+		List<String> result = new ArrayList<>();
 		result = database.SelectUsuarios();
 		return result;
 	}
@@ -181,6 +193,5 @@ public class App {
 			}
 		}
 	}
-	
-	
+
 }
