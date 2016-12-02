@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import application.Main;
+import application.basededatos.ConfiguracionDB;
 import application.basededatos.Database;
 import application.empresa.empleados.Empleado;
 import application.empresa.usuario.Usuario;
@@ -18,7 +19,7 @@ import application.empresa.usuario.Usuario;
 public class App {
 
 	Database database = Database.GetDatabase();
-
+	ConfiguracionDB config;
 	public App() {
 
 	}
@@ -38,7 +39,7 @@ public class App {
 	}
 	
 	public void GrabarUsuarioDB(Usuario nuevo){
-		database.Conectar();
+
 		database.InsertUsuario(nuevo);
 		database.Desconectar();
 	}
@@ -93,14 +94,13 @@ public class App {
 	
 	public List<String> ExtraerUsuariosDB(){
 		List<String> result =new ArrayList<>();
-		database.Conectar();
 		result = database.SelectUsuarios();
 		return result;
 	}
 
 	public List<String> ExtraerEmpleadosDB() {
 		List<String> result = new ArrayList<>();
-
+		database.Conectar(config);
 		result = database.SelectEmpleados();
 		return result;
 
@@ -183,5 +183,4 @@ public class App {
 	}
 	
 	
-
 }

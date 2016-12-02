@@ -1,5 +1,12 @@
 package application.basededatos;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,10 +24,14 @@ import application.empresa.usuario.Usuario;
 import application.empresa.persona.Persona;
 import application.empresa.utils.Utils.VIVIENDA;
 
+
 public class Database {
 
+	
 	private static Database database = null;
+	private String url;
 	private Connection conexion = null;
+	ConfiguracionDB config = new ConfiguracionDB();
 
 	private Database() {
 
@@ -33,15 +44,12 @@ public class Database {
 		return database;
 	}
 
-	public void Conectar() {
+	public void Conectar(ConfiguracionDB config) {
 		if (conexion == null) {
 			try {
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-				String url = String.format("jdbc:sqlserver://%s:%s;databaseName=%s;integratedSecurity=true;",
-				Configuracion.getAppSetting("dataBaseServer"),
-				Configuracion.getAppSetting("dataBasePassword"),
-				Configuracion.getAppSetting("dataBaseCatalog"));
-			
+				url = String.format("jdbc:sqlserver://%s:%s;databaseName=%s;integratedSecurity=true;",
+				config.GetDireccionDB(),config.GetPuerto(),config.GetNombreDB());
 				try {
 					conexion = DriverManager.getConnection(url);
 
@@ -323,7 +331,6 @@ public class Database {
 		}
 		return null;
 	}
-
 	public void InsertUsuario(Usuario nuevo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();

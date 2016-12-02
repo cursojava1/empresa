@@ -6,11 +6,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import application.basededatos.Configuracion;
+import application.basededatos.ConfiguracionDB;
 import application.basededatos.Database;
 
 public class Login {
-
+	
 	Database database = Database.GetDatabase();
+	ConfiguracionDB config = new ConfiguracionDB();
 	
 	@SuppressWarnings("resource")
 	public boolean VerificarUsuario(String nombre, String password) {
@@ -70,7 +73,7 @@ public class Login {
 	 * 		   Estado 2: Contraseña incorrecta
 	 */
 	public int VerificarUsuarioDB(String nombre, String password) {
-		database.Conectar();
+		database.Conectar(config);
 		String contraseña = database.GetContraseña(nombre);
 		if (contraseña == null) {
 			return 1;
@@ -78,6 +81,29 @@ public class Login {
 			return 0;
 		}
 		return 2;
+	}
+
+	public void SetearConectar(String nombreDB, String direccionDB, String puerto){
+		String a = Configuracion.getAppSetting("dataBaseCatalog");
+		if(!Configuracion.getAppSetting("dataBaseCatalog").equals(nombreDB)){
+			System.out.println("Dato de conexion erroneo, cargando dato predeterminado...");
+			config.SetNombreDBDefault(nombreDB);
+		} else {
+			config.SetNombreDB(nombreDB);
+		}
+		if(!Configuracion.getAppSetting("dataBaseServer").equals(direccionDB)){
+			System.out.println("Dato de conexion erroneo, cargando dato predeterminado...");
+			config.SetDireccionDefault(direccionDB);
+		}else{
+			config.SetDireccionDB(direccionDB);
+		}
+		if(!Configuracion.getAppSetting("dataBasePassword").equals(puerto)){
+			System.out.println("Dato de conexion erroneo, cargando dato predeterminado...");
+			config.SetPuertoDefault(puerto);
+		} else {
+			config.SetPuerto(puerto);
+		}
+		database.Conectar(config);
 	}
 	
 }
