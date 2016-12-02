@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
 import application.Main;
 import application.funcional.login.Login;
 import javafx.event.ActionEvent;
@@ -41,6 +43,9 @@ public class LoginControlador implements Initializable {
 		int estado = login.VerificarUsuarioDB(nombreUsuario.getText(), passwordUsuario.getText());
 		switch (estado) {
 		case 0:
+			JOptionPane.showMessageDialog(null, "Bienvenido "+ nombreUsuario.getText()+"\n"
+	                    + "Has ingresado satisfactoriamente al sistema",   "Mensaje de bienvenida",
+	                    JOptionPane.INFORMATION_MESSAGE);
 			Main.ShowApp();
 			break;
 		case 1:

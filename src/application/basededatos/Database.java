@@ -146,17 +146,18 @@ public class Database {
 			java.sql.Statement ps = conexion.createStatement();
 
 			int idVivienda = ObtenerIdVivienda(nuevo);
-
-			StringBuilder consultaInsertarDomicilio = new StringBuilder(
-					"INSERT INTO Domicilio ([IdTipoVivienda],[Calle],[Numero]) VALUES (").append(idVivienda)
-							.append(", '").append(nuevo.getCalle()).append("', ").append(nuevo.getNumero());
-
+			StringBuilder consultaInsertarDomicilio;
+			
 			if (nuevo.getVivienda().equals(VIVIENDA.DEPARTAMENTO)) {
-				consultaInsertarDomicilio.append(", ").append(nuevo.GetPiso()).append(", '")
-						.append(nuevo.GetDepartamento()).append("'");
+				consultaInsertarDomicilio = new StringBuilder(
+						"INSERT INTO Domicilio ([IdTipoVivienda],[Calle],[Numero],[Piso],[Departamento]) VALUES (").append(idVivienda)
+								.append(", '").append(nuevo.getCalle()).append("', ").append(nuevo.getNumero()).append(", ").append(nuevo.GetPiso()).append(", '")
+								.append(nuevo.GetDepartamento()).append("'").append(")");
+			} else {
+				consultaInsertarDomicilio = new StringBuilder(
+						"INSERT INTO Domicilio ([IdTipoVivienda],[Calle],[Numero]) VALUES (").append(idVivienda)
+								.append(", '").append(nuevo.getCalle()).append("', ").append(nuevo.getNumero()).append(")");
 			}
-
-			consultaInsertarDomicilio.append(")");
 
 			int cantidadAfectadas = ps.executeUpdate(consultaInsertarDomicilio.toString());
 
@@ -242,7 +243,7 @@ public class Database {
 			java.sql.Statement ps = conexion.createStatement();
 			ResultSet rs = ps.executeQuery("SELECT Max(Legajo) AS Legajo FROM Empleado");
 			rs.next();
-			return rs.getInt("Id");
+			return rs.getInt("Legajo");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
