@@ -39,7 +39,7 @@ public class App {
 	}
 	
 	public void GrabarUsuarioDB(Usuario nuevo){
-		database.Conectar();
+
 		database.InsertUsuario(nuevo);
 		database.Desconectar();
 	}
@@ -94,7 +94,6 @@ public class App {
 	
 	public List<String> ExtraerUsuariosDB(){
 		List<String> result =new ArrayList<>();
-		database.Conectar();
 		result = database.SelectUsuarios();
 		return result;
 	}
