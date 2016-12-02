@@ -147,7 +147,7 @@ public class Database {
 
 			int idVivienda = ObtenerIdVivienda(nuevo);
 			StringBuilder consultaInsertarDomicilio;
-			
+
 			if (nuevo.getVivienda().equals(VIVIENDA.DEPARTAMENTO)) {
 				consultaInsertarDomicilio = new StringBuilder(
 						"INSERT INTO Domicilio ([IdTipoVivienda],[Calle],[Numero],[Piso],[Departamento]) VALUES (").append(idVivienda)
@@ -424,7 +424,7 @@ public class Database {
 
 			int idVivienda = ObtenerIdVivienda(empleado);
 			StringBuilder consultaModificarDomicilio;
-
+			
 			if (empleado.getVivienda().equals(VIVIENDA.DEPARTAMENTO)) {
 				consultaModificarDomicilio = new StringBuilder("UPDATE Domicilio SET('");
 				consultaModificarDomicilio.append(empleado.getVivienda()).append("', '");
