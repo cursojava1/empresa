@@ -423,18 +423,22 @@ public class Database {
 			java.sql.Statement ps = conexion.createStatement();
 
 			int idVivienda = ObtenerIdVivienda(empleado);
-
-			StringBuilder consultaModificarDomicilio = new StringBuilder();
-			consultaModificarDomicilio.append("UPDATE Domicilio SET('");
-			consultaModificarDomicilio.append(empleado.getVivienda()).append("', '");
-			consultaModificarDomicilio.append(empleado.getCalle()).append("', ");
-			consultaModificarDomicilio.append(empleado.getNumero()).append(", ");
+			StringBuilder consultaModificarDomicilio;
 
 			if (empleado.getVivienda().equals(VIVIENDA.DEPARTAMENTO)) {
+				consultaModificarDomicilio = new StringBuilder("UPDATE Domicilio SET('");
+				consultaModificarDomicilio.append(empleado.getVivienda()).append("', '");
+				consultaModificarDomicilio.append(empleado.getCalle()).append("', ");
+				consultaModificarDomicilio.append(empleado.getNumero()).append(", ");
 				consultaModificarDomicilio.append(", ");
 				consultaModificarDomicilio.append(empleado.GetPiso());
 				consultaModificarDomicilio.append(", '");
 				consultaModificarDomicilio.append(empleado.GetDepartamento()).append("'");
+			} else {
+				consultaModificarDomicilio = new StringBuilder("UPDATE Domicilio SET('");
+				consultaModificarDomicilio.append(empleado.getVivienda()).append("', '");
+				consultaModificarDomicilio.append(empleado.getCalle()).append("', ");
+				consultaModificarDomicilio.append(empleado.getNumero()).append(", ");
 
 			}
 			consultaModificarDomicilio.append(" WHERE id = " + idVivienda);
