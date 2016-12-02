@@ -287,7 +287,38 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public void EliminarEmpleado(Empleado desempleado){
+		java.sql.Statement ps;
+		//NO COMPILAR NO PUSHEAR NO TOCAR
+		try {
+			ps = conexion.createStatement();
+			ResultSet lg = ps.executeQuery("SELECT IdPersona From Empleado Where Legajo = "+desempleado.getLegajo());
+			lg.next();
+			int idPersona = lg.getInt("IdPersona");
+			lg = ps.executeQuery("SELECT idDomicilio From MultiDomicilio Where IdPersona = "+idPersona);
+			List<Integer> idDomicilio = new ArrayList<Integer>();
+			while(lg.next()){
+				idDomicilio.add(lg.getInt("IdDomicilio"));
+			}
+			ps.executeQuery("delete from Persona Where Id = " + idPersona);
+			
+			for(int i = 0; i > idDomicilio.size();i++)			
+			ps.executeQuery("delete from Domicilio Where Id = "+idDomicilio.get(i));
+			ps.executeQuery("delete from MultiDomicilio Where IdPersona =" + idPersona);
+			//
+			lg = ps.executeQuery("SELECT Tipo From TipoEmpleados WHERE id =" + idPersona);
+			if(lg.getInt("idTipo") == 1)
+			ps.executeQuery("delete from Gerente Where");
+			else
+			ps.executeQuery("delete from Junior Where");
+				
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
 	public void InsertJunior(Empleado nuevo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
