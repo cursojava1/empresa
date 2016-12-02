@@ -91,13 +91,13 @@ public class Login {
 		} else {
 			config.SetNombreDB(nombreDB);
 		}
-		if(direccionDB != Configuracion.getAppSetting("dataBaseServer")){
+		if(!Configuracion.getAppSetting("dataBaseServer").equals(direccionDB)){
 			System.out.println("Dato de conexion erroneo, cargando dato predeterminado...");
 			config.SetDireccionDefault(direccionDB);
 		}else{
 			config.SetDireccionDB(direccionDB);
 		}
-		if(puerto != Configuracion.getAppSetting("dataBasePassword")){
+		if(!Configuracion.getAppSetting("dataBasePassword").equals(puerto)){
 			System.out.println("Dato de conexion erroneo, cargando dato predeterminado...");
 			config.SetPuertoDefault(puerto);
 		} else {
