@@ -15,6 +15,14 @@ import application.basededatos.ConfiguracionDB;
 import application.basededatos.Database;
 import application.empresa.empleados.Empleado;
 import application.empresa.usuario.Usuario;
+import application.fxml.app.ModeloEmpleado;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.util.Callback;
 
 public class App {
 
@@ -194,4 +202,24 @@ public class App {
 		}
 	}
 
+	public void ModificarEmpleadoDB(String legajoTabla, String columnaTabla, String valorTabla) {
+		switch(columnaTabla){
+		case "Nombre":
+			database.UpdateNombreEmpleado(legajoTabla, valorTabla);
+			break;
+		case "Apellido":
+			database.UpdateApellidoEmpleado(legajoTabla, valorTabla);
+			break;		
+		case "Dni":			
+			database.UpdateDniEmpleado(legajoTabla, valorTabla);
+			break;
+		case "Edad":
+			database.UpdateEdadEmpleado(legajoTabla, valorTabla);
+			break;
+
+			
+		
+	}
+	}
 }
+	

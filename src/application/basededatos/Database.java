@@ -210,6 +210,18 @@ public class Database {
 		}
 		return null;
 	}
+	
+	public Integer ObtenerIdPersona(int legajo) {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+			ResultSet rs = ps.executeQuery("SELECT IdPersona FROM Empleado WHERE Legajo = " + legajo);
+			rs.next();
+			return rs.getInt("IdPersona");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	public Integer ObtenerIdDomicilio(Empleado nuevo) {
 		try {
@@ -553,6 +565,46 @@ public class Database {
 			consultaModificarJunior.append(legajoEmpleado).append(")");
 			consultaModificarJunior.append(" WHERE id = " + tipo);
 			int cantidadAfectadas = ps.executeUpdate(consultaModificarJunior.toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void UpdateNombreEmpleado(String legajoTabla, String valorTabla) {
+		int idPersona = ObtenerIdPersona(Integer.parseInt(legajoTabla));
+		UpdateColumnaEmpleado(idPersona, legajoTabla, "Persona", "Nombre", valorTabla);
+	}
+	
+	public void UpdateApellidoEmpleado(String legajoTabla, String valorTabla) {
+		int idPersona = ObtenerIdPersona(Integer.parseInt(legajoTabla));
+		UpdateColumnaEmpleado(idPersona, legajoTabla, "Persona", "Apellido", valorTabla);
+	}
+	
+	public void UpdateDniEmpleado(String legajoTabla, String valorTabla) {
+		int idPersona = ObtenerIdPersona(Integer.parseInt(legajoTabla));
+		UpdateColumnaEmpleado(idPersona, legajoTabla, "Persona", "Dni", valorTabla);
+	}
+	
+	public void UpdateEdadEmpleado(String legajoTabla, String valorTabla) {
+		int idPersona = ObtenerIdPersona(Integer.parseInt(legajoTabla));
+		UpdateColumnaEmpleado(idPersona, legajoTabla, "Persona", "Edad", valorTabla);
+	}	
+	
+
+	public void UpdateColumnaEmpleado(int idPersona, String legajoTabla, String tabla, String columnaTabla, String valorTabla) {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+
+			StringBuilder consultaModificarEmpleado = new StringBuilder();
+			
+			consultaModificarEmpleado.append("UPDATE ").append(tabla)
+			.append(" SET ").append(columnaTabla).append(" = '").append(valorTabla)
+			.append("' ").append("WHERE id = " + idPersona);
+			
+			
+			
+			int cantidadAfectadas = ps.executeUpdate(consultaModificarEmpleado.toString());
 
 		} catch (Exception e) {
 			e.printStackTrace();
