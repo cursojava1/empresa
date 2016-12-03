@@ -9,10 +9,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +19,6 @@ import application.empresa.empleados.Empleado;
 import application.empresa.empleados.Gerente;
 import application.empresa.empleados.Junior;
 import application.empresa.usuario.Usuario;
-import application.empresa.persona.Persona;
 import application.empresa.utils.Utils.VIVIENDA;
 
 
@@ -34,7 +31,6 @@ public class Database {
 	ConfiguracionDB config = new ConfiguracionDB();
 
 	private Database() {
-
 	}
 
 	public static Database GetDatabase() {
@@ -117,7 +113,7 @@ public class Database {
 		return null;
 	}
 
-	public void InsertPersona(Empleado nuevo) {
+	public boolean InsertPersona(Empleado nuevo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
 
@@ -130,10 +126,14 @@ public class Database {
 					.append(", ").append(idEstadoCivil).append(")");
 
 			int cantidadAfectadas = ps.executeUpdate(consultaInsertarPersona.toString());
+			if (cantidadAfectadas == 0) {
+				return false;
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return true;
 	}
 
 	public Integer ObtenerIdVivienda(Empleado nuevo) {
@@ -149,7 +149,7 @@ public class Database {
 		return null;
 	}
 
-	public void InsertDomicilio(Empleado nuevo) {
+	public boolean InsertDomicilio(Empleado nuevo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
 
@@ -168,13 +168,17 @@ public class Database {
 			}
 
 			int cantidadAfectadas = ps.executeUpdate(consultaInsertarDomicilio.toString());
+			if (cantidadAfectadas == 0) {
+				return false;
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return true;
 	}
 
-	public void InsertMultiDomicilio(Empleado nuevo) {
+	public boolean InsertMultiDomicilio(Empleado nuevo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
 
@@ -185,10 +189,14 @@ public class Database {
 					.append(idPersona).append(", ").append(idDomicilio).append(")");
 
 			int cantidadAfectadas = ps.executeUpdate(consultaInsertarMultiDomicilio.toString());
+			if (cantidadAfectadas == 0) {
+				return false;
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return true;
 	}
 
 	public Integer ObtenerIdPersona(Empleado nuevo) {
@@ -228,7 +236,7 @@ public class Database {
 		return null;
 	}
 
-	public void InsertEmpleado(Empleado nuevo) {
+	public boolean InsertEmpleado(Empleado nuevo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
 
@@ -240,10 +248,14 @@ public class Database {
 					.append(idPersona).append(", ").append(idTipoEmpleado).append(")");
 
 			int cantidadAfectadas = ps.executeUpdate(consultaInsertarEmpleado.toString());
+			if (cantidadAfectadas == 0) {
+				return false;
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return true;
 	}
 
 	public Integer ObtenerLegajo(Empleado nuevo) {
@@ -270,7 +282,7 @@ public class Database {
 		return null;
 	}
 
-	public void InsertGerente(Empleado nuevo) {
+	public boolean InsertGerente(Empleado nuevo) {
 
 		try {
 			java.sql.Statement ps = conexion.createStatement();
@@ -282,13 +294,17 @@ public class Database {
 					.append(gerente.getRango()).append("', ").append(legajoEmpleado).append(")");
 
 			int cantidadAfectadas = ps.executeUpdate(consultaInsertarGerente.toString());
+			if (cantidadAfectadas == 0) {
+				return false;
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return true;
 	}
 
-	public void InsertJunior(Empleado nuevo) {
+	public boolean InsertJunior(Empleado nuevo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
 
@@ -299,10 +315,14 @@ public class Database {
 					.append(junior.GetLenguajes()).append("', ").append(legajoEmpleado).append(")");
 
 			int cantidadAfectadas = ps.executeUpdate(consultaInsertarJunior.toString());
+			if (cantidadAfectadas == 0) {
+				return false;
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return true;
 	}
 
 	public List<String> SelectEmpleados() {
@@ -331,7 +351,7 @@ public class Database {
 		}
 		return null;
 	}
-	public void InsertUsuario(Usuario nuevo) {
+	public boolean InsertUsuario(Usuario nuevo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
 
@@ -345,10 +365,14 @@ public class Database {
 					.append(nuevo.getEmail()).append("', ").append(idNivel).append(")");
 
 			int cantidadAfectadas = ps.executeUpdate(consultaInsertarUsuario.toString());
+			if (cantidadAfectadas == 0) {
+				return false;
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return true;
 	}
 
 	public void UpdateUsuario(Usuario nuevo) {
@@ -393,7 +417,6 @@ public class Database {
 
 				usuarios.add(datosUsuario);
 			}
-
 			return usuarios;
 
 		} catch (SQLException e) {
@@ -405,9 +428,9 @@ public class Database {
 	public void UpdatePersona(Empleado empleado) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
-			
+
 			int idPersona = ObtenerIdPersona(empleado);
-			
+
 			StringBuilder consultaModificarPersona = new StringBuilder();
 			consultaModificarPersona.append("UPDATE Persona SET('");
 			consultaModificarPersona.append(empleado.Nombre()).append("', '");
@@ -419,7 +442,6 @@ public class Database {
 			consultaModificarPersona.append(" WHERE id = " + idPersona);
 
 			int cantidadAfectadas = ps.executeUpdate(consultaModificarPersona.toString());
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -492,7 +514,6 @@ public class Database {
 			consultaModificarEmpleado.append(idTipoEmpleado).append(")");
 			consultaModificarEmpleado.append(" WHERE id = " + idTipoEmpleado);
 			int cantidadAfectadas = ps.executeUpdate(consultaModificarEmpleado.toString());
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -501,11 +522,8 @@ public class Database {
 	public void UpdateGerente(Empleado empleado) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
-			
-			int legajoEmpleado = ObtenerLegajo(empleado);
-			
-			int idTipoEmpleado = ObtenerIdTipoEmpleado(empleado);
 
+			int legajoEmpleado = ObtenerLegajo(empleado);
 			String tipo = ObtenerTipoEmpleado(empleado);
 
 			Gerente gerente = (Gerente) empleado;
@@ -524,11 +542,8 @@ public class Database {
 	public void UpdateJunior(Empleado empleado) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
-			
-			int legajoEmpleado = ObtenerLegajo(empleado);
-			
-			int idTipoEmpleado = ObtenerIdTipoEmpleado(empleado);
 
+			int legajoEmpleado = ObtenerLegajo(empleado);
 			String tipo = ObtenerTipoEmpleado(empleado);
 
 			Junior junior = (Junior) empleado;
@@ -545,4 +560,3 @@ public class Database {
 	}
 
 }
-	
