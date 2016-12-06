@@ -59,15 +59,19 @@ public class App {
 	}
 
 	public void GrabarUsuarioDB(Usuario nuevo) {
-
 		database.InsertUsuario(nuevo);
-		database.Desconectar();
+		//database.Desconectar();
 	}
+	
+	public void EliminarUsuarioDB(Usuario nuevo){
+		database.DeleteUsuario(nuevo);
+		//database.Desconectar();
+	}
+	
 
 	public void CerrarApp() {
 		Main.CerrarApp();
 		database.Desconectar();
-
 	}
 
 	public void GrabarEmpleado(Empleado nuevo) {
