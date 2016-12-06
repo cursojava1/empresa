@@ -103,6 +103,7 @@ public class AppControlador implements Initializable {
 	                app.ModificarEmpleadoDB(((ModeloEmpleado) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).getLegajoTabla(), nombreTabla.getText(),t.getNewValue());
+	                RefrescarEmpleados();
 	                }
 	            }
 	        );
@@ -119,6 +120,7 @@ public class AppControlador implements Initializable {
 	                app.ModificarEmpleadoDB(((ModeloEmpleado) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).getLegajoTabla(), apellidoTabla.getText(),t.getNewValue());
+	                RefrescarEmpleados();
 	                }
 	            }
 	        );
@@ -134,6 +136,7 @@ public class AppControlador implements Initializable {
 	                app.ModificarEmpleadoDB(((ModeloEmpleado) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).getLegajoTabla(), dniTabla.getText(),t.getNewValue());
+	                RefrescarEmpleados();
 	                }
 	            }
 	        );
@@ -149,6 +152,7 @@ public class AppControlador implements Initializable {
 	                app.ModificarEmpleadoDB(((ModeloEmpleado) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).getLegajoTabla(), edadTabla.getText(),t.getNewValue());
+	                RefrescarEmpleados();
 	                }
 	            }
 	        );
@@ -164,6 +168,7 @@ public class AppControlador implements Initializable {
 	                app.ModificarEmpleadoDB(((ModeloEmpleado) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).getLegajoTabla(), calleTabla.getText(),t.getNewValue());
+	                RefrescarEmpleados();
 	                }
 	            }
 	        );
@@ -179,6 +184,7 @@ public class AppControlador implements Initializable {
 	                app.ModificarEmpleadoDB(((ModeloEmpleado) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).getLegajoTabla(), numeroTabla.getText(),t.getNewValue());
+	                RefrescarEmpleados();
 	                }
 	            }
 	        );
@@ -194,6 +200,7 @@ public class AppControlador implements Initializable {
 	                app.ModificarEmpleadoDB(((ModeloEmpleado) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).getLegajoTabla(), pisoTabla.getText(),t.getNewValue());
+	                RefrescarEmpleados();
 	                }
 	            }
 	        );
@@ -209,6 +216,7 @@ public class AppControlador implements Initializable {
 	                app.ModificarEmpleadoDB(((ModeloEmpleado) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).getLegajoTabla(), departamentoTabla.getText(),t.getNewValue());
+	                RefrescarEmpleados();
 	                }
 	            }
 	        );
@@ -224,6 +232,7 @@ public class AppControlador implements Initializable {
 	                app.ModificarEmpleadoDB(((ModeloEmpleado) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).getLegajoTabla(), lenguajeTabla.getText(),t.getNewValue());
+	                RefrescarEmpleados();
 	                }
 	            }
 	        );
@@ -239,6 +248,7 @@ public class AppControlador implements Initializable {
 	                app.ModificarEmpleadoDB(((ModeloEmpleado) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).getLegajoTabla(), rangoTabla.getText(),t.getNewValue());
+	                RefrescarEmpleados();
 	                }
 	            }
 	        );
@@ -412,8 +422,7 @@ public class AppControlador implements Initializable {
 	private void MostrarAdministrarEmpleado() {
 		OcultarTodosAnchorPane();
 		AnchorAdministrarEmpleado.setVisible(true);
-		tablaEmpleados.getItems().clear();
-		ListarEmpleados();
+		RefrescarEmpleados();
 	}
 
 	@FXML
@@ -441,6 +450,11 @@ public class AppControlador implements Initializable {
 		}
 		
 		tablaEmpleados.setItems(empleados);
+	}
+	
+	private void RefrescarEmpleados(){
+		tablaEmpleados.getItems().clear();
+		ListarEmpleados();
 	}
 	
 	private void ListarUsuarios(){
