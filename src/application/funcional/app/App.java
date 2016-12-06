@@ -216,6 +216,24 @@ public class App {
 		case "Edad":
 			database.UpdateEdadEmpleado(legajoTabla, valorTabla);
 			break;
+		case "Calle":
+			database.UpdateCalleEmpleado(legajoTabla, valorTabla);
+			break;
+		case "Numero":
+			database.UpdateNumeroEmpleado(legajoTabla, valorTabla);
+			break;
+		case "Piso":
+			database.UpdatePisoEmpleado(legajoTabla, valorTabla);
+			break;
+		case "Departamento":
+			database.UpdateDepartamentoEmpleado(legajoTabla, valorTabla);
+			break;
+		case "Lenguaje":
+			database.UpdateLenguajeEmpleado(legajoTabla, valorTabla);
+			break;
+		case "Rango":
+			database.UpdateRangoEmpleado(legajoTabla, valorTabla);
+			break;	
 
 			
 		
