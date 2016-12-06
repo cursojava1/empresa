@@ -23,6 +23,7 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -42,7 +43,8 @@ public class AppControlador implements Initializable {
 
 	App app;
 	@FXML
-	TextField nombre, apellido, dni, edad, calle, piso, numero, dpt, text1, Unick, Uemail, Upass, Upassconfirmar,driver,nombreDB,direccion,puerto;
+	TextField nombre, apellido, dni, edad, calle, piso, numero, dpt, text1, Unick, Uemail, Upass, Upassconfirmar,
+			driver, nombreDB, direccion, puerto, Ueliminar;
 	@FXML
 	RadioButton rbcasa, rbdpt, Ucheckadmin, Ucheckinvitado;
 	@FXML
@@ -52,7 +54,9 @@ public class AppControlador implements Initializable {
 	@FXML
 	AnchorPane AnchorAgregarEmpleado, AnchorAdministrarEmpleado, AnchorAgregarUsuario, AnchorAdministrarUsuario;
 	@FXML
-	Label label1, labelPassMal;
+	Label label1, labelPassMal, Lusuario, Laviso;
+	@FXML
+	Button Baceptar;
 	@FXML
 	private TableView<ModeloEmpleado> tablaEmpleados;
 	@FXML
@@ -262,17 +266,7 @@ public class AppControlador implements Initializable {
 		TUcontraseña.setCellValueFactory(new PropertyValueFactory<ModeloUsuario, String>("PassTabla"));
 		TUnivel.setCellValueFactory(new PropertyValueFactory<ModeloUsuario, String>("NivelTabla"));
 
-		usuariosLista = app.ExtraerUsuariosDB();
-		ModeloUsuario modeloUsuario;
-		String[] datosUsuario = new String[5];
-		for (String usuario : usuariosLista) {
-			datosUsuario = usuario.split(" ");
-			LimpiarDatos(datosUsuario); // 1 = nick / 3 = contraseña / 2 = email
-										// / 4 = Nivel
-			modeloUsuario = new ModeloUsuario(datosUsuario[1], datosUsuario[3], datosUsuario[2], datosUsuario[4]);
-			observableUsuarios.add(modeloUsuario);
-		}
-		Tusuarios.setItems(observableUsuarios);
+		ListarUsuarios();
 	}
 	
 	@FXML
@@ -448,6 +442,20 @@ public class AppControlador implements Initializable {
 		
 		tablaEmpleados.setItems(empleados);
 	}
+	
+	private void ListarUsuarios(){
+		usuariosLista = app.ExtraerUsuariosDB();
+		ModeloUsuario modeloUsuario;
+		String[] datosUsuario = new String[5];
+		for (String usuario : usuariosLista) {
+			datosUsuario = usuario.split(" ");
+			LimpiarDatos(datosUsuario); // 1 = nick / 3 = contraseña / 2 = email
+										// / 4 = Nivel
+			modeloUsuario = new ModeloUsuario(datosUsuario[1], datosUsuario[3], datosUsuario[2], datosUsuario[4]);
+			observableUsuarios.add(modeloUsuario);
+		}
+		Tusuarios.setItems(observableUsuarios);
+	}
 
 	@FXML
 	private void AgregarUsuarioNuevo() {
@@ -455,6 +463,8 @@ public class AppControlador implements Initializable {
 		if (CompletarUsuarioNuevo(nuevo)) {
 			app.GrabarUsuarioDB(nuevo);
 		}
+		Tusuarios.getItems().clear();
+		ListarUsuarios();
 	}
 
 	private boolean CompletarUsuarioNuevo(Usuario nuevo) {
@@ -480,6 +490,27 @@ public class AppControlador implements Initializable {
 		}
 		return false;
 
+	}
+	
+	@FXML
+	private void ActivarEliminarUsuario() {
+		Lusuario.setVisible(true);
+		Ueliminar.setVisible(true);
+		Baceptar.setVisible(true);
+	}
+
+	@FXML
+	private void EliminarUsuario() {
+		Usuario nuevo = new Usuario();
+		DatosEliminar(nuevo);
+		app.EliminarUsuarioDB(nuevo);
+		Tusuarios.getItems().clear();
+		ListarUsuarios();
+		Laviso.setText("El usuario fue eliminado con éxito.");
+	}
+	
+	private void DatosEliminar(Usuario nuevo){
+		nuevo.setNombre(Ueliminar.getText());
 	}
 
 }

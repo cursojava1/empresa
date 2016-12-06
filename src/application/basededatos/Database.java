@@ -419,7 +419,7 @@ public class Database {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
 
-			String consultaDeleteUsuario = "DELETE FROM Usuario WHERE Id = '" + nuevo.getEmail() + "'";
+			String consultaDeleteUsuario = "DELETE FROM Usuario WHERE Nombre = '" + nuevo.getNombre() + "'";
 			int cantidadAfectadas = ps.executeUpdate(consultaDeleteUsuario.toString());
 
 		} catch (Exception e) {
