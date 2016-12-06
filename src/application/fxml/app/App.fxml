@@ -114,21 +114,21 @@
       <AnchorPane fx:id="AnchorAgregarUsuario" layoutX="-1.0" layoutY="27.0" prefHeight="435.0" prefWidth="853.0">
          <children>
             <Label layoutX="64.0" layoutY="51.0" text="Nick" />
-            <Label layoutX="61.0" layoutY="81.0" text="Correo Electronico" />
-            <Label layoutX="61.0" layoutY="112.0" text="Contraseña" />
-            <Label layoutX="63.0" layoutY="147.0" text="Confirmar Contraseña" />
-            <Label layoutX="64.0" layoutY="201.0" text="Seleccionar Nivel" />
-            <TextField fx:id="Unick" layoutX="211.0" layoutY="47.0" />
-            <TextField fx:id="Uemail" layoutX="210.0" layoutY="77.0" prefHeight="22.0" prefWidth="152.0" />
-            <PasswordField fx:id="Upass" layoutX="505.0" layoutY="86.0" />
-            <PasswordField fx:id="Upassconfirmar" layoutX="341.0" layoutY="229.0" />
-            <RadioButton fx:id="Ucheckadmin" layoutX="252.0" layoutY="224.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="122.0" text="Administrador">
+            <Label layoutX="61.0" layoutY="85.0" text="Correo Electronico" />
+            <Label layoutX="61.0" layoutY="116.0" text="Contraseña" />
+            <Label layoutX="63.0" layoutY="151.0" text="Confirmar Contraseña" />
+            <Label layoutX="64.0" layoutY="205.0" text="Seleccionar Nivel" />
+            <TextField fx:id="Unick" layoutX="230.0" layoutY="51.0" />
+            <TextField fx:id="Uemail" layoutX="230.0" layoutY="85.0" prefHeight="22.0" prefWidth="152.0" />
+            <PasswordField fx:id="Upass" layoutX="230.0" layoutY="116.0" />
+            <PasswordField fx:id="Upassconfirmar" layoutX="230.0" layoutY="151.0" />
+            <RadioButton fx:id="Ucheckadmin" layoutX="252.0" layoutY="239.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="122.0" text="Administrador">
                <toggleGroup>
                   <ToggleGroup fx:id="nivel1" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="Ucheckinvitado" layoutX="123.0" layoutY="224.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="88.0" text="Invitado" toggleGroup="$nivel1" />
-            <Button layoutX="206.0" layoutY="275.0" mnemonicParsing="false" onAction="#AgregarUsuarioNuevo" text="AGREGAR USUARIO" />
+            <RadioButton fx:id="Ucheckinvitado" layoutX="123.0" layoutY="239.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="88.0" text="Invitado" toggleGroup="$nivel1" />
+            <Button layoutX="170.0" layoutY="285.0" mnemonicParsing="false" onAction="#AgregarUsuarioNuevo" text="AGREGAR USUARIO" />
             <Label fx:id="labelPassMal" layoutX="346.0" layoutY="107.0" />
          </children>
       </AnchorPane>
