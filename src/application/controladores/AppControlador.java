@@ -20,6 +20,7 @@ import application.fxml.app.ModeloEmpleado;
 import application.fxml.app.ModeloUsuario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
@@ -31,7 +32,9 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -77,18 +80,164 @@ public class AppControlador implements Initializable {
 		rbcasa.setSelected(true);
 
 		tablaEmpleados.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tablaEmpleados.setEditable(true);       
+ 
+        
 
 		legajoTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("LegajoTabla"));
+        
+		
 		nombreTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("NombreTabla"));
+		nombreTabla.setCellFactory(TextFieldTableCell.forTableColumn());
+		nombreTabla.setOnEditCommit(
+	            new EventHandler<CellEditEvent<ModeloEmpleado, String>>() {
+	                @Override
+	                public void handle(CellEditEvent<ModeloEmpleado, String> t) {
+	                    ((ModeloEmpleado) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).setNombreTabla(t.getNewValue());
+	                app.ModificarEmpleadoDB(((ModeloEmpleado) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).getLegajoTabla(), nombreTabla.getText(),t.getNewValue());
+	                }
+	            }
+	        );
+		
 		apellidoTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("ApellidoTabla"));
+		apellidoTabla.setCellFactory(TextFieldTableCell.forTableColumn());
+		apellidoTabla.setOnEditCommit(
+	            new EventHandler<CellEditEvent<ModeloEmpleado, String>>() {
+	                @Override
+	                public void handle(CellEditEvent<ModeloEmpleado, String> t) {
+	                    ((ModeloEmpleado) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).setNombreTabla(t.getNewValue());
+	                app.ModificarEmpleadoDB(((ModeloEmpleado) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).getLegajoTabla(), apellidoTabla.getText(),t.getNewValue());
+	                }
+	            }
+	        );
 		dniTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("DniTabla"));
+		dniTabla.setCellFactory(TextFieldTableCell.forTableColumn());
+		dniTabla.setOnEditCommit(
+	            new EventHandler<CellEditEvent<ModeloEmpleado, String>>() {
+	                @Override
+	                public void handle(CellEditEvent<ModeloEmpleado, String> t) {
+	                    ((ModeloEmpleado) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).setNombreTabla(t.getNewValue());
+	                app.ModificarEmpleadoDB(((ModeloEmpleado) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).getLegajoTabla(), dniTabla.getText(),t.getNewValue());
+	                }
+	            }
+	        );
 		edadTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("EdadTabla"));
+		edadTabla.setCellFactory(TextFieldTableCell.forTableColumn());
+		edadTabla.setOnEditCommit(
+	            new EventHandler<CellEditEvent<ModeloEmpleado, String>>() {
+	                @Override
+	                public void handle(CellEditEvent<ModeloEmpleado, String> t) {
+	                    ((ModeloEmpleado) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).setNombreTabla(t.getNewValue());
+	                app.ModificarEmpleadoDB(((ModeloEmpleado) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).getLegajoTabla(), edadTabla.getText(),t.getNewValue());
+	                }
+	            }
+	        );
 		calleTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("CalleTabla"));
+		calleTabla.setCellFactory(TextFieldTableCell.forTableColumn());
+		calleTabla.setOnEditCommit(
+	            new EventHandler<CellEditEvent<ModeloEmpleado, String>>() {
+	                @Override
+	                public void handle(CellEditEvent<ModeloEmpleado, String> t) {
+	                    ((ModeloEmpleado) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).setNombreTabla(t.getNewValue());
+	                app.ModificarEmpleadoDB(((ModeloEmpleado) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).getLegajoTabla(), calleTabla.getText(),t.getNewValue());
+	                }
+	            }
+	        );
 		numeroTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("NumeroTabla"));
+		numeroTabla.setCellFactory(TextFieldTableCell.forTableColumn());
+		numeroTabla.setOnEditCommit(
+	            new EventHandler<CellEditEvent<ModeloEmpleado, String>>() {
+	                @Override
+	                public void handle(CellEditEvent<ModeloEmpleado, String> t) {
+	                    ((ModeloEmpleado) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).setNombreTabla(t.getNewValue());
+	                app.ModificarEmpleadoDB(((ModeloEmpleado) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).getLegajoTabla(), numeroTabla.getText(),t.getNewValue());
+	                }
+	            }
+	        );
 		pisoTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("PisoTabla"));
+		pisoTabla.setCellFactory(TextFieldTableCell.forTableColumn());
+		pisoTabla.setOnEditCommit(
+	            new EventHandler<CellEditEvent<ModeloEmpleado, String>>() {
+	                @Override
+	                public void handle(CellEditEvent<ModeloEmpleado, String> t) {
+	                    ((ModeloEmpleado) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).setNombreTabla(t.getNewValue());
+	                app.ModificarEmpleadoDB(((ModeloEmpleado) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).getLegajoTabla(), pisoTabla.getText(),t.getNewValue());
+	                }
+	            }
+	        );
 		departamentoTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("DepartamentoTabla"));
+		departamentoTabla.setCellFactory(TextFieldTableCell.forTableColumn());
+		departamentoTabla.setOnEditCommit(
+	            new EventHandler<CellEditEvent<ModeloEmpleado, String>>() {
+	                @Override
+	                public void handle(CellEditEvent<ModeloEmpleado, String> t) {
+	                    ((ModeloEmpleado) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).setNombreTabla(t.getNewValue());
+	                app.ModificarEmpleadoDB(((ModeloEmpleado) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).getLegajoTabla(), departamentoTabla.getText(),t.getNewValue());
+	                }
+	            }
+	        );
 		lenguajeTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("LenguajeTabla"));
+		lenguajeTabla.setCellFactory(TextFieldTableCell.forTableColumn());
+		lenguajeTabla.setOnEditCommit(
+	            new EventHandler<CellEditEvent<ModeloEmpleado, String>>() {
+	                @Override
+	                public void handle(CellEditEvent<ModeloEmpleado, String> t) {
+	                    ((ModeloEmpleado) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).setNombreTabla(t.getNewValue());
+	                app.ModificarEmpleadoDB(((ModeloEmpleado) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).getLegajoTabla(), lenguajeTabla.getText(),t.getNewValue());
+	                }
+	            }
+	        );
 		rangoTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("RangoTabla"));
+		rangoTabla.setCellFactory(TextFieldTableCell.forTableColumn());
+		rangoTabla.setOnEditCommit(
+	            new EventHandler<CellEditEvent<ModeloEmpleado, String>>() {
+	                @Override
+	                public void handle(CellEditEvent<ModeloEmpleado, String> t) {
+	                    ((ModeloEmpleado) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).setNombreTabla(t.getNewValue());
+	                app.ModificarEmpleadoDB(((ModeloEmpleado) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).getLegajoTabla(), rangoTabla.getText(),t.getNewValue());
+	                }
+	            }
+	        );
 
 		legajoTabla.prefWidthProperty().bind(tablaEmpleados.widthProperty().divide(11));
 		nombreTabla.prefWidthProperty().bind(tablaEmpleados.widthProperty().divide(11));
@@ -106,7 +255,7 @@ public class AppControlador implements Initializable {
 		usuarios.setItems(opcionesUsuarios);
 
 		
-		ListarEmpleados();
+		//ListarEmpleados();
 
 		TUnick.setCellValueFactory(new PropertyValueFactory<ModeloUsuario, String>("NombreTabla"));
 		TUemail.setCellValueFactory(new PropertyValueFactory<ModeloUsuario, String>("EmailTable"));

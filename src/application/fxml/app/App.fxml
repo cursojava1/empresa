@@ -50,7 +50,7 @@
           
         </menus>
       </MenuBar>
-      <AnchorPane fx:id="AnchorAgregarEmpleado" layoutY="27.0" minHeight="0.0" minWidth="0.0" prefHeight="435.0" prefWidth="853.0" visible="false">
+      <AnchorPane fx:id="AnchorAgregarEmpleado" layoutY="27.0" minHeight="0.0" minWidth="0.0" prefHeight="435.0" prefWidth="853.0">
          <children>
             <Label layoutX="23.0" layoutY="28.0" text="NOMBRE" />
             <Label layoutX="23.0" layoutY="61.0" text="APELLIDO" />
@@ -89,7 +89,6 @@
       </AnchorPane>
       <AnchorPane fx:id="AnchorAdministrarEmpleado" layoutX="1.0" layoutY="27.0" minHeight="0.0" minWidth="0.0" prefHeight="435.0" prefWidth="850.0" visible="false">
          <children>
-            <Button fx:id="btnModificarEmpleado" layoutX="606.0" layoutY="238.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Modificar" />
             <TableView fx:id="tablaEmpleados" layoutX="7.0" layoutY="14.0" prefHeight="198.0" prefWidth="836.0">
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -111,7 +110,7 @@
             <Button fx:id="btnEliminarEmpleado" layoutX="728.0" layoutY="238.0" mnemonicParsing="false" onAction="#EliminarEmpleado" prefHeight="25.0" prefWidth="108.0" text="Eliminar" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="AnchorAgregarUsuario" layoutX="-1.0" layoutY="27.0" prefHeight="435.0" prefWidth="853.0">
+      <AnchorPane fx:id="AnchorAgregarUsuario" layoutX="-1.0" layoutY="27.0" prefHeight="435.0" prefWidth="853.0" visible="false">
          <children>
             <Label layoutX="64.0" layoutY="51.0" text="Nick" />
             <Label layoutX="61.0" layoutY="81.0" text="Correo Electronico" />
@@ -132,7 +131,7 @@
             <Label fx:id="labelPassMal" layoutX="346.0" layoutY="107.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="AnchorAdministrarUsuario" layoutX="1.0" layoutY="27.0" minHeight="0.0" minWidth="0.0" prefHeight="435.0" prefWidth="850.0">
+      <AnchorPane fx:id="AnchorAdministrarUsuario" layoutX="1.0" layoutY="27.0" minHeight="0.0" minWidth="0.0" prefHeight="435.0" prefWidth="850.0" visible="false">
          <children>
             <TableView fx:id="Tusuarios" layoutX="222.0" layoutY="57.0" prefHeight="200.0" prefWidth="407.0" visible="false">
                <columns>

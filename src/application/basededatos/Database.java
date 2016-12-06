@@ -210,19 +210,44 @@ public class Database {
 		}
 		return null;
 	}
-
-	public Integer ObtenerIdDomicilio(Empleado nuevo) {
+	
+	public Integer ObtenerIdPersona(int legajo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
-			ResultSet rs = ps.executeQuery("SELECT Max(Id) AS Id FROM Domicilio");
+			ResultSet rs = ps.executeQuery("SELECT IdPersona FROM Empleado WHERE Legajo = " + legajo);
 			rs.next();
-			return rs.getInt("Id");
+			return rs.getInt("IdPersona");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
+	public Integer ObtenerIdDomicilio(Empleado nuevo) {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+			int idPersona = ObtenerIdPersona(nuevo);
+			ResultSet rs = ps.executeQuery("SELECT Max(IdDomicilio) AS IdDomicilio FROM MultiDomicilio WHERE IdPersona = " + idPersona);
+			rs.next();
+			return rs.getInt("IdDomicilio");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Integer ObtenerIdDomicilio(int idPersona) {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+			ResultSet rs = ps.executeQuery("SELECT Max(IdDomicilio) AS IdDomicilio FROM MultiDomicilio WHERE IdPersona = " + idPersona);
+			rs.next();
+			return rs.getInt("IdDomicilio");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public Integer ObtenerIdTipoEmpleado(Empleado nuevo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
@@ -553,6 +578,77 @@ public class Database {
 			consultaModificarJunior.append(legajoEmpleado).append(")");
 			consultaModificarJunior.append(" WHERE id = " + tipo);
 			int cantidadAfectadas = ps.executeUpdate(consultaModificarJunior.toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void UpdateNombreEmpleado(String legajoTabla, String valorTabla) {
+		int idPersona = ObtenerIdPersona(Integer.parseInt(legajoTabla));
+		UpdateColumnaEmpleado(idPersona, "Persona", "Nombre", valorTabla, "Id");
+	}
+	
+	public void UpdateApellidoEmpleado(String legajoTabla, String valorTabla) {
+		int idPersona = ObtenerIdPersona(Integer.parseInt(legajoTabla));
+		UpdateColumnaEmpleado(idPersona, "Persona", "Apellido", valorTabla, "Id");
+	}
+	
+	public void UpdateDniEmpleado(String legajoTabla, String valorTabla) {
+		int idPersona = ObtenerIdPersona(Integer.parseInt(legajoTabla));
+		UpdateColumnaEmpleado(idPersona, "Persona", "Dni", valorTabla, "Id");
+	}
+	
+	public void UpdateEdadEmpleado(String legajoTabla, String valorTabla) {
+		int idPersona = ObtenerIdPersona(Integer.parseInt(legajoTabla));
+		UpdateColumnaEmpleado(idPersona, "Persona", "Edad", valorTabla, "Id");
+	}	
+	
+	public void UpdateCalleEmpleado(String legajoTabla, String valorTabla) {
+		int idPersona = ObtenerIdPersona(Integer.parseInt(legajoTabla));
+		int idDomicilio = ObtenerIdDomicilio(idPersona);
+		UpdateColumnaEmpleado(idDomicilio, "Domicilio", "Calle", valorTabla, "Id");
+	}
+	
+	public void UpdateNumeroEmpleado(String legajoTabla, String valorTabla) {
+		int idPersona = ObtenerIdPersona(Integer.parseInt(legajoTabla));
+		int idDomicilio = ObtenerIdDomicilio(idPersona);
+		UpdateColumnaEmpleado(idDomicilio, "Domicilio", "Calle", valorTabla, "Id");
+	}
+	
+	public void UpdatePisoEmpleado(String legajoTabla, String valorTabla) {
+		int idPersona = ObtenerIdPersona(Integer.parseInt(legajoTabla));
+		int idDomicilio = ObtenerIdDomicilio(idPersona);
+		UpdateColumnaEmpleado(idDomicilio, "Domicilio", "Calle", valorTabla, "Id");
+	}
+	
+	public void UpdateDepartamentoEmpleado(String legajoTabla, String valorTabla) {
+		int idPersona = ObtenerIdPersona(Integer.parseInt(legajoTabla));
+		int idDomicilio = ObtenerIdDomicilio(idPersona);
+		UpdateColumnaEmpleado(idDomicilio, "Domicilio", "Calle", valorTabla, "Id");
+	}
+	public void UpdateLenguajeEmpleado(String legajoTabla, String valorTabla) {
+		int legajo = Integer.parseInt(legajoTabla);
+		UpdateColumnaEmpleado(legajo, "Junior", "Lenguaje", valorTabla, "LegajoEmpleado");
+	}
+	
+	public void UpdateRangoEmpleado(String legajoTabla, String valorTabla) {
+		int legajo = Integer.parseInt(legajoTabla);
+		UpdateColumnaEmpleado(legajo, "Gerente", "Rango", valorTabla, "LegajoEmpleado");
+	}
+	public void UpdateColumnaEmpleado(int id, String tabla, String columnaTabla, String valorTabla, String ColumnWhere) {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+
+			StringBuilder consultaModificarEmpleado = new StringBuilder();
+			
+			consultaModificarEmpleado.append("UPDATE ").append(tabla)
+			.append(" SET ").append(columnaTabla).append(" = '").append(valorTabla)
+			.append("' ").append("WHERE "+ColumnWhere+" = " + id);
+			
+			
+			
+			int cantidadAfectadas = ps.executeUpdate(consultaModificarEmpleado.toString());
 
 		} catch (Exception e) {
 			e.printStackTrace();
