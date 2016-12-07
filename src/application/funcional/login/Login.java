@@ -86,19 +86,19 @@ public class Login {
 	public void SetearConectar(String nombreDB, String direccionDB, String puerto){
 		String a = Configuracion.getAppSetting("dataBaseCatalog");
 		if(!Configuracion.getAppSetting("dataBaseCatalog").equals(nombreDB)){
-			System.out.println("Dato de conexion erroneo, cargando dato predeterminado...");
+			System.out.println("Nombre de Base de datos no reconocido, cargando dato predeterminado...");
 			config.SetNombreDBDefault(nombreDB);
 		} else {
 			config.SetNombreDB(nombreDB);
 		}
 		if(!Configuracion.getAppSetting("dataBaseServer").equals(direccionDB)){
-			System.out.println("Dato de conexion erroneo, cargando dato predeterminado...");
+			System.out.println("Dirección no reconocida, cargando dato predeterminado...");
 			config.SetDireccionDefault(direccionDB);
 		}else{
 			config.SetDireccionDB(direccionDB);
 		}
 		if(!Configuracion.getAppSetting("dataBasePassword").equals(puerto)){
-			System.out.println("Dato de conexion erroneo, cargando dato predeterminado...");
+			System.out.println("Puerto no reconocido, cargando dato predeterminado...");
 			config.SetPuertoDefault(puerto);
 		} else {
 			config.SetPuerto(puerto);

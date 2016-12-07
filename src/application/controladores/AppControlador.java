@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import application.Main;
 import application.empresa.empleados.Empleado;
 import application.empresa.empleados.FactoryEmpleados;
 import application.empresa.empleados.Gerente;
@@ -24,10 +23,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
@@ -37,7 +34,6 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 public class AppControlador implements Initializable {
 
@@ -52,7 +48,7 @@ public class AppControlador implements Initializable {
 	@FXML
 	MenuItem CerrarApp;
 	@FXML
-	AnchorPane AnchorAgregarEmpleado, AnchorAdministrarEmpleado, AnchorAgregarUsuario, AnchorAdministrarUsuario;
+	AnchorPane AnchorAgregarEmpleado, AnchorAdministrarEmpleado, AnchorAgregarUsuario, AnchorAdministrarUsuario, AnchorAutores;
 	@FXML
 	Label label1, labelPassMal, Lusuario, Laviso;
 	@FXML
@@ -84,13 +80,13 @@ public class AppControlador implements Initializable {
 		rbcasa.setSelected(true);
 
 		tablaEmpleados.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        tablaEmpleados.setEditable(true);       
- 
-        
+        tablaEmpleados.setEditable(true);
+
+
 
 		legajoTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("LegajoTabla"));
-        
-		
+
+
 		nombreTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("NombreTabla"));
 		nombreTabla.setCellFactory(TextFieldTableCell.forTableColumn());
 		nombreTabla.setOnEditCommit(
@@ -107,7 +103,7 @@ public class AppControlador implements Initializable {
 	                }
 	            }
 	        );
-		
+
 		apellidoTabla.setCellValueFactory(new PropertyValueFactory<ModeloEmpleado, String>("ApellidoTabla"));
 		apellidoTabla.setCellFactory(TextFieldTableCell.forTableColumn());
 		apellidoTabla.setOnEditCommit(
@@ -268,7 +264,7 @@ public class AppControlador implements Initializable {
 		ObservableList<String> opcionesUsuarios = FXCollections.observableArrayList("Gerente", "Desarrollador");
 		usuarios.setItems(opcionesUsuarios);
 
-		
+
 		//ListarEmpleados();
 
 		TUnick.setCellValueFactory(new PropertyValueFactory<ModeloUsuario, String>("NombreTabla"));
@@ -278,7 +274,7 @@ public class AppControlador implements Initializable {
 
 		ListarUsuarios();
 	}
-	
+
 	@FXML
 	private void ClickDpt() {
 		piso.setDisable(false);
@@ -324,7 +320,7 @@ public class AppControlador implements Initializable {
 			}
 		}
 	}
-	
+
 	private void LimpiarCamposEmpleado(){
 		nombre.clear();
 		apellido.clear();
@@ -338,7 +334,7 @@ public class AppControlador implements Initializable {
 		piso.clear();
 		dpt.clear();
 		usuarios.setValue(null);
-		text1.clear();		
+		text1.clear();
 	}
 
 	private void CompletarEmpleado(Empleado nuevo) {
@@ -353,7 +349,7 @@ public class AppControlador implements Initializable {
 		case "Femenino":
 			nuevo.setSexo(SEXO.FEMENINO);
 			break;
-		
+
 		}
 		switch (estado.getValue()) {
 		case "Casado":
@@ -410,6 +406,7 @@ public class AppControlador implements Initializable {
 		AnchorAdministrarEmpleado.setVisible(false);
 		AnchorAgregarUsuario.setVisible(false);
 		AnchorAdministrarUsuario.setVisible(false);
+		AnchorAutores.setVisible(false);
 	}
 
 	@FXML
@@ -436,7 +433,13 @@ public class AppControlador implements Initializable {
 		OcultarTodosAnchorPane();
 		AnchorAdministrarUsuario.setVisible(true);
 	}
-	
+
+	@FXML
+	private void MostrarAutores() {
+		OcultarTodosAnchorPane();
+		AnchorAutores.setVisible(true);
+	}
+
 	private void ListarEmpleados(){
 		empleadosArchivo = app.ExtraerEmpleadosDB();
 		ModeloEmpleado modeloEmpleado;
@@ -448,15 +451,15 @@ public class AppControlador implements Initializable {
 					datos[7], datos[8], datos[9], datos[10]);
 			empleados.add(modeloEmpleado);
 		}
-		
+
 		tablaEmpleados.setItems(empleados);
 	}
-	
+
 	private void RefrescarEmpleados(){
 		tablaEmpleados.getItems().clear();
 		ListarEmpleados();
 	}
-	
+
 	private void ListarUsuarios(){
 		usuariosLista = app.ExtraerUsuariosDB();
 		ModeloUsuario modeloUsuario;
@@ -505,7 +508,7 @@ public class AppControlador implements Initializable {
 		return false;
 
 	}
-	
+
 	@FXML
 	private void ActivarEliminarUsuario() {
 		Lusuario.setVisible(true);
@@ -522,7 +525,7 @@ public class AppControlador implements Initializable {
 		ListarUsuarios();
 		Laviso.setText("El usuario fue eliminado con éxito.");
 	}
-	
+
 	private void DatosEliminar(Usuario nuevo){
 		nuevo.setNombre(Ueliminar.getText());
 	}
