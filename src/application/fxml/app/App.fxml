@@ -32,12 +32,12 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Empleados">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#MostrarAgregarEmpleado" text="Agregar" />
+              <MenuItem fx:id="AgregEmpleado" disable="true" mnemonicParsing="false" onAction="#MostrarAgregarEmpleado" text="Agregar" />
               <MenuItem mnemonicParsing="false" onAction="#MostrarAdministrarEmpleado" text="Administrar" />
             </items>
           </Menu>
 
-          <Menu mnemonicParsing="false" text="Usuarios">
+          <Menu fx:id="Usuarios" disable="true" mnemonicParsing="false" text="Usuarios">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#MostrarAgregarUsuario" text="Agregar" />
               <MenuItem mnemonicParsing="false" onAction="#MostrarAdministrarUsuario" text="Administrar" />
@@ -110,7 +110,7 @@
                   <TableColumn fx:id="rangoTabla" minWidth="0.0" prefWidth="104.0" resizable="false" text="Rango" />
                </columns>
             </TableView>
-            <Button fx:id="btnEliminarEmpleado" layoutX="728.0" layoutY="238.0" mnemonicParsing="false" onAction="#EliminarEmpleado" prefHeight="25.0" prefWidth="108.0" text="Eliminar" />
+            <Button fx:id="btnEliminarEmpleado" disable="true" layoutX="728.0" layoutY="238.0" mnemonicParsing="false" onAction="#ConfirmarEliminarEmpleado" prefHeight="25.0" prefWidth="108.0" text="Eliminar" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="AnchorAgregarUsuario" layoutX="-1.0" layoutY="27.0" prefHeight="435.0" prefWidth="853.0" visible="false">
