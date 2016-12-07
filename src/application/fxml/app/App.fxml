@@ -154,7 +154,7 @@
       </AnchorPane>
       <AnchorPane fx:id="AnchorAutores" layoutY="27.0" prefHeight="435.0" prefWidth="853.0" visible="false">
          <children>
-            <TextArea editable="false" layoutX="285.0" layoutY="118.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="243.0" text="Ariadna Ballester&#10;Cristian Esposito&#10;Cristian Murcia&#10;Jorge Rajoy&#10;Marina Mansueto&#10;Matías Almeida&#10;Matías Carrera&#10;">
+            <TextArea editable="false" layoutX="285.0" layoutY="118.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="243.0" text="Ariadna Ballester&#10;Cristian Esposito&#10;Cristian Murcia&#10;Hector Chavez&#10;Jorge Rajoy&#10;Marina Mansueto&#10;Matías Almeida&#10;Matías Carrera&#10;">
                <font>
                   <Font size="14.0" />
                </font>
