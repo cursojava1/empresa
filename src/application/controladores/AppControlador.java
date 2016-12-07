@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
 import application.empresa.empleados.Empleado;
 import application.empresa.empleados.FactoryEmpleados;
 import application.empresa.empleados.Gerente;
@@ -47,13 +49,13 @@ public class AppControlador implements Initializable {
 	@FXML
 	ChoiceBox<String> sexo, estado, usuarios;
 	@FXML
-	MenuItem CerrarApp;
+	MenuItem CerrarApp, AgregEmpleado, Usuarios;
 	@FXML
 	AnchorPane AnchorAgregarEmpleado, AnchorAdministrarEmpleado, AnchorAgregarUsuario, AnchorAdministrarUsuario, AnchorAutores;
 	@FXML
 	Label label1, labelPassMal, Lusuario, Laviso;
 	@FXML
-	Button Baceptar;
+	Button Baceptar, btnEliminarEmpleado;
 	@FXML
 	private TableView<ModeloEmpleado> tablaEmpleados;
 	@FXML
@@ -274,6 +276,19 @@ public class AppControlador implements Initializable {
 		TUnivel.setCellValueFactory(new PropertyValueFactory<ModeloUsuario, String>("NivelTabla"));
 
 		ListarUsuarios();
+		
+		//Diferencia Administrador/Visitante
+		
+		if(app.GetNivelUsuarioDB(LoginControlador.usuarioActual) == 1){
+			AgregEmpleado.setDisable(false);
+			Usuarios.setDisable(false);
+			btnEliminarEmpleado.setDisable(false);
+		}
+		else{
+			AnchorAdministrarEmpleado.setVisible(true);
+			AnchorAgregarEmpleado.setVisible(false);
+			tablaEmpleados.setEditable(false);
+		}
 	}
 
 	@FXML
@@ -380,7 +395,7 @@ public class AppControlador implements Initializable {
 					dpt.getText());
 		}
 	}
-
+	
 	@FXML
 	private void EliminarEmpleado() {
 		//Guarda en Index ID de tabla selecionada
@@ -391,10 +406,21 @@ public class AppControlador implements Initializable {
 		Integer legajo = new Integer(0);
 		//Le cambio el valor de un String A un Integer
 		legajo = Integer.parseInt(LegajoString);
-		//Elimino el empleado a travez del legajo
+		//Elimino el empleado a traves del legajo
 		app.EliminarEmpleadoDB(legajo);
 		//Refresco Tabla
 		this.RefrescarEmpleados();
+	}
+	
+	@FXML
+	private void ConfirmarEliminarEmpleado(){
+		int aux = JOptionPane.showConfirmDialog(null, "Esta seguro de que desea eliminar el empleado?",   "Mensaje",
+                JOptionPane.YES_NO_OPTION);
+		if(aux == 0){
+			EliminarEmpleado();
+			JOptionPane.showMessageDialog(null, "El empleado ha sido eliminado",   "Mensaje",
+                    JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 
 	private void LimpiarDatos(String[] datos) {

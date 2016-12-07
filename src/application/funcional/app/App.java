@@ -59,6 +59,10 @@ public class App {
 		}
 
 	}
+	
+	public int GetNivelUsuarioDB(String nombre) {
+		return database.GetNivel(nombre);
+	}
 
 	public void GrabarUsuarioDB(Usuario nuevo) {
 		database.InsertUsuario(nuevo);

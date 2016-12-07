@@ -94,6 +94,18 @@ public class Database {
 		return null;
 	}
 	
+	public int GetNivel(String nombre){
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+			ResultSet rs = ps.executeQuery("SELECT IdNivel FROM Usuario where Nombre = '" + nombre + "'");
+			while (rs.next()) {
+				return rs.getInt("IdNivel");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 	
 	public Integer ObtenerIdSexo(Empleado nuevo) {
 		try {

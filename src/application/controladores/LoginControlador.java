@@ -22,6 +22,8 @@ public class LoginControlador implements Initializable {
 
 	Login login;
 
+	static String usuarioActual = "";
+	
 	@FXML
 	TextField nombreUsuario, nombreDB, direccionDB, puerto;
 
@@ -53,6 +55,7 @@ public class LoginControlador implements Initializable {
 			JOptionPane.showMessageDialog(null, "Bienvenido "+ nombreUsuario.getText()+"\n"
 	                    + "Has ingresado satisfactoriamente al sistema",   "Mensaje de bienvenida",
 	                    JOptionPane.INFORMATION_MESSAGE);
+			usuarioActual = nombreUsuario.getText();
 			Main.ShowApp();
 			break;
 		case 1:
