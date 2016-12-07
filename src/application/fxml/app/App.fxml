@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -15,7 +21,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="853.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controladores.AppControlador">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="853.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controladores.AppControlador">
 	<children>
       <MenuBar layoutX="-1.0" layoutY="2.0" prefHeight="25.0" prefWidth="853.0">
         <menus>
@@ -29,22 +35,22 @@
               <MenuItem mnemonicParsing="false" onAction="#MostrarAgregarEmpleado" text="Agregar" />
               <MenuItem mnemonicParsing="false" onAction="#MostrarAdministrarEmpleado" text="Administrar" />
             </items>
-          </Menu>          
-         
+          </Menu>
+
           <Menu mnemonicParsing="false" text="Usuarios">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#MostrarAgregarUsuario" text="Agregar" />
               <MenuItem mnemonicParsing="false" onAction="#MostrarAdministrarUsuario" text="Administrar" />
             </items>
           </Menu>
-          
-          <Menu disable="true" mnemonicParsing="false" text="Autores">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Agregar" />
-              <MenuItem mnemonicParsing="false" text="Administrar" />
-            </items>
+
+          <Menu mnemonicParsing="false" text="Acerca De">
+			<items>
+				<MenuItem mnemonicParsing="false" onAction="#MostrarAutores" text="Autores" />
+			</items>
           </Menu>
-          
+			
+			
         </menus>
       </MenuBar>
       <AnchorPane fx:id="AnchorAgregarEmpleado" layoutY="27.0" minHeight="0.0" minWidth="0.0" prefHeight="435.0" prefWidth="853.0">
@@ -144,6 +150,28 @@
             <Label fx:id="Lusuario" layoutX="231.0" layoutY="343.0" text="Usuario a eliminar:" visible="false" />
             <Button fx:id="Baceptar" layoutX="491.0" layoutY="339.0" mnemonicParsing="false" onAction="#EliminarUsuario" text="Aceptar" visible="false" />
             <Label fx:id="Laviso" layoutX="398.0" layoutY="380.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="AnchorAutores" layoutY="27.0" prefHeight="435.0" prefWidth="853.0" visible="false">
+         <children>
+            <TextArea editable="false" layoutX="285.0" layoutY="118.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="243.0" text="Ariadna Ballester&#10;Cristian Esposito&#10;Cristian Murcia&#10;Hector Chavez&#10;Jorge Rajoy&#10;Marina Mansueto&#10;Matías Almeida&#10;Matías Carrera&#10;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <effect>
+                  <InnerShadow color="#17bae7" />
+               </effect>
+            </TextArea>
+            <Label layoutX="400.0" layoutY="78.0" prefHeight="37.0" prefWidth="141.0" text="AUTORES" textAlignment="CENTER" textFill="#17bae7">
+               <font>
+                  <Font size="28.0" />
+               </font>
+               <effect>
+                  <DropShadow color="#1ac1d7" />
+               </effect>
+            </Label>
+            <Label layoutX="28.0" layoutY="14.0" text="Curso Java intermedio" />
+            <Label layoutX="28.0" layoutY="31.0" text="Año 2016" />
          </children>
       </AnchorPane>
 	</children>
