@@ -22,6 +22,10 @@ import application.empresa.usuario.Usuario;
 import application.empresa.utils.Utils.VIVIENDA;
 
 
+/**
+ * @author administrador
+ *
+ */
 public class Database {
 
 	
@@ -40,6 +44,8 @@ public class Database {
 		return database;
 	}
 
+
+	
 	public void Conectar(ConfiguracionDB config) {
 		if (conexion == null) {
 			try {
@@ -73,6 +79,7 @@ public class Database {
 			}
 		}
 	}
+	
 
 	public String GetContraseña(String nombre) {
 		try {
@@ -86,7 +93,8 @@ public class Database {
 		}
 		return null;
 	}
-
+	
+	
 	public Integer ObtenerIdSexo(Empleado nuevo) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
@@ -135,6 +143,8 @@ public class Database {
 		}
 		return true;
 	}
+	
+
 
 	public Integer ObtenerIdVivienda(Empleado nuevo) {
 		try {
@@ -183,7 +193,7 @@ public class Database {
 			java.sql.Statement ps = conexion.createStatement();
 
 			int idPersona = ObtenerIdPersona(nuevo);
-			int idDomicilio = ObtenerIdDomicilio(nuevo);
+			int idDomicilio = ObtenerUltimoIdDomicilio();
 
 			StringBuilder consultaInsertarMultiDomicilio = new StringBuilder("INSERT INTO MultiDomicilio Values (")
 					.append(idPersona).append(", ").append(idDomicilio).append(")");
@@ -223,13 +233,12 @@ public class Database {
 		return null;
 	}
 
-	public Integer ObtenerIdDomicilio(Empleado nuevo) {
+	public Integer ObtenerUltimoIdDomicilio() {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
-			int idPersona = ObtenerIdPersona(nuevo);
-			ResultSet rs = ps.executeQuery("SELECT Max(IdDomicilio) AS IdDomicilio FROM MultiDomicilio WHERE IdPersona = " + idPersona);
+			ResultSet rs = ps.executeQuery("SELECT Max(Id) AS Id FROM Domicilio");
 			rs.next();
-			return rs.getInt("IdDomicilio");
+			return rs.getInt("Id");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -461,7 +470,7 @@ public class Database {
 		return null;
 	}
 
-	public void UpdatePersona(Empleado empleado) {
+	/*public void UpdatePersona(Empleado empleado) {
 		try {
 			java.sql.Statement ps = conexion.createStatement();
 
@@ -593,7 +602,7 @@ public class Database {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	public void UpdateNombreEmpleado(String legajoTabla, String valorTabla) {
 		int idPersona = ObtenerIdPersona(Integer.parseInt(legajoTabla));

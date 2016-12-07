@@ -43,9 +43,11 @@ public class App {
 		if (database.InsertEmpleado(nuevo)) {
 			System.out.println("Insert Empleado");
 		}
-
-		//database.InsertMultiDomicilio(nuevo);
-
+		
+		if (database.InsertMultiDomicilio(nuevo)) {
+			System.out.println("Insert MultiDomicilio");
+		}
+		
 		if (nuevo.getClass().getSimpleName().equals("Gerente")) {
 			database.InsertGerente(nuevo);
 			System.out.println("Insert Gerente");
