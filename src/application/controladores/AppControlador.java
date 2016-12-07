@@ -18,6 +18,7 @@ import application.empresa.utils.Utils.VIVIENDA;
 import application.funcional.app.App;
 import application.fxml.app.ModeloEmpleado;
 import application.fxml.app.ModeloUsuario;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -386,9 +387,18 @@ public class AppControlador implements Initializable {
 
 	@FXML
 	private void EliminarEmpleado() {
-		int index = tablaEmpleados.getSelectionModel().getSelectedIndex();
-		empleados.remove(index);
-		app.EliminarEmpleado(index);
+		//Guarda en Index ID de tabla selecionada
+		int index = this.tablaEmpleados.getSelectionModel().getSelectedIndex();
+		//Guarda en un string el Valor de la columna Index(Seleccionada)
+		String LegajoString = legajoTabla.getCellObservableValue(index).getValue();
+		//Crea un Integer
+		Integer legajo = new Integer(0);
+		//Le cambio el valor de un String A un Integer
+		legajo = Integer.parseInt(LegajoString);
+		//Elimino el empleado a travez del legajo
+		app.EliminarEmpleadoDB(legajo);
+		//Refresco Tabla
+		this.RefrescarEmpleados();
 	}
 
 	private void LimpiarDatos(String[] datos) {
@@ -526,5 +536,7 @@ public class AppControlador implements Initializable {
 	private void DatosEliminar(Usuario nuevo){
 		nuevo.setNombre(Ueliminar.getText());
 	}
+	
+	
 
 }

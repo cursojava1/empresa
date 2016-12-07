@@ -260,6 +260,17 @@ public class Database {
 		}
 		return null;
 	}
+	public Integer ObtenerIdTipoEmpleado(int legajo) {
+		try {
+			java.sql.Statement ps = conexion.createStatement();
+			ResultSet rs = ps.executeQuery("SELECT idTipoEmpleado FROM Empleado WHERE Legajo = " + legajo);
+			rs.next();
+			return rs.getInt("idTipoEmpleado");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	public boolean InsertEmpleado(Empleado nuevo) {
 		try {
@@ -655,4 +666,35 @@ public class Database {
 		}
 	}
 
+	public void EliminarEmpleado(int legajo) {
+		java.sql.Statement ps;
+
+		try {
+			//Crea Conexion con base de datos y si la hay usa esa
+			ps = conexion.createStatement();
+			// obtiene el Id Persona mediante el legajo y lo guarda
+			int idPersona = this.ObtenerIdPersona(legajo);
+			//obtiene el idDomicilio mediante idPersona y lo guarda
+			int idDomicilio = this.ObtenerIdDomicilio(idPersona);
+			//Se fija si es Gerente o empleado por el legajo y lo elimina
+			if(this.ObtenerIdTipoEmpleado(legajo) == 1){
+				ps.executeUpdate("DELETE Gerente Where LegajoEmpleado = " + legajo);
+			}
+			else{
+				ps.executeUpdate("DELETE FROM Junior Where LegajoEmpleado = " + legajo);
+			}
+			//Elimina Empleado con la idPersona
+			ps.executeUpdate("DELETE FROM empleado Where IdPersona = " + idPersona);
+			//Elimina Multidomicilio con la idPersona
+			ps.executeUpdate("DELETE FROM MultiDomicilio WHERE IdPersona =" + idPersona);
+			//Elimina Persona con la idPersona
+			ps.executeUpdate("DELETE FROM Persona Where Id = " + idPersona);
+			//Elimina Domicilio con la idDomicilio
+			ps.executeUpdate("DELETE FROM Domicilio WHERE Id = " + idDomicilio);
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+	}
 }

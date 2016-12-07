@@ -238,10 +238,14 @@ public class App {
 		case "Rango":
 			database.UpdateRangoEmpleado(legajoTabla, valorTabla);
 			break;	
-
-			
 		
+		}	
 	}
+	//Recibo legajo y elimino empleado Puente entre database y Controlador
+	public void EliminarEmpleadoDB(int legajo){
+		database.EliminarEmpleado(legajo);
 	}
+	
+
 }
 	
