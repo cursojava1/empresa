@@ -59,8 +59,8 @@ public class App {
 		}
 
 	}
-	
-	public int GetNivelUsuarioDB(String nombre) {
+	//Obtener nivel de usuario desde la base de datos
+	public String GetNivelUsuarioDB(String nombre) {
 		return database.GetNivel(nombre);
 	}
 

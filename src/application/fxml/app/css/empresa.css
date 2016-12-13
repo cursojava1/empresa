@@ -1,0 +1,44 @@
+.body{
+	-fx-background-color: white;
+}
+.menubar{
+	-fx-background-color: gray;
+	-fx-font-weight: bold;
+	-fx-color: red;
+}
+.botonAct{
+    -fx-background-radius: 50;
+	-fx-text-fill: black;
+	-fx-border-insets: -2;
+	-fx-border-radius: 50;
+	-fx-border-width: 2;
+	-fx-border-color: black;	
+	-fx-background-color: yellow;
+}
+.botonAgreg{
+	-fx-background-radius: 50;
+	-fx-text-fill: black;
+	-fx-border-insets: -2;
+	-fx-border-radius: 50;
+	-fx-border-width: 2;
+	-fx-border-color: black;
+	-fx-background-color: lime;
+}
+.botonRein{
+	-fx-background-radius: 50;
+	-fx-text-fill: black;
+	-fx-border-insets: -2;
+	-fx-border-radius: 50;
+	-fx-border-width: 2;
+	-fx-border-color: black;
+	-fx-background-color: aquamarine;
+}
+.botonElim{
+	-fx-background-radius: 50;
+	-fx-text-fill: black;
+	-fx-border-insets: -2;
+	-fx-border-radius: 50;
+	-fx-border-width: 2;
+	-fx-border-color: black;
+	-fx-background-color: red;
+}
