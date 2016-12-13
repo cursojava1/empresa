@@ -51,7 +51,7 @@ public class AppControlador implements Initializable {
 	@FXML
 	MenuItem CerrarApp, AgregEmpleado, Usuarios;
 	@FXML
-	AnchorPane AnchorAgregarEmpleado, AnchorAdministrarEmpleado, AnchorAgregarUsuario, AnchorAdministrarUsuario,
+	AnchorPane AnchorInicio, AnchorAgregarEmpleado, AnchorAdministrarEmpleado, AnchorAgregarUsuario, AnchorAdministrarUsuario,
 			AnchorAutores;
 	@FXML
 	ImageView ErrorNombre, ErrorApellido, ErrorEdad, ErrorDocumento, ErrorSexo, ErrorEstadoCivil, ErrorCalle,
@@ -572,13 +572,19 @@ public class AppControlador implements Initializable {
 	}
 
 	private void OcultarTodosAnchorPane() {
+		AnchorInicio.setVisible(false);
 		AnchorAgregarEmpleado.setVisible(false);
 		AnchorAdministrarEmpleado.setVisible(false);
 		AnchorAgregarUsuario.setVisible(false);
 		AnchorAdministrarUsuario.setVisible(false);
 		AnchorAutores.setVisible(false);
 	}
-
+	@FXML
+	private void MostrarPrincipal() {
+		OcultarTodosAnchorPane();
+		AnchorInicio.setVisible(true);
+	}
+	
 	@FXML
 	private void MostrarAgregarEmpleado() {
 		OcultarTodosAnchorPane();

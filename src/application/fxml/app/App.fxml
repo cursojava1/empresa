@@ -28,7 +28,8 @@
         <menus>
           <Menu mnemonicParsing="false" text="Inicio">
             <items>
-              <MenuItem fx:id="CerrarApp" mnemonicParsing="false" onAction="#CerrarApp" text="Close" />
+                  <MenuItem fx:id="Principal" mnemonicParsing="false" onAction="#MostrarPrincipal" text="Principal" />
+              <MenuItem fx:id="CerrarApp" mnemonicParsing="false" onAction="#CerrarApp" text="Cerrar" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Empleados">
@@ -54,7 +55,7 @@
 			
         </menus>
       </MenuBar>
-      <AnchorPane fx:id="AnchorAgregarEmpleado" layoutY="27.0" minHeight="0.0" minWidth="0.0" prefHeight="435.0" prefWidth="853.0" styleClass="body" stylesheets="@css/empresa.css">
+      <AnchorPane fx:id="AnchorAgregarEmpleado" layoutY="27.0" minHeight="0.0" minWidth="0.0" prefHeight="435.0" prefWidth="853.0" styleClass="body" stylesheets="@css/empresa.css" visible="false">
          <children>
             <Label layoutX="53.0" layoutY="146.0" text="Nombre">
                <font>
@@ -440,6 +441,15 @@
             </Label>
             <Label layoutX="28.0" layoutY="14.0" text="Curso Java intermedio" />
             <Label layoutX="28.0" layoutY="31.0" text="Año 2016" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="AnchorInicio" layoutX="-1.0" layoutY="27.0" prefHeight="435.0" prefWidth="853.0">
+         <children>
+            <ImageView fitHeight="435.0" fitWidth="853.0" layoutX="1.0" pickOnBounds="true" smooth="false">
+               <image>
+                  <Image url="@../login/imagenes/index.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
 	</children>
