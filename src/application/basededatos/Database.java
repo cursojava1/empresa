@@ -94,17 +94,18 @@ public class Database {
 		return null;
 	}
 	
-	public int GetNivel(String nombre){
+	//Join de usuario con nivel para detectar si el usuario es administrador o visitante
+	public String GetNivel(String nombre){
 		try {
 			java.sql.Statement ps = conexion.createStatement();
-			ResultSet rs = ps.executeQuery("SELECT IdNivel FROM Usuario where Nombre = '" + nombre + "'");
+			ResultSet rs = ps.executeQuery("SELECT Nivel.Tipo FROM Usuario JOIN Nivel ON Usuario.IdNivel = Nivel.Id WHERE Usuario.Nombre = '" + nombre + "'");
 			while (rs.next()) {
-				return rs.getInt("IdNivel");
+				return rs.getString("Tipo");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return 0;
+		return null;
 	}
 	
 	public Integer ObtenerIdSexo(Empleado nuevo) {
